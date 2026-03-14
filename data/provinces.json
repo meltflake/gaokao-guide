@@ -1,0 +1,7 @@
+{
+  "guangdong": {"name":"广东","examType":"新高考","categories":["物理类","历史类"],"batchLine2024":{"物理类":442,"历史类":437},"batchLine2023":{"物理类":439,"历史类":433},"batchLine2022":{"物理类":445,"历史类":437}},
+  "hunan": {"name":"湖南","examType":"新高考","categories":["物理类","历史类"],"batchLine2024":{"物理类":422,"历史类":428},"batchLine2023":{"物理类":415,"历史类":428},"batchLine2022":{"物理类":414,"历史类":451}},
+  "henan": {"name":"河南","examType":"传统","categories":["理科","文科"],"batchLine2024":{"理科":514,"文科":521},"batchLine2023":{"理科":514,"文科":547},"batchLine2022":{"理科":509,"文科":527}},
+  "shandong": {"name":"山东","examType":"新高考","categories":["综合"],"batchLine2024":{"综合":443},"batchLine2023":{"综合":443},"batchLine2022":{"综合":437}},
+  "sichuan": {"name":"四川","examType":"传统","categories":["理科","文科"],"batchLine2024":{"理科":539,"文科":529},"batchLine2023":{"理科":520,"文科":527},"batchLine2022":{"理科":515,"文科":538}}
+}

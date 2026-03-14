@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高考GPS 🎯 科学填报，精准择校</title>
+  <style>
+    :root {
+      --bg: #f8faff;
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-dark: #1d4ed8;
+      --card-bg: #f0f4ff;
+      --card-hover: #e0e8ff;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --white: #ffffff;
+      --shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+      --shadow-hover: 0 4px 16px rgba(37, 99, 235, 0.15);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    
+    /* Header */
+    header {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    nav { display: flex; gap: 8px; flex-wrap: wrap; }
+    nav button {
+      background: var(--card-bg);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    nav button:hover, nav button.active {
+      background: var(--primary);
+      color: var(--white);
+    }
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        padding: 16px;
+        box-shadow: var(--shadow);
+        flex-direction: column;
+      }
+      nav.show { display: flex; }
+      nav button { width: 100%; text-align: left; }
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+    }
+    .hero h1 { font-size: 48px; margin-bottom: 16px; }
+    .hero p { font-size: 20px; opacity: 0.9; margin-bottom: 32px; }
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 36px; font-weight: 700; }
+    .stat-label { font-size: 14px; opacity: 0.8; }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 16px; }
+      .stats { gap: 24px; }
+      .stat-num { font-size: 28px; }
+    }
+
+    /* Sections */
+    section {
+      display: none;
+      padding: 40px 0;
+    }
+    section.active { display: block; }
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 24px;
+      color: var(--primary);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 640px) {
+      .card-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Tags */
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+    .tag {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--card-bg);
+      color: var(--primary);
+    }
+    .tag.t985 { background: #fef3c7; color: #92400e; }
+    .tag.t211 { background: #dbeafe; color: #1e40af; }
+    .tag.tc9 { background: #fce7f3; color: #9d174d; }
+
+    /* Forms */
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+    select, input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+      background: var(--white);
+    }
+    select:focus, input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .btn {
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: var(--primary-dark); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .filter-btn {
+      background: var(--card-bg);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    /* Search */
+    .search-box {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .search-box input {
+      padding-left: 40px;
+    }
+    .search-box::before {
+      content: "🔍";
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Results */
+    .result-section { margin-bottom: 32px; }
+    .result-section h3 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .school-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .school-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateX(4px);
+    }
+    .school-info h4 { font-size: 16px; margin-bottom: 4px; }
+    .school-info p { font-size: 13px; color: var(--text-light); }
+    .score-diff {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+    .score-diff.reach { background: #fee2e2; color: #dc2626; }
+    .score-diff.match { background: #fef3c7; color: #d97706; }
+    .score-diff.safe { background: #dcfce7; color: #16a34a; }
+
+    /* Toggles */
+    .toggle-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toggle input { display: none; }
+    .toggle-box {
+      width: 40px;
+      height: 22px;
+      background: #e2e8f0;
+      border-radius: 11px;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .toggle-box::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: var(--white);
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: left 0.2s;
+    }
+    .toggle input:checked + .toggle-box {
+      background: var(--primary);
+    }
+    .toggle input:checked + .toggle-box::after {
+      left: 20px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal.show { display: flex; }
+    .modal-content {
+      background: var(--white);
+      border-radius: var(--radius);
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 24px;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .modal-header h3 { font-size: 20px; }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text-light);
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    th {
+      background: var(--card-bg);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    td { font-size: 14px; }
+
+    /* Accordion */
+    .accordion-item {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .accordion-header {
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+    }
+    .accordion-header:hover { background: var(--card-bg); }
+    .accordion-content {
+      display: none;
+      padding: 0 20px 20px;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+    .accordion-item.open .accordion-content { display: block; }
+    .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+    .accordion-arrow { transition: transform 0.2s; }
+
+    /* Major cards */
+    .major-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .major-card {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+    }
+    .major-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+    .major-icon { font-size: 32px; margin-bottom: 8px; }
+    .major-name { font-size: 14px; font-weight: 500; }
+
+    /* Volunteer simulation */
+    .volunteer-list { margin: 24px 0; }
+    .volunteer-slot {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+    }
+    .slot-num {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+    .slot-content { flex: 1; }
+    .slot-content select { margin-top: 8px; }
+    .risk-badge {
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+    .risk-safe { background: #dcfce7; color: #16a34a; }
+    .risk-warning { background: #fef3c7; color: #d97706; }
+    .risk-danger { background: #fee2e2; color: #dc2626; }
+
+    /* Score chart */
+    .score-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+      height: 150px;
+      padding: 20px 0;
+    }
+    .chart-bar {
+      flex: 1;
+      background: var(--primary);
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      min-width: 60px;
+    }
+    .chart-bar span {
+      position: absolute;
+      bottom: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: var(--text-light);
+    }
+    .chart-bar strong {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: var(--primary);
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="logo">高考GPS 🎯</div>
+      <button class="nav-toggle" onclick="toggleNav()">☰</button>
+      <nav id="mainNav">
+        <button class="active" onclick="showSection('smart')">🎯 智能选校</button>
+        <button onclick="showSection('schools')">🏫 院校库</button>
+        <button onclick="showSection('scores')">📊 分数线</button>
+        <button onclick="showSection('majors')">📚 专业库</button>
+        <button onclick="showSection('volunteer')">📝 志愿模拟</button>
+        <button onclick="showSection('guide')">📖 填报指南</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1>高考GPS 🎯</h1>
+    <p>科学填报，精准择校</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num" id="schoolCount">--</div>
+        <div class="stat-label">所院校</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5</div>
+        <div class="stat-label">个省份</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="majorCount">--</div>
+        <div class="stat-label">个专业</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- 智能选校 -->
+    <section id="smart" class="active">
+      <h2>🎯 智能选校</h2>
+      <div class="card" style="max-width: 500px;">
+        <div class="form-group">
+          <label>选择省份</label>
+          <select id="smartProvince" onchange="updateCategories()">
+            <option value="">请选择省份</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>科类</label>
+          <select id="smartCategory">
+            <option value="">请先选择省份</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>高考分数</label>
+          <input type="number" id="smartScore" placeholder="请输入分数 (0-750)" min="0" max="750">
+        </div>
+        <div class="toggle-group">
+          <label class="toggle">
+            <input type="checkbox" id="prefer985">
+            <span class="toggle-box"></span>
+            <span>985优先</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="preferRegion">
+            <span class="toggle-box"></span>
+            <span>地区偏好</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="preferJob">
+            <span class="toggle-box"></span>
+            <span>就业优先</span>
+          </label>
+        </div>
+        <button class="btn" onclick="doSmartMatch()" style="width: 100%;">开始匹配</button>
+      </div>
+      <div id="smartResults" style="margin-top: 32px;"></div>
+    </section>
+
+    <!-- 院校库 -->
+    <section id="schools">
+      <h2>🏫 院校库</h2>
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterSchools('all', this)">全部</button>
+        <button class="filter-btn" onclick="filterSchools('985', this)">985</button>
+        <button class="filter-btn" onclick="filterSchools('211', this)">211</button>
+        <button class="filter-btn" onclick="filterSchools('双一流', this)">双一流</button>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterRegion('all', this)">全国</button>
+        <button class="filter-btn" onclick="filterRegion('华北', this)">华北</button>
+        <button class="filter-btn" onclick="filterRegion('华东', this)">华东</button>
+        <button class="filter-btn" onclick="filterRegion('华南', this)">华南</button>
+        <button class="filter-btn" onclick="filterRegion('华中', this)">华中</button>
+        <button class="filter-btn" onclick="filterRegion('西南', this)">西南</button>
+        <button class="filter-btn" onclick="filterRegion('西北', this)">西北</button>
+        <button class="filter-btn" onclick="filterRegion('东北', this)">东北</button>
+      </div>
+      <div class="search-box">
+        <input type="text" id="schoolSearch" placeholder="搜索院校名称..." oninput="searchSchools()">
+      </div>
+      <div id="schoolList" class="card-grid"></div>
+    </section>
+
+    <!-- 分数线查询 -->
+    <section id="scores">
+      <h2>📊 分数线查询</h2>
+      <div class="card" style="max-width: 500px;">
+        <div class="form-group">
+          <label>选择省份</label>
+          <select id="scoreProvince" onchange="updateScoreSchools()">
+            <option value="">请选择省份</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>选择院校</label>
+          <select id="scoreSchool">
+            <option value="">请先选择省份</option>
+          </select>
+        </div>
+        <button class="btn" onclick="lookupScore()" style="width: 100%;">查询分数线</button>
+      </div>
+      <div id="scoreResults" style="margin-top: 32px;"></div>
+    </section>
+
+    <!-- 专业库 -->
+    <section id="majors">
+      <h2>📚 专业库</h2>
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterMajors('all', this)">全部</button>
+        <button class="filter-btn" onclick="filterMajors('热门', this)">热门</button>
+        <button class="filter-btn" onclick="filterMajors('高薪', this)">高薪</button>
+        <button class="filter-btn" onclick="filterMajors('理工', this)">理工</button>
+        <button class="filter-btn" onclick="filterMajors('文科', this)">文科</button>
+        <button class="filter-btn" onclick="filterMajors('医学', this)">医学</button>
+        <button class="filter-btn" onclick="filterMajors('艺术', this)">艺术</button>
+      </div>
+      <div id="majorList" class="major-grid"></div>
+    </section>
+
+    <!-- 志愿模拟 -->
+    <section id="volunteer">
+      <h2>📝 志愿模拟</h2>
+      <div class="card" style="max-width: 600px;">
+        <div class="form-group">
+          <label>选择省份</label>
+          <select id="volProvince" onchange="updateVolCategories()">
+            <option value="">请选择省份</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>科类</label>
+          <select id="volCategory">
+            <option value="">请先选择省份</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>你的分数</label>
+          <input type="number" id="volScore" placeholder="请输入分数" min="0" max="750">
+        </div>
+      </div>
+      <div class="volunteer-list" id="volunteerList"></div>
+      <button class="btn" onclick="generateVolunteerImage()" style="margin-top: 16px;">📸 一键生成志愿表</button>
+    </section>
+
+    <!-- 填报指南 -->
+    <section id="guide">
+      <h2>📖 填报指南</h2>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>📋 平行志愿规则</span>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+          <p><strong>什么是平行志愿？</strong></p>
+          <p>平行志愿是指在同一录取批次中，考生可以填报多个院校志愿，这些志愿之间是平行关系，按照"分数优先、遵循志愿"的原则进行投档。</p>
+          <br>
+          <p><strong>投档原则：</strong></p>
+          <ul style="margin-left: 20px;">
+            <li>分数优先：按考生成绩从高到低排序，依次检索</li>
+            <li>遵循志愿：按考生填报的志愿顺序依次检索</li>
+            <li>一次投档：每个考生只有一次投档机会</li>
+          </ul>
+          <br>
+          <p><strong>填报建议：</strong></p>
+          <p>采用"冲一冲、稳一稳、保一保"策略，合理拉开志愿梯度。一般建议：冲刺院校2-3所，稳妥院校2-3所，保底院校1-2所。</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>📚 新高考选科</span>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+          <p><strong>3+1+2模式：</strong></p>
+          <p>"3"为语文、数学、外语必考科目；"1"为首选科目，在物理、历史中选1门；"2"为再选科目，在化学、生物、思想政治、地理4门中选2门。</p>
+          <br>
+          <p><strong>选科建议：</strong></p>
+          <ul style="margin-left: 20px;">
+            <li>物理+化学+生物：适合理工科、医学类专业</li>
+            <li>物理+化学+地理：工科偏好，选择面广</li>
+            <li>历史+政治+地理：适合文科类、法学、管理类</li>
+            <li>物理+生物+地理：医学、农学、环境科学</li>
+          </ul>
+          <br>
+          <p><strong>注意事项：</strong></p>
+          <p>选科时要综合考虑个人兴趣、学科优势、未来专业方向。部分专业对选科有强制要求，建议提前查阅目标院校的选科要求。</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>🎖️ 提前批说明</span>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+          <p><strong>什么是提前批？</strong></p>
+          <p>提前批是在普通批次之前录取的批次，主要包括军事院校、公安院校、艺术类院校、体育类院校、免费师范生、定向生等。</p>
+          <br>
+          <p><strong>提前批类型：</strong></p>
+          <ul style="margin-left: 20px;">
+            <li>军事类：需政审、体检、面试</li>
+            <li>公安类：需政审、体能测试</li>
+            <li>艺术类：需专业课成绩</li>
+            <li>体育类：需体育专项成绩</li>
+            <li>免费师范生：毕业后定向就业</li>
+          </ul>
+          <br>
+          <p><strong>注意事项：</strong></p>
+          <p>提前批录取不影响后续批次录取。如果提前批未被录取，不影响普通批次的投档。但如果被提前批录取，则不能再参加后续批次录取。</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>⚠️ 常见误区</span>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+          <p><strong>误区一：只看学校排名</strong></p>
+          <p>学校排名固然重要，但专业选择同样关键。有些学校整体排名一般，但某些专业实力很强，就业前景也很好。</p>
+          <br>
+          <p><strong>误区二：盲目追热门专业</strong></p>
+          <p>热门专业竞争激烈，四年后就业形势可能变化。建议结合个人兴趣和能力，不要盲目跟风。</p>
+          <br>
+          <p><strong>误区三：志愿没有梯度</strong></p>
+          <p>所有志愿都填报相同层次的学校，容易造成全部落空。应该合理拉开梯度，确保有保底选择。</p>
+          <br>
+          <p><strong>误区四：忽视地域因素</strong></p>
+          <p>学校所在城市对未来实习、就业、人脉积累都有影响。一线城市机会多，但竞争也大；二线城市生活成本低，发展潜力大。</p>
+          <br>
+          <p><strong>误区五：不服从调剂</strong></p>
+          <p>不服从专业调剂可能导致退档。建议在能接受的范围内勾选服从调剂，增加录取机会。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 院校详情弹窗 -->
+  <div class="modal" id="schoolModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalSchoolName"></h3>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- 专业详情弹窗 -->
+  <div class="modal" id="majorModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalMajorName"></h3>
+        <button class="modal-close" onclick="closeMajorModal()">×</button>
+      </div>
+      <div id="majorModalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // Global data
+    var schools = [];
+    var scores = {};
+    var majors = [];
+    var provinces = {};
+    var currentTagFilter = 'all';
+    var currentRegionFilter = 'all';
+    var currentMajorFilter = 'all';
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      loadData();
+    });
+
+    async function loadData() {
+      try {
+        var [schoolsRes, scoresRes, majorsRes, provincesRes] = await Promise.all([
+          fetch('data/schools.json'),
+          fetch('data/scores.json'),
+          fetch('data/majors.json'),
+          fetch('data/provinces.json')
+        ]);
+        schools = await schoolsRes.json();
+        scores = await scoresRes.json();
+        majors = await majorsRes.json();
+        provinces = await provincesRes.json();
+        
+        document.getElementById('schoolCount').textContent = schools.length;
+        document.getElementById('majorCount').textContent = majors.length;
+        
+        initProvinceSelects();
+        renderSchools();
+        renderMajors();
+        initVolunteerSlots();
+      } catch (e) {
+        console.error('加载数据失败:', e);
+      }
+    }
+
+    function initProvinceSelects() {
+      var selects = ['smartProvince', 'scoreProvince', 'volProvince'];
+      selects.forEach(function(id) {
+        var select = document.getElementById(id);
+        if (!select) return;
+        select.innerHTML = '<option value="">请选择省份</option>';
+        Object.keys(provinces).forEach(function(key) {
+          var opt = document.createElement('option');
+          opt.value = key;
+          opt.textContent = provinces[key].name;
+          select.appendChild(opt);
+        });
+      });
+    }
+
+    function updateCategories() {
+      var prov = document.getElementById('smartProvince').value;
+      var catSelect = document.getElementById('smartCategory');
+      catSelect.innerHTML = '';
+      if (prov && provinces[prov]) {
+        provinces[prov].categories.forEach(function(cat) {
+          var opt = document.createElement('option');
+          opt.value = cat;
+          opt.textContent = cat;
+          catSelect.appendChild(opt);
+        });
+      } else {
+        catSelect.innerHTML = '<option value="">请先选择省份</option>';
+      }
+    }
+
+    function updateVolCategories() {
+      var prov = document.getElementById('volProvince').value;
+      var catSelect = document.getElementById('volCategory');
+      catSelect.innerHTML = '';
+      if (prov && provinces[prov]) {
+        provinces[prov].categories.forEach(function(cat) {
+          var opt = document.createElement('option');
+          opt.value = cat;
+          opt.textContent = cat;
+          catSelect.appendChild(opt);
+        });
+      } else {
+        catSelect.innerHTML = '<option value="">请先选择省份</option>';
+      }
+      updateVolunteerRisks();
+    }
+
+    function updateScoreSchools() {
+      var prov = document.getElementById('scoreProvince').value;
+      var schoolSelect = document.getElementById('scoreSchool');
+      schoolSelect.innerHTML = '';
+      if (prov) {
+        schools.forEach(function(s) {
+          if (scores[s.id] && scores[s.id][prov]) {
+            var opt = document.createElement('option');
+            opt.value = s.id;
+            opt.textContent = s.name;
+            schoolSelect.appendChild(opt);
+          }
+        });
+      } else {
+        schoolSelect.innerHTML = '<option value="">请先选择省份</option>';
+      }
+    }
+
+    // Navigation
+    function showSection(name) {
+      document.querySelectorAll('section').forEach(function(s) { s.classList.remove('active'); });
+      document.getElementById(name).classList.add('active');
+      document.querySelectorAll('nav button').forEach(function(b) { b.classList.remove('active'); });
+      event.target.classList.add('active');
+      document.getElementById('mainNav').classList.remove('show');
+    }
+
+    function toggleNav() {
+      document.getElementById('mainNav').classList.toggle('show');
+    }
+
+    // Smart Match
+    function doSmartMatch() {
+      var prov = document.getElementById('smartProvince').value;
+      var cat = document.getElementById('smartCategory').value;
+      var score = parseInt(document.getElementById('smartScore').value) || 0;
+      var prefer985 = document.getElementById('prefer985').checked;
+      var preferJob = document.getElementById('preferJob').checked;
+
+      if (!prov || !cat || !score) {
+        alert('请填写完整信息');
+        return;
+      }
+
+      var results = [];
+      schools.forEach(function(school) {
+        var schoolScore = scores[school.id] && scores[school.id][prov] && scores[school.id][prov]['2024'] && scores[school.id][prov]['2024'][cat];
+        if (!schoolScore) return;
+        
+        var diff = score - schoolScore;
+        var priority = 0;
+        if (prefer985 && (school.tags || []).indexOf('985') >= 0) priority += 10;
+        if (preferJob) priority += (school.employmentRate || 90) / 10;
+        
+        results.push({
+          school: school,
+          cutoff: schoolScore,
+          diff: diff,
+          priority: priority
+        });
+      });
+
+      results.sort(function(a, b) { return (b.diff + b.priority) - (a.diff + a.priority); });
+
+      var reach = results.filter(function(r) { return r.diff >= -20 && r.diff < 0; }).slice(0, 10);
+      var match = results.filter(function(r) { return r.diff >= 0 && r.diff < 20; }).slice(0, 10);
+      var safe = results.filter(function(r) { return r.diff >= 20; }).slice(0, 10);
+
+      var html = '';
+      if (reach.length) {
+        html += '<div class="result-section"><h3>🚀 冲刺校 (Reach)</h3>';
+        reach.forEach(function(r) { html += renderResultCard(r, 'reach'); });
+        html += '</div>';
+      }
+      if (match.length) {
+        html += '<div class="result-section"><h3>🎯 稳妥校 (Match)</h3>';
+        match.forEach(function(r) { html += renderResultCard(r, 'match'); });
+        html += '</div>';
+      }
+      if (safe.length) {
+        html += '<div class="result-section"><h3>✅ 保底校 (Safety)</h3>';
+        safe.forEach(function(r) { html += renderResultCard(r, 'safe'); });
+        html += '</div>';
+      }
+      if (!reach.length && !match.length && !safe.length) {
+        html = '<p style="text-align:center;color:var(--text-light);padding:40px;">未找到匹配院校，请调整分数或省份</p>';
+      }
+
+      document.getElementById('smartResults').innerHTML = html;
+    }
+
+    function renderResultCard(r, type) {
+      var tags = (r.school.tags || []).map(function(t) {
+        var cls = t === '985' ? 't985' : (t === '211' ? 't211' : (t === 'C9' ? 'tc9' : ''));
+        return '<span class="tag ' + cls + '">' + t + '</span>';
+      }).join('');
+      var diffText = r.diff >= 0 ? '+' + r.diff : r.diff;
+      return '<div class="school-card" onclick="openSchoolModal(\'' + r.school.id + '\')">' +
+        '<div class="school-info"><h4>' + r.school.name + '</h4>' +
+        '<p>' + (r.school.province || '') + ' · ' + (r.school.type || '') + '</p>' +
+        '<div class="tags">' + tags + '</div></div>' +
+        '<div class="score-diff ' + type + '">' + diffText + '分</div></div>';
+    }
+
+    // Schools Browser
+    function renderSchools() {
+      var filtered = schools.filter(function(s) {
+        if (currentTagFilter !== 'all' && (s.tags || []).indexOf(currentTagFilter) < 0) return false;
+        if (currentRegionFilter !== 'all' && s.region !== currentRegionFilter) return false;
+        var search = (document.getElementById('schoolSearch').value || '').toLowerCase();
+        if (search && s.name.toLowerCase().indexOf(search) < 0) return false;
+        return true;
+      });
+
+      var html = filtered.slice(0, 50).map(function(s) {
+        var tags = (s.tags || []).slice(0, 3).map(function(t) {
+          var cls = t === '985' ? 't985' : (t === '211' ? 't211' : (t === 'C9' ? 'tc9' : ''));
+          return '<span class="tag ' + cls + '">' + t + '</span>';
+        }).join('');
+        var majorsStr = (s.topMajors || []).slice(0, 3).join('、');
+        return '<div class="card" style="cursor:pointer" onclick="openSchoolModal(\'' + s.id + '\')">' +
+          '<h4>' + s.name + '</h4>' +
+          '<p style="color:var(--text-light);font-size:14px;margin:4px 0">' + (s.province || '') + ' · ' + (s.type || '') + '</p>' +
+          '<div class="tags">' + tags + '</div>' +
+          '<p style="font-size:13px;margin-top:8px">🎓 ' + majorsStr + '</p>' +
+          '<p style="font-size:13px;color:var(--text-light)">就业率 ' + (s.employmentRate || '--') + '%</p></div>';
+      }).join('');
+
+      document.getElementById('schoolList').innerHTML = html || '<p style="text-align:center;color:var(--text-light);grid-column:1/-1">暂无匹配院校</p>';
+    }
+
+    function filterSchools(tag, btn) {
+      currentTagFilter = tag;
+      document.querySelectorAll('#schools .filter-bar:first-of-type .filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderSchools();
+    }
+
+    function filterRegion(region, btn) {
+      currentRegionFilter = region;
+      document.querySelectorAll('#schools .filter-bar:nth-of-type(2) .filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderSchools();
+    }
+
+    function searchSchools() {
+      renderSchools();
+    }
+
+    function openSchoolModal(id) {
+      var school = schools.find(function(s) { return s.id === id; });
+      if (!school) return;
+
+      document.getElementById('modalSchoolName').textContent = school.name;
+      
+      var tags = (school.tags || []).map(function(t) {
+        var cls = t === '985' ? 't985' : (t === '211' ? 't211' : (t === 'C9' ? 'tc9' : ''));
+        return '<span class="tag ' + cls + '">' + t + '</span>';
+      }).join('');
+
+      var scoreTable = '';
+      if (scores[id]) {
+        scoreTable = '<h4 style="margin-top:20px">📊 历年分数线</h4><table><tr><th>省份</th><th>年份</th><th>科类</th><th>分数</th></tr>';
+        Object.keys(scores[id]).forEach(function(prov) {
+          var provData = scores[id][prov];
+          Object.keys(provData).forEach(function(year) {
+            Object.keys(provData[year]).forEach(function(cat) {
+              scoreTable += '<tr><td>' + (provinces[prov] ? provinces[prov].name : prov) + '</td><td>' + year + '</td><td>' + cat + '</td><td>' + provData[year][cat] + '</td></tr>';
+            });
+          });
+        });
+        scoreTable += '</table>';
+      }
+
+      var html = '<p style="color:var(--text-light)">' + (school.province || '') + ' · ' + (school.city || '') + ' · ' + (school.type || '') + '</p>' +
+        '<div class="tags" style="margin:12px 0">' + tags + '</div>' +
+        '<p>' + (school.desc || '') + '</p>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">' +
+        '<div class="card"><strong>排名</strong><br>#' + (school.ranking || '--') + '</div>' +
+        '<div class="card"><strong>就业率</strong><br>' + (school.employmentRate || '--') + '%</div>' +
+        '<div class="card"><strong>学生数</strong><br>' + (school.studentCount || '--') + '</div>' +
+        '<div class="card"><strong>男生比例</strong><br>' + (school.maleRatio || '--') + '%</div></div>' +
+        '<h4 style="margin-top:20px">🎓 优势专业</h4><div class="tags">' + (school.topMajors || []).map(function(m) { return '<span class="tag">' + m + '</span>'; }).join('') + '</div>' +
+        '<h4 style="margin-top:20px">✨ 特色</h4><p>' + (school.features || []).join('、') + '</p>' +
+        (school.website ? '<p style="margin-top:16px"><a href="' + school.website + '" target="_blank" style="color:var(--primary)">🔗 学校官网</a></p>' : '') +
+        scoreTable;
+
+      document.getElementById('modalContent').innerHTML = html;
+      document.getElementById('schoolModal').classList.add('show');
+    }
+
+    function closeModal() {
+      document.getElementById('schoolModal').classList.remove('show');
+    }
+
+    // Score Lookup
+    function lookupScore() {
+      var prov = document.getElementById('scoreProvince').value;
+      var schoolId = document.getElementById('scoreSchool').value;
+
+      if (!prov || !schoolId) {
+        alert('请选择省份和院校');
+        return;
+      }
+
+      var school = schools.find(function(s) { return s.id === schoolId; });
+      var schoolScores = scores[schoolId] && scores[schoolId][prov];
+      if (!schoolScores) {
+        document.getElementById('scoreResults').innerHTML = '<p style="text-align:center;color:var(--text-light)">暂无该院校在此省份的分数数据</p>';
+        return;
+      }
+
+      var years = Object.keys(schoolScores).sort().reverse();
+      var cats = Object.keys(schoolScores[years[0]] || {});
+
+      var tableHtml = '<table><tr><th>年份</th>';
+      cats.forEach(function(c) { tableHtml += '<th>' + c + '</th>'; });
+      tableHtml += '</tr>';
+      years.forEach(function(y) {
+        tableHtml += '<tr><td>' + y + '</td>';
+        cats.forEach(function(c) {
+          tableHtml += '<td>' + (schoolScores[y] && schoolScores[y][c] ? schoolScores[y][c] : '--') + '</td>';
+        });
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</table>';
+
+      // Simple chart
+      var maxScore = 750;
+      var chartHtml = '<div class="score-chart">';
+      years.forEach(function(y) {
+        var avgScore = 0, count = 0;
+        cats.forEach(function(c) {
+          if (schoolScores[y] && schoolScores[y][c]) {
+            avgScore += schoolScores[y][c];
+            count++;
+          }
+        });
+        avgScore = count ? Math.round(avgScore / count) : 0;
+        var height = (avgScore / maxScore) * 100;
+        chartHtml += '<div class="chart-bar" style="height:' + height + '%"><strong>' + avgScore + '</strong><span>' + y + '</span></div>';
+      });
+      chartHtml += '</div>';
+
+      document.getElementById('scoreResults').innerHTML = '<div class="card"><h3>' + (school ? school.name : schoolId) + ' - ' + (provinces[prov] ? provinces[prov].name : prov) + '</h3>' + chartHtml + tableHtml + '</div>';
+    }
+
+    // Majors
+    function renderMajors() {
+      var filtered = majors.filter(function(m) {
+        if (currentMajorFilter === 'all') return true;
+        return (m.tags || []).indexOf(currentMajorFilter) >= 0;
+      });
+
+      var html = filtered.map(function(m) {
+        return '<div class="major-card" onclick="openMajorModal(\'' + m.id + '\')">' +
+          '<div class="major-icon">' + (m.icon || '📚') + '</div>' +
+          '<div class="major-name">' + m.name + '</div></div>';
+      }).join('');
+
+      document.getElementById('majorList').innerHTML = html;
+    }
+
+    function filterMajors(tag, btn) {
+      currentMajorFilter = tag;
+      document.querySelectorAll('#majors .filter-bar .filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderMajors();
+    }
+
+    function openMajorModal(id) {
+      var major = majors.find(function(m) { return m.id === id; });
+      if (!major) return;
+
+      document.getElementById('modalMajorName').textContent = (major.icon || '') + ' ' + major.name;
+
+      var topSchoolsHtml = (major.topSchools || []).map(function(sid) {
+        var s = schools.find(function(x) { return x.id === sid; });
+        return s ? '<span class="tag">' + s.name + '</span>' : '';
+      }).join('');
+
+      var html = '<p style="color:var(--text-light)">' + (major.category || '') + '</p>' +
+        '<div class="tags" style="margin:12px 0">' + (major.tags || []).map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
+        '<p>' + (major.desc || '') + '</p>' +
+        '<h4 style="margin-top:20px">💼 就业方向</h4><p>' + (major.careers || []).join('、') + '</p>' +
+        '<h4 style="margin-top:16px">💰 薪资范围</h4><p>' + (major.salaryRange || '--') + '</p>' +
+        '<h4 style="margin-top:16px">🏫 推荐院校</h4><div class="tags">' + topSchoolsHtml + '</div>';
+
+      document.getElementById('majorModalContent').innerHTML = html;
+      document.getElementById('majorModal').classList.add('show');
+    }
+
+    function closeMajorModal() {
+      document.getElementById('majorModal').classList.remove('show');
+    }
+
+    // Volunteer Simulation
+    function initVolunteerSlots() {
+      var html = '';
+      for (var i = 1; i <= 6; i++) {
+        html += '<div class="volunteer-slot">' +
+          '<div class="slot-num">' + i + '</div>' +
+          '<div class="slot-content">' +
+          '<strong>志愿 ' + i + '</strong>' +
+          '<select id="vol' + i + '" onchange="updateVolunteerRisks()"><option value="">请选择院校</option></select>' +
+          '</div>' +
+          '<span class="risk-badge" id="risk' + i + '">--</span></div>';
+      }
+      document.getElementById('volunteerList').innerHTML = html;
+      populateVolunteerSchools();
+    }
+
+    function populateVolunteerSchools() {
+      for (var i = 1; i <= 6; i++) {
+        var sel = document.getElementById('vol' + i);
+        if (!sel) continue;
+        sel.innerHTML = '<option value="">请选择院校</option>';
+        schools.forEach(function(s) {
+          var opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = s.name;
+          sel.appendChild(opt);
+        });
+      }
+    }
+
+    function updateVolunteerRisks() {
+      var prov = document.getElementById('volProvince').value;
+      var cat = document.getElementById('volCategory').value;
+      var userScore = parseInt(document.getElementById('volScore').value) || 0;
+
+      for (var i = 1; i <= 6; i++) {
+        var sel = document.getElementById('vol' + i);
+        var riskBadge = document.getElementById('risk' + i);
+        if (!sel || !riskBadge) continue;
+
+        var schoolId = sel.value;
+        if (!schoolId || !prov || !cat || !userScore) {
+          riskBadge.textContent = '--';
+          riskBadge.className = 'risk-badge';
+          continue;
+        }
+
+        var cutoff = scores[schoolId] && scores[schoolId][prov] && scores[schoolId][prov]['2024'] && scores[schoolId][prov]['2024'][cat];
+        if (!cutoff) {
+          riskBadge.textContent = '无数据';
+          riskBadge.className = 'risk-badge';
+          continue;
+        }
+
+        var diff = userScore - cutoff;
+        if (diff >= 20) {
+          riskBadge.textContent = '🟢 安全';
+          riskBadge.className = 'risk-badge risk-safe';
+        } else if (diff >= 0) {
+          riskBadge.textContent = '🟡 有风险';
+          riskBadge.className = 'risk-badge risk-warning';
+        } else {
+          riskBadge.textContent = '🔴 冲刺';
+          riskBadge.className = 'risk-badge risk-danger';
+        }
+      }
+    }
+
+    function generateVolunteerImage() {
+      var prov = document.getElementById('volProvince').value;
+      var cat = document.getElementById('volCategory').value;
+      var userScore = document.getElementById('volScore').value;
+
+      var text = '【高考志愿表】\n';
+      text += '省份：' + (provinces[prov] ? provinces[prov].name : prov || '未选择') + '\n';
+      text += '科类：' + (cat || '未选择') + '\n';
+      text += '分数：' + (userScore || '未填写') + '\n\n';
+
+      for (var i = 1; i <= 6; i++) {
+        var sel = document.getElementById('vol' + i);
+        var schoolId = sel ? sel.value : '';
+        var school = schools.find(function(s) { return s.id === schoolId; });
+        var riskBadge = document.getElementById('risk' + i);
+        text += '志愿' + i + '：' + (school ? school.name : '未选择') + ' ' + (riskBadge ? riskBadge.textContent : '') + '\n';
+      }
+
+      text += '\n— 高考GPS 🎯 生成';
+      
+      alert('志愿表内容已生成！\n\n' + text + '\n\n(可复制分享)');
+    }
+
+    // Guide Accordion
+    function toggleAccordion(header) {
+      var item = header.parentElement;
+      item.classList.toggle('open');
+    }
+
+    // Close modals on outside click
+    document.getElementById('schoolModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+    document.getElementById('majorModal').addEventListener('click', function(e) {
+      if (e.target === this) closeMajorModal();
+    });
+  </script>
+</body>
+</html>
