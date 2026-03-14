@@ -19,6 +19,8 @@
       --shadow-hover: 0 4px 16px rgba(37, 99, 235, 0.15);
       --radius: 12px;
       --radius-sm: 8px;
+      --warn: #f59e0b;
+      --warn-bg: #fffbeb;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -316,6 +318,72 @@
       left: 20px;
     }
 
+    /* Subject pills */
+    .subject-selector {
+      margin: 16px 0;
+      padding: 16px;
+      background: var(--card-bg);
+      border-radius: var(--radius-sm);
+    }
+    .subject-selector h4 {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+    .subject-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .subject-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 2px solid #e2e8f0;
+      background: var(--white);
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .subject-pill:hover {
+      border-color: var(--primary-light);
+    }
+    .subject-pill.selected {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+    .subject-pill.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .subject-pill input { display: none; }
+
+    /* Subject req tags */
+    .req-tag {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+    .req-tag.req { background: #fee2e2; color: #dc2626; }
+    .req-tag.pref { background: #dbeafe; color: #1e40af; }
+    .req-tag.any { background: #fef3c7; color: #92400e; }
+    .req-tag.ok { background: #dcfce7; color: #16a34a; }
+
+    /* Major compatibility warning */
+    .major-compat-warn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--warn);
+      margin-top: 4px;
+    }
+
     /* Modal */
     .modal {
       display: none;
@@ -421,6 +489,11 @@
     }
     .major-icon { font-size: 32px; margin-bottom: 8px; }
     .major-name { font-size: 14px; font-weight: 500; }
+    .major-req-note {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
 
     /* Volunteer simulation */
     .volunteer-list { margin: 24px 0; }
@@ -521,7 +594,7 @@
         <div class="stat-label">所院校</div>
       </div>
       <div class="stat">
-        <div class="stat-num">5</div>
+        <div class="stat-num">31</div>
         <div class="stat-label">个省份</div>
       </div>
       <div class="stat">
@@ -535,21 +608,16 @@
     <!-- 智能选校 -->
     <section id="smart" class="active">
       <h2>🎯 智能选校</h2>
-      <div class="card" style="max-width: 500px;">
+      <div class="card" style="max-width: 560px;">
         <div class="form-group">
-          <label>选择省份</label>
-          <select id="smartProvince" onchange="updateCategories()">
+          <label>① 选择省份</label>
+          <select id="smartProvince" onchange="onSmartProvinceChange()">
             <option value="">请选择省份</option>
           </select>
         </div>
+        <div id="smartSubjectArea"></div>
         <div class="form-group">
-          <label>科类</label>
-          <select id="smartCategory">
-            <option value="">请先选择省份</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>高考分数</label>
+          <label>③ 高考分数</label>
           <input type="number" id="smartScore" placeholder="请输入分数 (0-750)" min="0" max="750">
         </div>
         <div class="toggle-group">
@@ -593,6 +661,15 @@
         <button class="filter-btn" onclick="filterRegion('西北', this)">西北</button>
         <button class="filter-btn" onclick="filterRegion('东北', this)">东北</button>
       </div>
+      <div class="filter-bar" id="schoolSubjectFilterBar" style="display:none;">
+        <span style="font-size:14px;color:var(--text-light);padding:8px 0;">选科筛选：</span>
+        <button class="filter-btn" onclick="toggleSchoolSubjectFilter(this, '物理')">物理</button>
+        <button class="filter-btn" onclick="toggleSchoolSubjectFilter(this, '化学')">化学</button>
+        <button class="filter-btn" onclick="toggleSchoolSubjectFilter(this, '生物')">生物</button>
+        <button class="filter-btn" onclick="toggleSchoolSubjectFilter(this, '历史')">历史</button>
+        <button class="filter-btn" onclick="toggleSchoolSubjectFilter(this, '政治')">政治</button>
+        <button class="filter-btn" onclick="toggleSchoolSubjectFilter(this, '地理')">地理</button>
+      </div>
       <div class="search-box">
         <input type="text" id="schoolSearch" placeholder="搜索院校名称..." oninput="searchSchools()">
       </div>
@@ -631,6 +708,14 @@
         <button class="filter-btn" onclick="filterMajors('文科', this)">文科</button>
         <button class="filter-btn" onclick="filterMajors('医学', this)">医学</button>
         <button class="filter-btn" onclick="filterMajors('艺术', this)">艺术</button>
+      </div>
+      <div class="filter-bar" id="majorSubjectFilterBar">
+        <label class="toggle" style="margin-right:8px;">
+          <input type="checkbox" id="majorOnlyCompatible" onchange="renderMajors()">
+          <span class="toggle-box"></span>
+          <span>只看我能报的专业</span>
+        </label>
+        <span style="font-size:13px;color:var(--text-light);" id="majorMySubjectsLabel"></span>
       </div>
       <div id="majorList" class="major-grid"></div>
     </section>
@@ -689,8 +774,17 @@
           <span class="accordion-arrow">▼</span>
         </div>
         <div class="accordion-content">
-          <p><strong>3+1+2模式：</strong></p>
+          <p><strong>3+1+2模式（14省）：</strong></p>
           <p>"3"为语文、数学、外语必考科目；"1"为首选科目，在物理、历史中选1门；"2"为再选科目，在化学、生物、思想政治、地理4门中选2门。</p>
+          <p style="color:var(--text-light);font-size:13px;margin-top:4px">适用省份：广东、湖南、湖北、河北、辽宁、江苏、福建、重庆、广西、甘肃、吉林、黑龙江、安徽、江西</p>
+          <br>
+          <p><strong>3+3模式（6省市）：</strong></p>
+          <p>"3"为语文、数学、外语必考科目；另外从物理、化学、生物、历史、政治、地理中任选3门。</p>
+          <p style="color:var(--text-light);font-size:13px;margin-top:4px">适用省份：上海、浙江、北京、天津、山东、海南</p>
+          <br>
+          <p><strong>传统文理分科（11省区）：</strong></p>
+          <p>文科：语数外+政史地；理科：语数外+理化生。</p>
+          <p style="color:var(--text-light);font-size:13px;margin-top:4px">适用省份：河南、四川、云南、陕西、山西、内蒙古、宁夏、青海、西藏、新疆、贵州</p>
           <br>
           <p><strong>选科建议：</strong></p>
           <ul style="margin-left: 20px;">
@@ -782,6 +876,10 @@
     var currentTagFilter = 'all';
     var currentRegionFilter = 'all';
     var currentMajorFilter = 'all';
+    
+    // User's selected subjects (global state for cross-section use)
+    var userSubjects = []; // e.g. ["物理","化学","生物"]
+    var schoolSubjectFilters = []; // active subject filters in 院校库
 
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
@@ -808,6 +906,7 @@
         renderSchools();
         renderMajors();
         initVolunteerSlots();
+        document.getElementById('schoolSubjectFilterBar').style.display = 'flex';
       } catch (e) {
         console.error('加载数据失败:', e);
       }
@@ -819,91 +918,241 @@
         var select = document.getElementById(id);
         if (!select) return;
         select.innerHTML = '<option value="">请选择省份</option>';
+        // Group by exam type
+        var groups = {'3+1+2': [], '3+3': [], '传统': []};
         Object.keys(provinces).forEach(function(key) {
-          var opt = document.createElement('option');
-          opt.value = key;
-          opt.textContent = provinces[key].name;
-          select.appendChild(opt);
+          var p = provinces[key];
+          var t = p.examType || '传统';
+          if (!groups[t]) groups[t] = [];
+          groups[t].push({key: key, name: p.name});
+        });
+        var labels = {'3+1+2': '新高考 3+1+2', '3+3': '新高考 3+3', '传统': '传统文理'};
+        Object.keys(groups).forEach(function(type) {
+          if (groups[type].length === 0) return;
+          var optgroup = document.createElement('optgroup');
+          optgroup.label = labels[type] || type;
+          groups[type].forEach(function(p) {
+            var opt = document.createElement('option');
+            opt.value = p.key;
+            opt.textContent = p.name;
+            optgroup.appendChild(opt);
+          });
+          select.appendChild(optgroup);
         });
       });
     }
 
-    function updateCategories() {
+    // ============ Subject Selection Logic ============
+    
+    function getExamType(provKey) {
+      if (!provKey || !provinces[provKey]) return null;
+      return provinces[provKey].examType;
+    }
+
+    function onSmartProvinceChange() {
       var prov = document.getElementById('smartProvince').value;
-      var catSelect = document.getElementById('smartCategory');
-      catSelect.innerHTML = '';
-      if (prov && provinces[prov]) {
-        provinces[prov].categories.forEach(function(cat) {
-          var opt = document.createElement('option');
-          opt.value = cat;
-          opt.textContent = cat;
-          catSelect.appendChild(opt);
+      var area = document.getElementById('smartSubjectArea');
+      area.innerHTML = '';
+      
+      if (!prov) return;
+      
+      var examType = getExamType(prov);
+      var html = '<div class="subject-selector">';
+      
+      if (examType === '3+1+2') {
+        html += '<h4>② 选科 — 首选科目（选1门）</h4>';
+        html += '<div class="subject-pills" id="primarySubjects">';
+        html += makePill('物理', 'primary', false);
+        html += makePill('历史', 'primary', false);
+        html += '</div>';
+        html += '<h4 style="margin-top:14px">再选科目（选2门）</h4>';
+        html += '<div class="subject-pills" id="secondarySubjects">';
+        ['化学','生物','政治','地理'].forEach(function(s) {
+          html += makePill(s, 'secondary', false);
         });
+        html += '</div>';
+      } else if (examType === '3+3') {
+        html += '<h4>② 选科（任选3门）</h4>';
+        html += '<div class="subject-pills" id="freeSubjects">';
+        ['物理','化学','生物','历史','政治','地理'].forEach(function(s) {
+          html += makePill(s, 'free', false);
+        });
+        html += '</div>';
       } else {
-        catSelect.innerHTML = '<option value="">请先选择省份</option>';
+        // 传统
+        html += '<h4>② 科类</h4>';
+        html += '<div class="subject-pills" id="tradCategory">';
+        html += makePill('理科', 'trad', false);
+        html += makePill('文科', 'trad', false);
+        html += '</div>';
       }
+      
+      html += '</div>';
+      area.innerHTML = html;
+      
+      // Bind click handlers
+      area.querySelectorAll('.subject-pill').forEach(function(pill) {
+        pill.addEventListener('click', function() {
+          handlePillClick(this, examType);
+        });
+      });
     }
 
-    function updateVolCategories() {
-      var prov = document.getElementById('volProvince').value;
-      var catSelect = document.getElementById('volCategory');
-      catSelect.innerHTML = '';
-      if (prov && provinces[prov]) {
-        provinces[prov].categories.forEach(function(cat) {
-          var opt = document.createElement('option');
-          opt.value = cat;
-          opt.textContent = cat;
-          catSelect.appendChild(opt);
-        });
-      } else {
-        catSelect.innerHTML = '<option value="">请先选择省份</option>';
-      }
-      updateVolunteerRisks();
+    function makePill(label, group, selected) {
+      return '<div class="subject-pill' + (selected ? ' selected' : '') + '" data-subject="' + label + '" data-group="' + group + '">' + label + '</div>';
     }
 
-    function updateScoreSchools() {
-      var prov = document.getElementById('scoreProvince').value;
-      var schoolSelect = document.getElementById('scoreSchool');
-      schoolSelect.innerHTML = '';
-      if (prov) {
-        schools.forEach(function(s) {
-          if (scores[s.id] && scores[s.id][prov]) {
-            var opt = document.createElement('option');
-            opt.value = s.id;
-            opt.textContent = s.name;
-            schoolSelect.appendChild(opt);
+    function handlePillClick(pill, examType) {
+      var group = pill.getAttribute('data-group');
+      
+      if (group === 'primary' || group === 'trad') {
+        // Radio behavior
+        pill.parentElement.querySelectorAll('.subject-pill').forEach(function(p) {
+          p.classList.remove('selected');
+        });
+        pill.classList.toggle('selected');
+      } else if (group === 'secondary') {
+        // Max 2
+        var selected = pill.parentElement.querySelectorAll('.subject-pill.selected');
+        if (pill.classList.contains('selected')) {
+          pill.classList.remove('selected');
+        } else if (selected.length < 2) {
+          pill.classList.add('selected');
+        }
+        // Update disabled state
+        var sel = pill.parentElement.querySelectorAll('.subject-pill.selected');
+        pill.parentElement.querySelectorAll('.subject-pill').forEach(function(p) {
+          if (!p.classList.contains('selected')) {
+            p.classList.toggle('disabled', sel.length >= 2);
           }
         });
+      } else if (group === 'free') {
+        // Max 3
+        var selected = pill.parentElement.querySelectorAll('.subject-pill.selected');
+        if (pill.classList.contains('selected')) {
+          pill.classList.remove('selected');
+        } else if (selected.length < 3) {
+          pill.classList.add('selected');
+        }
+        var sel = pill.parentElement.querySelectorAll('.subject-pill.selected');
+        pill.parentElement.querySelectorAll('.subject-pill').forEach(function(p) {
+          if (!p.classList.contains('selected')) {
+            p.classList.toggle('disabled', sel.length >= 3);
+          }
+        });
+      }
+      
+      updateUserSubjects(examType);
+    }
+
+    function updateUserSubjects(examType) {
+      userSubjects = [];
+      var area = document.getElementById('smartSubjectArea');
+      
+      if (examType === '3+1+2') {
+        var primary = area.querySelector('#primarySubjects .subject-pill.selected');
+        if (primary) userSubjects.push(primary.getAttribute('data-subject'));
+        area.querySelectorAll('#secondarySubjects .subject-pill.selected').forEach(function(p) {
+          userSubjects.push(p.getAttribute('data-subject'));
+        });
+      } else if (examType === '3+3') {
+        area.querySelectorAll('#freeSubjects .subject-pill.selected').forEach(function(p) {
+          userSubjects.push(p.getAttribute('data-subject'));
+        });
       } else {
-        schoolSelect.innerHTML = '<option value="">请先选择省份</option>';
+        var trad = area.querySelector('#tradCategory .subject-pill.selected');
+        if (trad) {
+          var cat = trad.getAttribute('data-subject');
+          if (cat === '理科') userSubjects = ['物理','化学','生物'];
+          else userSubjects = ['历史','政治','地理'];
+        }
+      }
+      
+      // Update label in majors section
+      var label = document.getElementById('majorMySubjectsLabel');
+      if (label) {
+        label.textContent = userSubjects.length > 0 ? '当前选科：' + userSubjects.join('、') : '（请先在智能选校中设置选科）';
       }
     }
 
-    // Navigation
-    function showSection(name) {
-      document.querySelectorAll('section').forEach(function(s) { s.classList.remove('active'); });
-      document.getElementById(name).classList.add('active');
-      document.querySelectorAll('nav button').forEach(function(b) { b.classList.remove('active'); });
-      event.target.classList.add('active');
-      document.getElementById('mainNav').classList.remove('show');
+    function getSmartCategory(examType) {
+      // Derive the category key for score lookup
+      if (examType === '3+1+2') {
+        var primary = document.querySelector('#primarySubjects .subject-pill.selected');
+        if (!primary) return null;
+        return primary.getAttribute('data-subject') === '物理' ? '物理类' : '历史类';
+      } else if (examType === '3+3') {
+        return '综合';
+      } else {
+        var trad = document.querySelector('#tradCategory .subject-pill.selected');
+        if (!trad) return null;
+        return trad.getAttribute('data-subject');
+      }
     }
 
-    function toggleNav() {
-      document.getElementById('mainNav').classList.toggle('show');
+    // ============ Subject Compatibility ============
+
+    function checkMajorCompat(major, subjects) {
+      // Returns {compatible: bool, note: string}
+      var req = major.subjectReq;
+      if (!req) return {compatible: true, note: ''};
+      
+      // Check required (must have ALL)
+      if (req.required && req.required.length > 0) {
+        for (var i = 0; i < req.required.length; i++) {
+          if (subjects.indexOf(req.required[i]) < 0) {
+            return {compatible: false, note: '需要选' + req.required.join('和')};
+          }
+        }
+      }
+      
+      // Check requiredAny (must have at least one)
+      if (req.requiredAny && req.requiredAny.length > 0) {
+        var hasAny = false;
+        for (var i = 0; i < req.requiredAny.length; i++) {
+          if (subjects.indexOf(req.requiredAny[i]) >= 0) { hasAny = true; break; }
+        }
+        if (!hasAny) {
+          return {compatible: false, note: '需要选' + req.requiredAny.join('或')};
+        }
+      }
+      
+      return {compatible: true, note: req.note || ''};
     }
 
-    // Smart Match
+    function renderSubjectReqTags(major) {
+      var req = major.subjectReq;
+      if (!req) return '';
+      var html = '';
+      if (req.required && req.required.length > 0) {
+        html += '<span class="req-tag req">必选 ' + req.required.join('+') + '</span>';
+      }
+      if (req.requiredAny && req.requiredAny.length > 0) {
+        html += '<span class="req-tag any">选一 ' + req.requiredAny.join('/') + '</span>';
+      }
+      if (req.required && req.required.length === 0 && (!req.requiredAny || req.requiredAny.length === 0)) {
+        html += '<span class="req-tag ok">不限</span>';
+      }
+      return html;
+    }
+
+    // ============ Smart Match ============
+
     function doSmartMatch() {
       var prov = document.getElementById('smartProvince').value;
-      var cat = document.getElementById('smartCategory').value;
+      var examType = getExamType(prov);
+      var cat = getSmartCategory(examType);
       var score = parseInt(document.getElementById('smartScore').value) || 0;
       var prefer985 = document.getElementById('prefer985').checked;
       var preferJob = document.getElementById('preferJob').checked;
 
       if (!prov || !cat || !score) {
-        alert('请填写完整信息');
+        alert('请填写完整信息（省份、选科、分数）');
         return;
       }
+
+      // Determine subjects for compatibility checking
+      updateUserSubjects(examType);
 
       var results = [];
       schools.forEach(function(school) {
@@ -915,11 +1164,25 @@
         if (prefer985 && (school.tags || []).indexOf('985') >= 0) priority += 10;
         if (preferJob) priority += (school.employmentRate || 90) / 10;
         
+        // Check how many of this school's majors are compatible
+        var compatMajors = 0;
+        var incompatMajors = 0;
+        (school.topMajors || []).forEach(function(mName) {
+          var m = majors.find(function(x) { return x.name === mName; });
+          if (m && userSubjects.length > 0) {
+            var compat = checkMajorCompat(m, userSubjects);
+            if (compat.compatible) compatMajors++;
+            else incompatMajors++;
+          }
+        });
+        
         results.push({
           school: school,
           cutoff: schoolScore,
           diff: diff,
-          priority: priority
+          priority: priority,
+          compatMajors: compatMajors,
+          incompatMajors: incompatMajors
         });
       });
 
@@ -928,6 +1191,18 @@
       var reach = results.filter(function(r) { return r.diff >= -20 && r.diff < 0; }).slice(0, 10);
       var match = results.filter(function(r) { return r.diff >= 0 && r.diff < 20; }).slice(0, 10);
       var safe = results.filter(function(r) { return r.diff >= 20; }).slice(0, 10);
+
+      // Separate schools with NO compatible majors
+      var limited = [];
+      if (userSubjects.length > 0) {
+        [reach, match, safe].forEach(function(arr) {
+          for (var i = arr.length - 1; i >= 0; i--) {
+            if (arr[i].incompatMajors > 0 && arr[i].compatMajors === 0) {
+              limited.push(arr.splice(i, 1)[0]);
+            }
+          }
+        });
+      }
 
       var html = '';
       if (reach.length) {
@@ -945,7 +1220,12 @@
         safe.forEach(function(r) { html += renderResultCard(r, 'safe'); });
         html += '</div>';
       }
-      if (!reach.length && !match.length && !safe.length) {
+      if (limited.length) {
+        html += '<div class="result-section"><h3>⚠️ 选科受限</h3><p style="color:var(--text-light);font-size:14px;margin-bottom:12px;">以下院校的优势专业与你的选科不匹配</p>';
+        limited.forEach(function(r) { html += renderResultCard(r, 'match'); });
+        html += '</div>';
+      }
+      if (!reach.length && !match.length && !safe.length && !limited.length) {
         html = '<p style="text-align:center;color:var(--text-light);padding:40px;">未找到匹配院校，请调整分数或省份</p>';
       }
 
@@ -958,20 +1238,57 @@
         return '<span class="tag ' + cls + '">' + t + '</span>';
       }).join('');
       var diffText = r.diff >= 0 ? '+' + r.diff : r.diff;
-      return '<div class="school-card" onclick="openSchoolModal(\'' + r.school.id + '\')">' +
+      
+      // Show major compatibility info
+      var compatHtml = '';
+      if (userSubjects.length > 0) {
+        var schoolMajors = (r.school.topMajors || []);
+        var majorDetails = schoolMajors.slice(0, 5).map(function(mName) {
+          var m = majors.find(function(x) { return x.name === mName; });
+          if (!m) return '<span class="tag">' + mName + '</span>';
+          var compat = checkMajorCompat(m, userSubjects);
+          if (compat.compatible) {
+            return '<span class="tag" style="background:#dcfce7;color:#16a34a">' + mName + ' ✓</span>';
+          } else {
+            return '<span class="tag" style="background:#fee2e2;color:#dc2626">' + mName + ' ⚠️</span>';
+          }
+        }).join('');
+        compatHtml = '<div class="tags" style="margin-top:4px">' + majorDetails + '</div>';
+      }
+      
+      return '<div class="school-card" style="flex-direction:column;align-items:stretch;" onclick="openSchoolModal(\'' + r.school.id + '\')">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;">' +
         '<div class="school-info"><h4>' + r.school.name + '</h4>' +
         '<p>' + (r.school.province || '') + ' · ' + (r.school.type || '') + '</p>' +
         '<div class="tags">' + tags + '</div></div>' +
-        '<div class="score-diff ' + type + '">' + diffText + '分</div></div>';
+        '<div class="score-diff ' + type + '">' + diffText + '分</div></div>' +
+        compatHtml +
+        '</div>';
     }
 
-    // Schools Browser
+    // ============ Schools Browser ============
+
     function renderSchools() {
       var filtered = schools.filter(function(s) {
         if (currentTagFilter !== 'all' && (s.tags || []).indexOf(currentTagFilter) < 0) return false;
         if (currentRegionFilter !== 'all' && s.region !== currentRegionFilter) return false;
         var search = (document.getElementById('schoolSearch').value || '').toLowerCase();
         if (search && s.name.toLowerCase().indexOf(search) < 0) return false;
+        
+        // Subject filter for schools
+        if (schoolSubjectFilters.length > 0) {
+          // Show schools that have at least one major compatible with the filter subjects
+          var hasCompat = false;
+          (s.topMajors || []).forEach(function(mName) {
+            var m = majors.find(function(x) { return x.name === mName; });
+            if (m) {
+              var compat = checkMajorCompat(m, schoolSubjectFilters);
+              if (compat.compatible) hasCompat = true;
+            }
+          });
+          if (!hasCompat) return false;
+        }
+        
         return true;
       });
 
@@ -990,6 +1307,18 @@
       }).join('');
 
       document.getElementById('schoolList').innerHTML = html || '<p style="text-align:center;color:var(--text-light);grid-column:1/-1">暂无匹配院校</p>';
+    }
+
+    function toggleSchoolSubjectFilter(btn, subject) {
+      var idx = schoolSubjectFilters.indexOf(subject);
+      if (idx >= 0) {
+        schoolSubjectFilters.splice(idx, 1);
+        btn.classList.remove('active');
+      } else {
+        schoolSubjectFilters.push(subject);
+        btn.classList.add('active');
+      }
+      renderSchools();
     }
 
     function filterSchools(tag, btn) {
@@ -1035,6 +1364,26 @@
         scoreTable += '</table>';
       }
 
+      // Show major compatibility
+      var majorsHtml = '<h4 style="margin-top:20px">🎓 优势专业</h4><div class="tags">';
+      (school.topMajors || []).forEach(function(mName) {
+        var m = majors.find(function(x) { return x.name === mName; });
+        if (m && userSubjects.length > 0) {
+          var compat = checkMajorCompat(m, userSubjects);
+          if (compat.compatible) {
+            majorsHtml += '<span class="tag" style="background:#dcfce7;color:#16a34a">' + mName + ' ✓</span>';
+          } else {
+            majorsHtml += '<span class="tag" style="background:#fee2e2;color:#dc2626" title="' + compat.note + '">' + mName + ' ⚠️</span>';
+          }
+        } else {
+          majorsHtml += '<span class="tag">' + mName + '</span>';
+        }
+      });
+      majorsHtml += '</div>';
+      if (userSubjects.length > 0) {
+        majorsHtml += '<p style="font-size:12px;color:var(--text-light);margin-top:6px;">基于你的选科：' + userSubjects.join('、') + '</p>';
+      }
+
       var html = '<p style="color:var(--text-light)">' + (school.province || '') + ' · ' + (school.city || '') + ' · ' + (school.type || '') + '</p>' +
         '<div class="tags" style="margin:12px 0">' + tags + '</div>' +
         '<p>' + (school.desc || '') + '</p>' +
@@ -1043,7 +1392,7 @@
         '<div class="card"><strong>就业率</strong><br>' + (school.employmentRate || '--') + '%</div>' +
         '<div class="card"><strong>学生数</strong><br>' + (school.studentCount || '--') + '</div>' +
         '<div class="card"><strong>男生比例</strong><br>' + (school.maleRatio || '--') + '%</div></div>' +
-        '<h4 style="margin-top:20px">🎓 优势专业</h4><div class="tags">' + (school.topMajors || []).map(function(m) { return '<span class="tag">' + m + '</span>'; }).join('') + '</div>' +
+        majorsHtml +
         '<h4 style="margin-top:20px">✨ 特色</h4><p>' + (school.features || []).join('、') + '</p>' +
         (school.website ? '<p style="margin-top:16px"><a href="' + school.website + '" target="_blank" style="color:var(--primary)">🔗 学校官网</a></p>' : '') +
         scoreTable;
@@ -1056,7 +1405,26 @@
       document.getElementById('schoolModal').classList.remove('show');
     }
 
-    // Score Lookup
+    // ============ Score Lookup ============
+
+    function updateScoreSchools() {
+      var prov = document.getElementById('scoreProvince').value;
+      var schoolSelect = document.getElementById('scoreSchool');
+      schoolSelect.innerHTML = '';
+      if (prov) {
+        schools.forEach(function(s) {
+          if (scores[s.id] && scores[s.id][prov]) {
+            var opt = document.createElement('option');
+            opt.value = s.id;
+            opt.textContent = s.name;
+            schoolSelect.appendChild(opt);
+          }
+        });
+      } else {
+        schoolSelect.innerHTML = '<option value="">请先选择省份</option>';
+      }
+    }
+
     function lookupScore() {
       var prov = document.getElementById('scoreProvince').value;
       var schoolId = document.getElementById('scoreSchool').value;
@@ -1088,6 +1456,24 @@
       });
       tableHtml += '</table>';
 
+      // Batch line info
+      var provData = provinces[prov];
+      var batchHtml = '';
+      if (provData) {
+        batchHtml = '<h4 style="margin-top:20px">📌 ' + provData.name + ' 批次线参考</h4><table><tr><th>年份</th>';
+        cats.forEach(function(c) { batchHtml += '<th>' + c + '</th>'; });
+        batchHtml += '</tr>';
+        ['2024','2023','2022'].forEach(function(y) {
+          var bl = provData['batchLine' + y];
+          if (bl) {
+            batchHtml += '<tr><td>' + y + '</td>';
+            cats.forEach(function(c) { batchHtml += '<td>' + (bl[c] || '--') + '</td>'; });
+            batchHtml += '</tr>';
+          }
+        });
+        batchHtml += '</table>';
+      }
+
       // Simple chart
       var maxScore = 750;
       var chartHtml = '<div class="score-chart">';
@@ -1105,20 +1491,34 @@
       });
       chartHtml += '</div>';
 
-      document.getElementById('scoreResults').innerHTML = '<div class="card"><h3>' + (school ? school.name : schoolId) + ' - ' + (provinces[prov] ? provinces[prov].name : prov) + '</h3>' + chartHtml + tableHtml + '</div>';
+      document.getElementById('scoreResults').innerHTML = '<div class="card"><h3>' + (school ? school.name : schoolId) + ' - ' + (provinces[prov] ? provinces[prov].name : prov) + '</h3>' + chartHtml + tableHtml + batchHtml + '</div>';
     }
 
-    // Majors
+    // ============ Majors ============
+
     function renderMajors() {
+      var onlyCompat = document.getElementById('majorOnlyCompatible').checked;
+      
       var filtered = majors.filter(function(m) {
-        if (currentMajorFilter === 'all') return true;
-        return (m.tags || []).indexOf(currentMajorFilter) >= 0;
+        if (currentMajorFilter !== 'all' && (m.tags || []).indexOf(currentMajorFilter) < 0) return false;
+        if (onlyCompat && userSubjects.length > 0) {
+          var compat = checkMajorCompat(m, userSubjects);
+          if (!compat.compatible) return false;
+        }
+        return true;
       });
 
       var html = filtered.map(function(m) {
-        return '<div class="major-card" onclick="openMajorModal(\'' + m.id + '\')">' +
+        var reqHtml = renderSubjectReqTags(m);
+        var compatClass = '';
+        if (userSubjects.length > 0) {
+          var compat = checkMajorCompat(m, userSubjects);
+          if (!compat.compatible) compatClass = ' style="opacity:0.6"';
+        }
+        return '<div class="major-card"' + compatClass + ' onclick="openMajorModal(\'' + m.id + '\')">' +
           '<div class="major-icon">' + (m.icon || '📚') + '</div>' +
-          '<div class="major-name">' + m.name + '</div></div>';
+          '<div class="major-name">' + m.name + '</div>' +
+          '<div class="major-req-note">' + reqHtml + '</div></div>';
       }).join('');
 
       document.getElementById('majorList').innerHTML = html;
@@ -1126,7 +1526,7 @@
 
     function filterMajors(tag, btn) {
       currentMajorFilter = tag;
-      document.querySelectorAll('#majors .filter-bar .filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('#majors .filter-bar:first-of-type .filter-btn').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
       renderMajors();
     }
@@ -1142,9 +1542,40 @@
         return s ? '<span class="tag">' + s.name + '</span>' : '';
       }).join('');
 
+      // Subject req info
+      var reqHtml = '';
+      if (major.subjectReq) {
+        var req = major.subjectReq;
+        reqHtml = '<h4 style="margin-top:20px">📋 选科要求</h4><div style="padding:12px;background:var(--card-bg);border-radius:8px;margin-top:8px;">';
+        if (req.required && req.required.length > 0) {
+          reqHtml += '<p><span class="req-tag req">必选</span> ' + req.required.join(' + ') + '</p>';
+        }
+        if (req.requiredAny && req.requiredAny.length > 0) {
+          reqHtml += '<p><span class="req-tag any">选一</span> ' + req.requiredAny.join(' / ') + '</p>';
+        }
+        if (req.preferred && req.preferred.length > 0) {
+          reqHtml += '<p><span class="req-tag pref">建议</span> ' + req.preferred.join('、') + '</p>';
+        }
+        if (req.note) {
+          reqHtml += '<p style="color:var(--text-light);font-size:13px;margin-top:8px;">💡 ' + req.note + '</p>';
+        }
+        reqHtml += '</div>';
+        
+        // Compatibility check
+        if (userSubjects.length > 0) {
+          var compat = checkMajorCompat(major, userSubjects);
+          if (compat.compatible) {
+            reqHtml += '<p style="color:#16a34a;margin-top:8px;">✅ 你的选科（' + userSubjects.join('、') + '）可以报考此专业</p>';
+          } else {
+            reqHtml += '<p style="color:#dc2626;margin-top:8px;">⚠️ 你的选科（' + userSubjects.join('、') + '）不能报考此专业 — ' + compat.note + '</p>';
+          }
+        }
+      }
+
       var html = '<p style="color:var(--text-light)">' + (major.category || '') + '</p>' +
         '<div class="tags" style="margin:12px 0">' + (major.tags || []).map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
         '<p>' + (major.desc || '') + '</p>' +
+        reqHtml +
         '<h4 style="margin-top:20px">💼 就业方向</h4><p>' + (major.careers || []).join('、') + '</p>' +
         '<h4 style="margin-top:16px">💰 薪资范围</h4><p>' + (major.salaryRange || '--') + '</p>' +
         '<h4 style="margin-top:16px">🏫 推荐院校</h4><div class="tags">' + topSchoolsHtml + '</div>';
@@ -1157,10 +1588,35 @@
       document.getElementById('majorModal').classList.remove('show');
     }
 
-    // Volunteer Simulation
+    // ============ Volunteer Simulation ============
+
+    function updateVolCategories() {
+      var prov = document.getElementById('volProvince').value;
+      var catSelect = document.getElementById('volCategory');
+      catSelect.innerHTML = '';
+      if (prov && provinces[prov]) {
+        provinces[prov].categories.forEach(function(cat) {
+          var opt = document.createElement('option');
+          opt.value = cat;
+          opt.textContent = cat;
+          catSelect.appendChild(opt);
+        });
+      } else {
+        catSelect.innerHTML = '<option value="">请先选择省份</option>';
+      }
+      initVolunteerSlots();
+      updateVolunteerRisks();
+    }
+
     function initVolunteerSlots() {
+      var prov = document.getElementById('volProvince').value;
+      var slotCount = 6;
+      if (prov && provinces[prov]) {
+        slotCount = Math.min(provinces[prov].volunteerSlots || 6, 12); // Show max 12 for UI
+      }
+      
       var html = '';
-      for (var i = 1; i <= 6; i++) {
+      for (var i = 1; i <= slotCount; i++) {
         html += '<div class="volunteer-slot">' +
           '<div class="slot-num">' + i + '</div>' +
           '<div class="slot-content">' +
@@ -1170,11 +1626,12 @@
           '<span class="risk-badge" id="risk' + i + '">--</span></div>';
       }
       document.getElementById('volunteerList').innerHTML = html;
-      populateVolunteerSchools();
+      populateVolunteerSchools(slotCount);
     }
 
-    function populateVolunteerSchools() {
-      for (var i = 1; i <= 6; i++) {
+    function populateVolunteerSchools(count) {
+      count = count || 6;
+      for (var i = 1; i <= count; i++) {
         var sel = document.getElementById('vol' + i);
         if (!sel) continue;
         sel.innerHTML = '<option value="">请选择院校</option>';
@@ -1191,8 +1648,9 @@
       var prov = document.getElementById('volProvince').value;
       var cat = document.getElementById('volCategory').value;
       var userScore = parseInt(document.getElementById('volScore').value) || 0;
+      var slotCount = 12;
 
-      for (var i = 1; i <= 6; i++) {
+      for (var i = 1; i <= slotCount; i++) {
         var sel = document.getElementById('vol' + i);
         var riskBadge = document.getElementById('risk' + i);
         if (!sel || !riskBadge) continue;
@@ -1235,9 +1693,11 @@
       text += '科类：' + (cat || '未选择') + '\n';
       text += '分数：' + (userScore || '未填写') + '\n\n';
 
-      for (var i = 1; i <= 6; i++) {
+      for (var i = 1; i <= 12; i++) {
         var sel = document.getElementById('vol' + i);
+        if (!sel) break;
         var schoolId = sel ? sel.value : '';
+        if (!schoolId) continue;
         var school = schools.find(function(s) { return s.id === schoolId; });
         var riskBadge = document.getElementById('risk' + i);
         text += '志愿' + i + '：' + (school ? school.name : '未选择') + ' ' + (riskBadge ? riskBadge.textContent : '') + '\n';
@@ -1248,7 +1708,20 @@
       alert('志愿表内容已生成！\n\n' + text + '\n\n(可复制分享)');
     }
 
-    // Guide Accordion
+    // ============ Navigation & Utils ============
+
+    function showSection(name) {
+      document.querySelectorAll('section').forEach(function(s) { s.classList.remove('active'); });
+      document.getElementById(name).classList.add('active');
+      document.querySelectorAll('nav button').forEach(function(b) { b.classList.remove('active'); });
+      event.target.classList.add('active');
+      document.getElementById('mainNav').classList.remove('show');
+    }
+
+    function toggleNav() {
+      document.getElementById('mainNav').classList.toggle('show');
+    }
+
     function toggleAccordion(header) {
       var item = header.parentElement;
       item.classList.toggle('open');
