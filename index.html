@@ -2,8 +2,14 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>高考GPS 🎯 科学填报，精准择校</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>高考GPS — 高考志愿填报智能指导工具</title>
+  <meta name="description" content="免费高考志愿填报工具，覆盖31省份151所重点院校，智能推荐冲稳保，分数线查询，选科指导，志愿模拟。">
+  <meta name="keywords" content="高考,志愿填报,高考GPS,985,211,双一流,分数线,选科,新高考">
+  <meta property="og:title" content="高考GPS — 高考志愿填报智能指导工具">
+  <meta property="og:description" content="免费高考志愿填报工具，覆盖31省份151所重点院校，智能推荐冲稳保，分数线查询，选科指导，志愿模拟。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gaokao-gps.com">
   <style>
     :root {
       --bg: #f8faff;
@@ -23,22 +29,31 @@
       --warn-bg: #fffbeb;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: none;
     }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
     
     /* Header */
     header {
-      background: var(--white);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       box-shadow: var(--shadow);
       position: sticky;
       top: 0;
       z-index: 100;
+      transition: box-shadow 0.3s;
+    }
+    header.scrolled {
+      box-shadow: 0 2px 16px rgba(37, 99, 235, 0.12);
     }
     .header-inner {
       display: flex;
@@ -76,18 +91,42 @@
     @media (max-width: 768px) {
       .nav-toggle { display: block; }
       nav {
-        display: none;
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
-        background: var(--white);
-        padding: 16px;
-        box-shadow: var(--shadow);
-        flex-direction: column;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 0 16px;
+        box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
       }
-      nav.show { display: flex; }
-      nav button { width: 100%; text-align: left; }
+      nav.show {
+        max-height: 400px;
+        opacity: 1;
+        padding: 16px;
+      }
+      nav button {
+        width: 100%;
+        text-align: center;
+        padding: 12px 10px;
+        font-size: 15px;
+        border-radius: 12px;
+      }
+      .nav-backdrop {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 99;
+      }
+      .nav-backdrop.show { display: block; }
     }
 
     /* Hero */
@@ -130,7 +169,7 @@
     /* Cards */
     .card {
       background: var(--white);
-      border-radius: var(--radius);
+      border-radius: 16px;
       padding: 20px;
       box-shadow: var(--shadow);
       transition: all 0.2s;
@@ -146,6 +185,7 @@
     }
     @media (max-width: 640px) {
       .card-grid { grid-template-columns: 1fr; }
+      .card { padding: 16px; }
     }
 
     /* Tags */
@@ -153,7 +193,7 @@
     .tag {
       font-size: 12px;
       padding: 2px 8px;
-      border-radius: 10px;
+      border-radius: 8px;
       background: var(--card-bg);
       color: var(--primary);
     }
@@ -173,9 +213,10 @@
       width: 100%;
       padding: 12px;
       border: 1px solid #e2e8f0;
-      border-radius: var(--radius-sm);
+      border-radius: 12px;
       font-size: 16px;
       background: var(--white);
+      -webkit-appearance: none;
     }
     select:focus, input:focus {
       outline: none;
@@ -401,12 +442,22 @@
     .modal.show { display: flex; }
     .modal-content {
       background: var(--white);
-      border-radius: var(--radius);
+      border-radius: 16px;
       max-width: 600px;
       width: 100%;
       max-height: 80vh;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       padding: 24px;
+    }
+    @media (max-width: 640px) {
+      .modal { padding: 8px; }
+      .modal-content {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 16px 16px 0 0;
+        padding: 20px 16px;
+      }
     }
     .modal-header {
       display: flex;
@@ -424,6 +475,11 @@
     }
 
     /* Table */
+    .table-scroll-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 16px 0;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -627,8 +683,8 @@
       width: 100%;
       padding: 10px 12px;
       border: 1px solid #e2e8f0;
-      border-radius: var(--radius-sm);
-      font-size: 14px;
+      border-radius: 12px;
+      font-size: 16px;
     }
     .vol-autocomplete {
       position: absolute;
@@ -693,9 +749,12 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: var(--white);
-      box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 -2px 12px rgba(37, 99, 235, 0.1);
       padding: 12px 24px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -705,6 +764,17 @@
       transition: transform 0.3s;
     }
     .compare-bar.show { transform: translateY(0); }
+    @media (max-width: 640px) {
+      .compare-bar {
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 16px;
+        padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      }
+      .compare-bar .btn, .compare-bar .btn-outline {
+        width: 100%;
+      }
+    }
     .compare-bar-schools {
       display: flex;
       gap: 8px;
@@ -824,14 +894,145 @@
     .compare-overlay.show { display: flex; }
     .compare-overlay-inner {
       background: var(--white);
-      border-radius: var(--radius);
+      border-radius: 16px;
       padding: 24px;
       max-width: 900px;
       width: 100%;
     }
+    @media (max-width: 640px) {
+      .compare-overlay { padding: 8px; }
+      .compare-overlay-inner {
+        padding: 16px;
+        border-radius: 16px;
+      }
+      .compare-table th, .compare-table td {
+        padding: 8px 6px;
+        font-size: 13px;
+      }
+    }
+
+    /* Volunteer slot mobile */
+    @media (max-width: 640px) {
+      .vol-slot {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .vol-slot-body { width: 100%; }
+      .volunteer-list .vol-slot select { font-size: 16px; }
+    }
+
+    /* Scroll animations */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-1 { transition-delay: 0.05s; }
+    .stagger-2 { transition-delay: 0.1s; }
+    .stagger-3 { transition-delay: 0.15s; }
+    .stagger-4 { transition-delay: 0.2s; }
+    .stagger-5 { transition-delay: 0.25s; }
+
+    /* Back to top */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(37, 99, 235, 0.25);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .back-to-top:hover { background: var(--primary-dark); }
+
+    /* Active nav highlight */
+    nav button.nav-active {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--white);
+      border-top: 1px solid #e2e8f0;
+      padding: 32px 20px;
+      margin-top: 60px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 2;
+    }
+    .site-footer .footer-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .site-footer .footer-copy {
+      margin-top: 12px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    /* Loading skeleton */
+    .loading-skeleton {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-light);
+    }
+    .loading-spinner {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border: 3px solid #e2e8f0;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-light);
+    }
+    .empty-state .empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+    .empty-state p {
+      font-size: 15px;
+    }
+
+    /* iOS safe areas */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .site-footer { padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
+    }
   </style>
 </head>
 <body>
+  <div class="nav-backdrop" id="navBackdrop" onclick="closeNav()"></div>
   <header>
     <div class="container header-inner">
       <div class="logo">高考GPS 🎯</div>
@@ -1332,6 +1533,18 @@
     </div>
   </div>
 
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>数据来源：各省教育考试院、阳光高考平台</p>
+      <p>免责声明：本站数据仅供参考，实际录取以各省考试院公布为准</p>
+      <p class="footer-copy">© 2026 高考GPS</p>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
+
   <script>
     // Global data
     var schools = [];
@@ -1359,6 +1572,9 @@
     });
 
     async function loadData() {
+      // Show loading states
+      document.getElementById('schoolList').innerHTML = '<div class="loading-skeleton" style="grid-column:1/-1"><div class="loading-spinner"></div><p>正在加载院校数据...</p></div>';
+      document.getElementById('majorList').innerHTML = '<div class="loading-skeleton" style="grid-column:1/-1"><div class="loading-spinner"></div><p>正在加载专业数据...</p></div>';
       try {
         var [schoolsRes, scoresRes, majorsRes, provincesRes] = await Promise.all([
           fetch('data/schools.json'),
@@ -1381,6 +1597,8 @@
         document.getElementById('schoolSubjectFilterBar').style.display = 'flex';
       } catch (e) {
         console.error('加载数据失败:', e);
+        document.getElementById('schoolList').innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">😢</div><p>数据加载失败，请刷新页面重试</p></div>';
+        document.getElementById('majorList').innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">😢</div><p>数据加载失败，请刷新页面重试</p></div>';
       }
     }
 
@@ -1698,7 +1916,7 @@
         html += '</div>';
       }
       if (!reach.length && !match.length && !safe.length && !limited.length) {
-        html = '<p style="text-align:center;color:var(--text-light);padding:40px;">未找到匹配院校，请调整分数或省份</p>';
+        html = '<div class="empty-state"><div class="empty-icon">🎯</div><p>未找到匹配院校，请调整分数或省份</p></div>';
       }
 
       document.getElementById('smartResults').innerHTML = html;
@@ -1783,7 +2001,7 @@
           '<div style="margin-top:8px;text-align:right;"><button class="' + compareBtnCls + '" onclick="event.stopPropagation();toggleCompare(\'' + s.id + '\')">' + compareBtnText + '</button></div></div>';
       }).join('');
 
-      document.getElementById('schoolList').innerHTML = html || '<p style="text-align:center;color:var(--text-light);grid-column:1/-1">暂无匹配院校</p>';
+      document.getElementById('schoolList').innerHTML = html || '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🔍</div><p>暂无匹配院校，试试调整筛选条件</p></div>';
     }
 
     function toggleSchoolSubjectFilter(btn, subject) {
@@ -2705,11 +2923,23 @@
       document.getElementById(name).classList.add('active');
       document.querySelectorAll('nav button').forEach(function(b) { b.classList.remove('active'); });
       event.target.classList.add('active');
-      document.getElementById('mainNav').classList.remove('show');
+      closeNav();
+      // Scroll to top of section
+      window.scrollTo({ top: document.getElementById(name).offsetTop - 80, behavior: 'smooth' });
+      // Re-trigger animations for newly visible cards
+      setTimeout(observeAnimations, 100);
     }
 
     function toggleNav() {
-      document.getElementById('mainNav').classList.toggle('show');
+      var nav = document.getElementById('mainNav');
+      var backdrop = document.getElementById('navBackdrop');
+      nav.classList.toggle('show');
+      backdrop.classList.toggle('show');
+    }
+
+    function closeNav() {
+      document.getElementById('mainNav').classList.remove('show');
+      document.getElementById('navBackdrop').classList.remove('show');
     }
 
     function toggleAccordion(header) {
@@ -2730,6 +2960,77 @@
     document.getElementById('volImageModal').addEventListener('click', function(e) {
       if (e.target === this) closeVolImageModal();
     });
+
+    // ============ Back to Top ============
+    var backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('show');
+      } else {
+        backToTopBtn.classList.remove('show');
+      }
+      // Header scroll effect
+      var header = document.querySelector('header');
+      if (window.scrollY > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // ============ Scroll Animations (IntersectionObserver) ============
+    function observeAnimations() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.fade-in-up:not(.visible)').forEach(function(el) {
+        observer.observe(el);
+      });
+    }
+
+    // Apply fade-in-up to section headings and cards after render
+    var origRenderSchools = renderSchools;
+    renderSchools = function() {
+      origRenderSchools();
+      // Add animation classes to school cards
+      var cards = document.querySelectorAll('#schoolList .card');
+      cards.forEach(function(card, i) {
+        card.classList.add('fade-in-up');
+        card.classList.add('stagger-' + Math.min((i % 6) + 1, 5));
+      });
+      observeAnimations();
+    };
+
+    var origRenderMajors = renderMajors;
+    renderMajors = function() {
+      origRenderMajors();
+      var cards = document.querySelectorAll('#majorList .major-card');
+      cards.forEach(function(card, i) {
+        card.classList.add('fade-in-up');
+        card.classList.add('stagger-' + Math.min((i % 6) + 1, 5));
+      });
+      observeAnimations();
+    };
+
+    // Animate section headings
+    document.querySelectorAll('section h2').forEach(function(h2) {
+      h2.classList.add('fade-in-up');
+    });
+
+    // Animate accordion items
+    document.querySelectorAll('.accordion-item').forEach(function(item, i) {
+      item.classList.add('fade-in-up');
+      item.classList.add('stagger-' + Math.min(i + 1, 5));
+    });
+
+    // Initial observe
+    setTimeout(observeAnimations, 200);
   </script>
 </body>
 </html>
