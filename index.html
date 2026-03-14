@@ -567,6 +567,268 @@
       padding: 40px;
       color: var(--text-light);
     }
+
+    /* Volunteer Simulation Enhanced */
+    .vol-header-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 640px) {
+      .vol-header-form { grid-template-columns: 1fr; }
+    }
+    .vol-slot {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s, transform 0.15s;
+      position: relative;
+    }
+    .vol-slot.dragging {
+      opacity: 0.5;
+      box-shadow: var(--shadow-hover);
+    }
+    .vol-slot.drag-over {
+      border-top: 3px solid var(--primary);
+    }
+    .drag-handle {
+      cursor: grab;
+      color: #94a3b8;
+      font-size: 18px;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .drag-handle:active { cursor: grabbing; }
+    .vol-slot-body { flex: 1; min-width: 0; }
+    .vol-slot-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .vol-slot-school {
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .vol-slot-meta {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+    .vol-search-wrap {
+      position: relative;
+    }
+    .vol-search-wrap input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+    }
+    .vol-autocomplete {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border: 1px solid #e2e8f0;
+      border-top: none;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      max-height: 240px;
+      overflow-y: auto;
+      z-index: 50;
+      display: none;
+      box-shadow: var(--shadow-hover);
+    }
+    .vol-autocomplete.show { display: block; }
+    .vol-ac-item {
+      padding: 10px 12px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+    .vol-ac-item:hover { background: var(--card-bg); }
+    .vol-ac-item .tags { margin: 0; }
+    .risk-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .risk-safe2 { background: #dcfce7; color: #16a34a; }
+    .risk-stable { background: #fef3c7; color: #d97706; }
+    .risk-risky { background: #ffedd5; color: #ea580c; }
+    .risk-reach { background: #fee2e2; color: #dc2626; }
+    .vol-remove {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: #94a3b8;
+      flex-shrink: 0;
+      padding: 4px;
+    }
+    .vol-remove:hover { color: #dc2626; }
+    .vol-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Compare floating bar */
+    .compare-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 150;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+    .compare-bar.show { transform: translateY(0); }
+    .compare-bar-schools {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .compare-bar-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--card-bg);
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 13px;
+    }
+    .compare-bar-item button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    /* Compare modal */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .compare-table th, .compare-table td {
+      padding: 12px 16px;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+    .compare-table th:first-child, .compare-table td:first-child {
+      text-align: left;
+      font-weight: 500;
+      background: var(--card-bg);
+      white-space: nowrap;
+    }
+    .compare-table .best-val { color: #16a34a; font-weight: 600; }
+
+    /* School detail modal enhanced */
+    .detail-modal-content {
+      max-width: 700px;
+    }
+    .detail-score-table { margin-top: 16px; }
+    .detail-chart-wrap {
+      margin-top: 16px;
+    }
+    .compare-btn-on-card {
+      background: var(--card-bg);
+      border: 1px solid #e2e8f0;
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .compare-btn-on-card:hover {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+    .compare-btn-on-card.added {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    /* Volunteer table image modal */
+    .vol-image-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 250;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .vol-image-modal.show { display: flex; }
+    .vol-image-modal-inner {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+    .vol-image-modal-inner canvas {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .vol-image-modal-inner .actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    /* Full-screen compare overlay */
+    .compare-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 250;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+    .compare-overlay.show { display: flex; }
+    .compare-overlay-inner {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      max-width: 900px;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -723,26 +985,32 @@
     <!-- 志愿模拟 -->
     <section id="volunteer">
       <h2>📝 志愿模拟</h2>
-      <div class="card" style="max-width: 600px;">
-        <div class="form-group">
-          <label>选择省份</label>
-          <select id="volProvince" onchange="updateVolCategories()">
-            <option value="">请选择省份</option>
-          </select>
+      <div class="card" style="max-width: 800px;">
+        <div class="vol-header-form">
+          <div class="form-group" style="margin-bottom:0">
+            <label>选择省份</label>
+            <select id="volProvince" onchange="updateVolCategories()">
+              <option value="">请选择省份</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>科类</label>
+            <select id="volCategory" onchange="updateVolunteerRisks()">
+              <option value="">请先选择省份</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>你的分数</label>
+            <input type="number" id="volScore" placeholder="请输入分数" min="0" max="750" oninput="updateVolunteerRisks()">
+          </div>
         </div>
-        <div class="form-group">
-          <label>科类</label>
-          <select id="volCategory">
-            <option value="">请先选择省份</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>你的分数</label>
-          <input type="number" id="volScore" placeholder="请输入分数" min="0" max="750">
-        </div>
+        <p style="font-size:13px;color:var(--text-light);" id="volSlotInfo"></p>
       </div>
-      <div class="volunteer-list" id="volunteerList"></div>
-      <button class="btn" onclick="generateVolunteerImage()" style="margin-top: 16px;">📸 一键生成志愿表</button>
+      <div id="volunteerList" style="margin-top:20px;max-width:800px;"></div>
+      <div class="vol-actions" style="max-width:800px;">
+        <button class="btn" onclick="generateVolunteerImage()">📸 一键生成志愿表</button>
+        <button class="btn btn-outline" onclick="clearAllVolunteers()">🗑️ 清空全部</button>
+      </div>
     </section>
 
     <!-- 填报指南 -->
@@ -1011,9 +1279,9 @@
     </section>
   </main>
 
-  <!-- 院校详情弹窗 -->
+  <!-- 院校详情弹窗 (enhanced) -->
   <div class="modal" id="schoolModal">
-    <div class="modal-content">
+    <div class="modal-content detail-modal-content">
       <div class="modal-header">
         <h3 id="modalSchoolName"></h3>
         <button class="modal-close" onclick="closeModal()">×</button>
@@ -1033,6 +1301,37 @@
     </div>
   </div>
 
+  <!-- Compare floating bar -->
+  <div class="compare-bar" id="compareBar">
+    <div class="compare-bar-schools" id="compareBarSchools"></div>
+    <span id="compareBarCount" style="font-size:14px;color:var(--text-light);"></span>
+    <button class="btn btn-outline" onclick="clearCompare()" style="padding:6px 14px;font-size:13px;">清空</button>
+    <button class="btn" onclick="startCompare()" style="padding:6px 14px;font-size:13px;">开始对比</button>
+  </div>
+
+  <!-- Compare overlay -->
+  <div class="compare-overlay" id="compareOverlay">
+    <div class="compare-overlay-inner">
+      <div class="modal-header">
+        <h3>📊 院校对比</h3>
+        <button class="modal-close" onclick="closeCompare()">×</button>
+      </div>
+      <div id="compareContent" style="overflow-x:auto;"></div>
+    </div>
+  </div>
+
+  <!-- Volunteer table image modal -->
+  <div class="vol-image-modal" id="volImageModal">
+    <div class="vol-image-modal-inner">
+      <h3 style="margin-bottom:16px;">📸 我的高考志愿表</h3>
+      <canvas id="volTableCanvas"></canvas>
+      <div class="actions">
+        <button class="btn" onclick="downloadVolImage()">💾 保存图片</button>
+        <button class="btn btn-outline" onclick="closeVolImageModal()">关闭</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Global data
     var schools = [];
@@ -1046,6 +1345,13 @@
     // User's selected subjects (global state for cross-section use)
     var userSubjects = []; // e.g. ["物理","化学","生物"]
     var schoolSubjectFilters = []; // active subject filters in 院校库
+    
+    // Volunteer simulation state
+    var volSlots = []; // [{schoolId, school, cutoff, risk}, ...]
+    var volSlotCount = 6;
+    
+    // Compare state
+    var compareList = []; // school ids, max 3
 
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
@@ -1464,12 +1770,17 @@
           return '<span class="tag ' + cls + '">' + t + '</span>';
         }).join('');
         var majorsStr = (s.topMajors || []).slice(0, 3).join('、');
-        return '<div class="card" style="cursor:pointer" onclick="openSchoolModal(\'' + s.id + '\')">' +
+        var isInCompare = compareList.indexOf(s.id) >= 0;
+        var compareBtnCls = isInCompare ? 'compare-btn-on-card added' : 'compare-btn-on-card';
+        var compareBtnText = isInCompare ? '✓ 已选' : '➕ 对比';
+        return '<div class="card" style="cursor:pointer">' +
+          '<div onclick="openSchoolModal(\'' + s.id + '\')">' +
           '<h4>' + s.name + '</h4>' +
           '<p style="color:var(--text-light);font-size:14px;margin:4px 0">' + (s.province || '') + ' · ' + (s.type || '') + '</p>' +
           '<div class="tags">' + tags + '</div>' +
           '<p style="font-size:13px;margin-top:8px">🎓 ' + majorsStr + '</p>' +
-          '<p style="font-size:13px;color:var(--text-light)">就业率 ' + (s.employmentRate || '--') + '%</p></div>';
+          '<p style="font-size:13px;color:var(--text-light)">就业率 ' + (s.employmentRate || '--') + '%</p></div>' +
+          '<div style="margin-top:8px;text-align:right;"><button class="' + compareBtnCls + '" onclick="event.stopPropagation();toggleCompare(\'' + s.id + '\')">' + compareBtnText + '</button></div></div>';
       }).join('');
 
       document.getElementById('schoolList').innerHTML = html || '<p style="text-align:center;color:var(--text-light);grid-column:1/-1">暂无匹配院校</p>';
@@ -1505,9 +1816,16 @@
       renderSchools();
     }
 
+    var detailModalProvince = ''; // province selected inside detail modal
+
     function openSchoolModal(id) {
       var school = schools.find(function(s) { return s.id === id; });
       if (!school) return;
+
+      // Default detail province: user's vol/smart province or guangdong
+      if (!detailModalProvince) {
+        detailModalProvince = document.getElementById('volProvince').value || document.getElementById('smartProvince').value || 'guangdong';
+      }
 
       document.getElementById('modalSchoolName').textContent = school.name;
       
@@ -1516,21 +1834,23 @@
         return '<span class="tag ' + cls + '">' + t + '</span>';
       }).join('');
 
-      var scoreTable = '';
-      if (scores[id]) {
-        scoreTable = '<h4 style="margin-top:20px">📊 历年分数线</h4><table><tr><th>省份</th><th>年份</th><th>科类</th><th>分数</th></tr>';
-        Object.keys(scores[id]).forEach(function(prov) {
-          var provData = scores[id][prov];
-          Object.keys(provData).forEach(function(year) {
-            Object.keys(provData[year]).forEach(function(cat) {
-              scoreTable += '<tr><td>' + (provinces[prov] ? provinces[prov].name : prov) + '</td><td>' + year + '</td><td>' + cat + '</td><td>' + provData[year][cat] + '</td></tr>';
-            });
-          });
-        });
-        scoreTable += '</table>';
-      }
+      // Province selector for scores
+      var provSelectorHtml = '<div style="margin-top:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">' +
+        '<h4 style="margin:0;">📊 历年分数线</h4>' +
+        '<select id="detailProvSelect" onchange="switchDetailProvince(\'' + id + '\')" style="width:auto;padding:6px 12px;font-size:13px;">';
+      Object.keys(provinces).forEach(function(pk) {
+        var sel = pk === detailModalProvince ? ' selected' : '';
+        provSelectorHtml += '<option value="' + pk + '"' + sel + '>' + provinces[pk].name + '</option>';
+      });
+      provSelectorHtml += '</select></div>';
 
-      // Show major compatibility
+      // Score table for selected province
+      var scoreTableHtml = buildDetailScoreTable(id, detailModalProvince);
+
+      // Canvas chart
+      var chartHtml = '<div class="detail-chart-wrap"><canvas id="detailTrendCanvas" width="500" height="250" style="width:100%;max-width:500px;margin-top:12px;"></canvas></div>';
+
+      // Majors
       var majorsHtml = '<h4 style="margin-top:20px">🎓 优势专业</h4><div class="tags">';
       (school.topMajors || []).forEach(function(mName) {
         var m = majors.find(function(x) { return x.name === mName; });
@@ -1550,21 +1870,66 @@
         majorsHtml += '<p style="font-size:12px;color:var(--text-light);margin-top:6px;">基于你的选科：' + userSubjects.join('、') + '</p>';
       }
 
+      var femaleRatio = school.maleRatio != null ? (100 - school.maleRatio) : '--';
+
       var html = '<p style="color:var(--text-light)">' + (school.province || '') + ' · ' + (school.city || '') + ' · ' + (school.type || '') + '</p>' +
         '<div class="tags" style="margin:12px 0">' + tags + '</div>' +
         '<p>' + (school.desc || '') + '</p>' +
-        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">' +
-        '<div class="card"><strong>排名</strong><br>#' + (school.ranking || '--') + '</div>' +
-        '<div class="card"><strong>就业率</strong><br>' + (school.employmentRate || '--') + '%</div>' +
-        '<div class="card"><strong>学生数</strong><br>' + (school.studentCount || '--') + '</div>' +
-        '<div class="card"><strong>男生比例</strong><br>' + (school.maleRatio || '--') + '%</div></div>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:16px">' +
+        '<div class="card" style="text-align:center"><strong>排名</strong><br>#' + (school.ranking || '--') + '</div>' +
+        '<div class="card" style="text-align:center"><strong>就业率</strong><br>' + (school.employmentRate || '--') + '%</div>' +
+        '<div class="card" style="text-align:center"><strong>学生数</strong><br>' + formatNum(school.studentCount) + '</div>' +
+        '<div class="card" style="text-align:center"><strong>男女比</strong><br>' + (school.maleRatio || '--') + ':' + femaleRatio + '</div></div>' +
         majorsHtml +
         '<h4 style="margin-top:20px">✨ 特色</h4><p>' + (school.features || []).join('、') + '</p>' +
         (school.website ? '<p style="margin-top:16px"><a href="' + school.website + '" target="_blank" style="color:var(--primary)">🔗 学校官网</a></p>' : '') +
-        scoreTable;
+        provSelectorHtml + scoreTableHtml + chartHtml;
 
       document.getElementById('modalContent').innerHTML = html;
       document.getElementById('schoolModal').classList.add('show');
+
+      // Draw chart
+      setTimeout(function() { drawDetailTrendChart(id, detailModalProvince); }, 50);
+    }
+
+    function formatNum(n) {
+      if (n == null) return '--';
+      if (n >= 10000) return (n / 10000).toFixed(1) + '万';
+      return n.toString();
+    }
+
+    function buildDetailScoreTable(schoolId, provKey) {
+      var schoolScores = scores[schoolId] && scores[schoolId][provKey];
+      if (!schoolScores) return '<p style="color:var(--text-light);font-size:14px;margin-top:8px;">暂无该省份分数数据</p>';
+      var years = Object.keys(schoolScores).sort().reverse();
+      var cats = Object.keys(schoolScores[years[0]] || {});
+      var html = '<table class="detail-score-table"><tr><th>年份</th>';
+      cats.forEach(function(c) { html += '<th>' + c + '</th>'; });
+      html += '</tr>';
+      years.forEach(function(y) {
+        html += '<tr><td>' + y + '</td>';
+        cats.forEach(function(c) {
+          html += '<td>' + (schoolScores[y] && schoolScores[y][c] ? schoolScores[y][c] : '--') + '</td>';
+        });
+        html += '</tr>';
+      });
+      html += '</table>';
+      return html;
+    }
+
+    function switchDetailProvince(schoolId) {
+      detailModalProvince = document.getElementById('detailProvSelect').value;
+      openSchoolModal(schoolId);
+    }
+
+    function drawDetailTrendChart(schoolId, provKey) {
+      var canvas = document.getElementById('detailTrendCanvas');
+      if (!canvas) return;
+      var schoolScores = scores[schoolId] && scores[schoolId][provKey];
+      if (!schoolScores) return;
+      var years = Object.keys(schoolScores).sort();
+      var cats = Object.keys(schoolScores[years[0]] || {});
+      drawTrendChart(schoolScores, cats, years, 'detailTrendCanvas');
     }
 
     function closeModal() {
@@ -1666,8 +2031,8 @@
       drawTrendChart(schoolScores, cats, years);
     }
 
-    function drawTrendChart(schoolScores, cats, years) {
-      var canvas = document.getElementById('trendCanvas');
+    function drawTrendChart(schoolScores, cats, years, canvasId) {
+      var canvas = document.getElementById(canvasId || 'trendCanvas');
       if (!canvas) return;
       var ctx = canvas.getContext('2d');
       var W = canvas.width, H = canvas.height;
@@ -1882,7 +2247,7 @@
       document.getElementById('majorModal').classList.remove('show');
     }
 
-    // ============ Volunteer Simulation ============
+    // ============ Volunteer Simulation (Enhanced) ============
 
     function updateVolCategories() {
       var prov = document.getElementById('volProvince').value;
@@ -1895,111 +2260,442 @@
           opt.textContent = cat;
           catSelect.appendChild(opt);
         });
+        volSlotCount = Math.min(provinces[prov].volunteerSlots || 6, 20);
+        document.getElementById('volSlotInfo').textContent = provinces[prov].name + '共可填 ' + (provinces[prov].volunteerSlots || 6) + ' 个志愿（此处显示前 ' + volSlotCount + ' 个）';
       } else {
         catSelect.innerHTML = '<option value="">请先选择省份</option>';
+        volSlotCount = 6;
+        document.getElementById('volSlotInfo').textContent = '';
       }
-      initVolunteerSlots();
-      updateVolunteerRisks();
+      // Pre-fill from smart section
+      prefillVolFromSmart();
+      // Reset slots but keep count
+      volSlots = new Array(volSlotCount).fill(null);
+      renderVolSlots();
+    }
+
+    function prefillVolFromSmart() {
+      var smartProv = document.getElementById('smartProvince').value;
+      var smartScore = document.getElementById('smartScore').value;
+      var volProv = document.getElementById('volProvince').value;
+      if (volProv && smartScore && volProv === smartProv) {
+        document.getElementById('volScore').value = smartScore;
+      }
     }
 
     function initVolunteerSlots() {
       var prov = document.getElementById('volProvince').value;
-      var slotCount = 6;
       if (prov && provinces[prov]) {
-        slotCount = Math.min(provinces[prov].volunteerSlots || 6, 12); // Show max 12 for UI
+        volSlotCount = Math.min(provinces[prov].volunteerSlots || 6, 20);
+      } else {
+        volSlotCount = 6;
       }
-      
-      var html = '';
-      for (var i = 1; i <= slotCount; i++) {
-        html += '<div class="volunteer-slot">' +
-          '<div class="slot-num">' + i + '</div>' +
-          '<div class="slot-content">' +
-          '<strong>志愿 ' + i + '</strong>' +
-          '<select id="vol' + i + '" onchange="updateVolunteerRisks()"><option value="">请选择院校</option></select>' +
-          '</div>' +
-          '<span class="risk-badge" id="risk' + i + '">--</span></div>';
-      }
-      document.getElementById('volunteerList').innerHTML = html;
-      populateVolunteerSchools(slotCount);
+      volSlots = new Array(volSlotCount).fill(null);
+      renderVolSlots();
     }
 
-    function populateVolunteerSchools(count) {
-      count = count || 6;
-      for (var i = 1; i <= count; i++) {
-        var sel = document.getElementById('vol' + i);
-        if (!sel) continue;
-        sel.innerHTML = '<option value="">请选择院校</option>';
-        schools.forEach(function(s) {
-          var opt = document.createElement('option');
-          opt.value = s.id;
-          opt.textContent = s.name;
-          sel.appendChild(opt);
-        });
-      }
-    }
-
-    function updateVolunteerRisks() {
+    function getRiskInfo(schoolId) {
       var prov = document.getElementById('volProvince').value;
       var cat = document.getElementById('volCategory').value;
       var userScore = parseInt(document.getElementById('volScore').value) || 0;
-      var slotCount = 12;
-
-      for (var i = 1; i <= slotCount; i++) {
-        var sel = document.getElementById('vol' + i);
-        var riskBadge = document.getElementById('risk' + i);
-        if (!sel || !riskBadge) continue;
-
-        var schoolId = sel.value;
-        if (!schoolId || !prov || !cat || !userScore) {
-          riskBadge.textContent = '--';
-          riskBadge.className = 'risk-badge';
-          continue;
-        }
-
-        var cutoff = scores[schoolId] && scores[schoolId][prov] && scores[schoolId][prov]['2024'] && scores[schoolId][prov]['2024'][cat];
-        if (!cutoff) {
-          riskBadge.textContent = '无数据';
-          riskBadge.className = 'risk-badge';
-          continue;
-        }
-
-        var diff = userScore - cutoff;
-        if (diff >= 20) {
-          riskBadge.textContent = '🟢 安全';
-          riskBadge.className = 'risk-badge risk-safe';
-        } else if (diff >= 0) {
-          riskBadge.textContent = '🟡 有风险';
-          riskBadge.className = 'risk-badge risk-warning';
-        } else {
-          riskBadge.textContent = '🔴 冲刺';
-          riskBadge.className = 'risk-badge risk-danger';
-        }
-      }
+      if (!schoolId || !prov || !cat || !userScore) return { label: '--', cls: '', cutoff: null };
+      var cutoff = scores[schoolId] && scores[schoolId][prov] && scores[schoolId][prov]['2024'] && scores[schoolId][prov]['2024'][cat];
+      if (!cutoff) return { label: '无数据', cls: '', cutoff: null };
+      var diff = userScore - cutoff;
+      if (diff >= 20) return { label: '🟢 安全', cls: 'risk-safe2', cutoff: cutoff };
+      if (diff >= 0) return { label: '🟡 稳妥', cls: 'risk-stable', cutoff: cutoff };
+      if (diff >= -10) return { label: '🟠 有风险', cls: 'risk-risky', cutoff: cutoff };
+      return { label: '🔴 冲刺', cls: 'risk-reach', cutoff: cutoff };
     }
 
+    function renderVolSlots() {
+      var prov = document.getElementById('volProvince').value;
+      var cat = document.getElementById('volCategory').value;
+      var html = '';
+      for (var i = 0; i < volSlotCount; i++) {
+        var slot = volSlots[i];
+        html += '<div class="vol-slot" draggable="true" data-idx="' + i + '">';
+        html += '<span class="drag-handle" title="拖拽排序">☰</span>';
+        html += '<div class="slot-num">' + (i + 1) + '</div>';
+        html += '<div class="vol-slot-body">';
+        if (slot && slot.schoolId) {
+          var school = slot.school;
+          var risk = getRiskInfo(slot.schoolId);
+          var tags = (school.tags || []).slice(0, 3).map(function(t) {
+            var cls = t === '985' ? 't985' : (t === '211' ? 't211' : (t === 'C9' ? 'tc9' : ''));
+            return '<span class="tag ' + cls + '">' + t + '</span>';
+          }).join('');
+          html += '<div class="vol-slot-header"><span class="vol-slot-school">' + school.name + '</span>' + tags + '</div>';
+          html += '<div class="vol-slot-meta">';
+          if (risk.cutoff) html += '2024录取线：' + risk.cutoff + '分';
+          html += '</div>';
+          html += '</div>';
+          html += '<span class="risk-pill ' + risk.cls + '">' + risk.label + '</span>';
+          html += '<button class="vol-remove" onclick="removeVolSlot(' + i + ')" title="移除">×</button>';
+        } else {
+          html += '<div class="vol-search-wrap">';
+          html += '<input type="text" placeholder="搜索院校名称..." oninput="onVolSearch(this,' + i + ')" onfocus="onVolSearch(this,' + i + ')" autocomplete="off">';
+          html += '<div class="vol-autocomplete" id="volAc' + i + '"></div>';
+          html += '</div></div>';
+        }
+        html += '</div>';
+      }
+      document.getElementById('volunteerList').innerHTML = html;
+      initVolDragDrop();
+    }
+
+    function onVolSearch(input, idx) {
+      var q = (input.value || '').toLowerCase().trim();
+      var ac = document.getElementById('volAc' + idx);
+      if (!ac) return;
+      if (!q) { ac.classList.remove('show'); return; }
+      var prov = document.getElementById('volProvince').value;
+      var cat = document.getElementById('volCategory').value;
+      // Filter schools not already in slots
+      var usedIds = volSlots.filter(Boolean).map(function(s) { return s.schoolId; });
+      var matches = schools.filter(function(s) {
+        if (usedIds.indexOf(s.id) >= 0) return false;
+        return s.name.toLowerCase().indexOf(q) >= 0;
+      }).slice(0, 10);
+
+      if (matches.length === 0) {
+        ac.innerHTML = '<div class="vol-ac-item" style="color:var(--text-light)">无匹配院校</div>';
+        ac.classList.add('show');
+        return;
+      }
+
+      ac.innerHTML = matches.map(function(s) {
+        var tags = (s.tags || []).slice(0, 2).map(function(t) {
+          var cls = t === '985' ? 't985' : (t === '211' ? 't211' : '');
+          return '<span class="tag ' + cls + '" style="font-size:11px">' + t + '</span>';
+        }).join('');
+        var scoreText = '';
+        if (prov && cat) {
+          var cutoff = scores[s.id] && scores[s.id][prov] && scores[s.id][prov]['2024'] && scores[s.id][prov]['2024'][cat];
+          if (cutoff) scoreText = '<span style="font-size:12px;color:var(--text-light)">2024: ' + cutoff + '分</span>';
+        }
+        return '<div class="vol-ac-item" onclick="selectVolSchool(\'' + s.id + '\',' + idx + ')">' +
+          '<span>' + s.name + ' ' + tags + '</span>' + scoreText + '</div>';
+      }).join('');
+      ac.classList.add('show');
+    }
+
+    function selectVolSchool(schoolId, idx) {
+      var school = schools.find(function(s) { return s.id === schoolId; });
+      if (!school) return;
+      volSlots[idx] = { schoolId: schoolId, school: school };
+      renderVolSlots();
+    }
+
+    function removeVolSlot(idx) {
+      volSlots[idx] = null;
+      renderVolSlots();
+    }
+
+    function clearAllVolunteers() {
+      volSlots = new Array(volSlotCount).fill(null);
+      renderVolSlots();
+    }
+
+    function updateVolunteerRisks() {
+      // Just re-render to update risk badges
+      renderVolSlots();
+    }
+
+    // Drag & drop reorder
+    var dragSrcIdx = null;
+
+    function initVolDragDrop() {
+      var slots = document.querySelectorAll('.vol-slot[draggable]');
+      slots.forEach(function(slot) {
+        slot.addEventListener('dragstart', function(e) {
+          dragSrcIdx = parseInt(this.getAttribute('data-idx'));
+          this.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', dragSrcIdx);
+        });
+        slot.addEventListener('dragend', function() {
+          this.classList.remove('dragging');
+          document.querySelectorAll('.vol-slot').forEach(function(s) { s.classList.remove('drag-over'); });
+        });
+        slot.addEventListener('dragover', function(e) {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          this.classList.add('drag-over');
+        });
+        slot.addEventListener('dragleave', function() {
+          this.classList.remove('drag-over');
+        });
+        slot.addEventListener('drop', function(e) {
+          e.preventDefault();
+          this.classList.remove('drag-over');
+          var targetIdx = parseInt(this.getAttribute('data-idx'));
+          if (dragSrcIdx !== null && dragSrcIdx !== targetIdx) {
+            // Swap
+            var temp = volSlots[dragSrcIdx];
+            volSlots[dragSrcIdx] = volSlots[targetIdx];
+            volSlots[targetIdx] = temp;
+            renderVolSlots();
+          }
+          dragSrcIdx = null;
+        });
+      });
+    }
+
+    // Close autocomplete on outside click
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.vol-search-wrap')) {
+        document.querySelectorAll('.vol-autocomplete').forEach(function(ac) { ac.classList.remove('show'); });
+      }
+    });
+
+    // Generate volunteer table image
     function generateVolunteerImage() {
       var prov = document.getElementById('volProvince').value;
       var cat = document.getElementById('volCategory').value;
       var userScore = document.getElementById('volScore').value;
+      var filled = volSlots.filter(Boolean);
+      if (filled.length === 0) { alert('请先添加至少一个志愿'); return; }
 
-      var text = '【高考志愿表】\n';
-      text += '省份：' + (provinces[prov] ? provinces[prov].name : prov || '未选择') + '\n';
-      text += '科类：' + (cat || '未选择') + '\n';
-      text += '分数：' + (userScore || '未填写') + '\n\n';
+      var canvas = document.getElementById('volTableCanvas');
+      var rowH = 44;
+      var headerH = 60;
+      var footerH = 50;
+      var W = 560;
+      var tableTop = headerH + 20;
+      var colHeaderH = 36;
+      var H = tableTop + colHeaderH + filled.length * rowH + footerH + 20;
 
-      for (var i = 1; i <= 12; i++) {
-        var sel = document.getElementById('vol' + i);
-        if (!sel) break;
-        var schoolId = sel ? sel.value : '';
-        if (!schoolId) continue;
-        var school = schools.find(function(s) { return s.id === schoolId; });
-        var riskBadge = document.getElementById('risk' + i);
-        text += '志愿' + i + '：' + (school ? school.name : '未选择') + ' ' + (riskBadge ? riskBadge.textContent : '') + '\n';
+      canvas.width = W * 2; // retina
+      canvas.height = H * 2;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      var ctx = canvas.getContext('2d');
+      ctx.scale(2, 2);
+
+      // Background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, W, H);
+
+      // Header
+      ctx.fillStyle = '#2563eb';
+      ctx.fillRect(0, 0, W, headerH);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 22px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('我的高考志愿表', W / 2, 38);
+
+      // Table columns
+      var cols = [
+        { label: '志愿序号', x: 0, w: 80 },
+        { label: '院校名称', x: 80, w: 220 },
+        { label: '院校代码', x: 300, w: 120 },
+        { label: '风险等级', x: 420, w: 140 }
+      ];
+
+      // Column headers
+      ctx.fillStyle = '#f0f4ff';
+      ctx.fillRect(20, tableTop, W - 40, colHeaderH);
+      ctx.fillStyle = '#1e293b';
+      ctx.font = 'bold 13px sans-serif';
+      ctx.textAlign = 'center';
+      cols.forEach(function(col) {
+        ctx.fillText(col.label, 20 + col.x + col.w / 2, tableTop + 23);
+      });
+
+      // Rows
+      ctx.font = '13px sans-serif';
+      filled.forEach(function(slot, i) {
+        var y = tableTop + colHeaderH + i * rowH;
+        // Alternating bg
+        if (i % 2 === 0) {
+          ctx.fillStyle = '#f8faff';
+          ctx.fillRect(20, y, W - 40, rowH);
+        }
+        // Border bottom
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.beginPath();
+        ctx.moveTo(20, y + rowH);
+        ctx.lineTo(W - 20, y + rowH);
+        ctx.stroke();
+
+        var textY = y + rowH / 2 + 5;
+        ctx.fillStyle = '#1e293b';
+        ctx.textAlign = 'center';
+
+        // Index
+        var slotIdx = volSlots.indexOf(slot) + 1;
+        ctx.fillText('志愿 ' + slotIdx, 20 + cols[0].x + cols[0].w / 2, textY);
+
+        // Name
+        ctx.font = 'bold 13px sans-serif';
+        ctx.fillText(slot.school.name, 20 + cols[1].x + cols[1].w / 2, textY);
+        ctx.font = '13px sans-serif';
+
+        // Code placeholder
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillText('—', 20 + cols[2].x + cols[2].w / 2, textY);
+
+        // Risk
+        var risk = getRiskInfo(slot.schoolId);
+        var riskColors = { 'risk-safe2': '#16a34a', 'risk-stable': '#d97706', 'risk-risky': '#ea580c', 'risk-reach': '#dc2626' };
+        ctx.fillStyle = riskColors[risk.cls] || '#64748b';
+        ctx.fillText(risk.label, 20 + cols[3].x + cols[3].w / 2, textY);
+      });
+
+      // Footer
+      var fy = tableTop + colHeaderH + filled.length * rowH + 20;
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '12px sans-serif';
+      ctx.textAlign = 'left';
+      var provName = provinces[prov] ? provinces[prov].name : (prov || '未选择');
+      ctx.fillText('省份：' + provName + '　科类：' + (cat || '未选择') + '　分数：' + (userScore || '未填写'), 24, fy);
+      ctx.textAlign = 'right';
+      var today = new Date();
+      ctx.fillText('高考GPS 🎯  ' + today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0'), W - 24, fy);
+
+      // Show modal
+      document.getElementById('volImageModal').classList.add('show');
+    }
+
+    function downloadVolImage() {
+      var canvas = document.getElementById('volTableCanvas');
+      var link = document.createElement('a');
+      link.download = '高考志愿表.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function closeVolImageModal() {
+      document.getElementById('volImageModal').classList.remove('show');
+    }
+
+    // ============ Compare Feature ============
+
+    function toggleCompare(schoolId) {
+      var idx = compareList.indexOf(schoolId);
+      if (idx >= 0) {
+        compareList.splice(idx, 1);
+      } else {
+        if (compareList.length >= 3) {
+          alert('最多对比3所院校');
+          return;
+        }
+        compareList.push(schoolId);
+      }
+      updateCompareBar();
+      renderSchools(); // re-render to update button states
+    }
+
+    function updateCompareBar() {
+      var bar = document.getElementById('compareBar');
+      var schoolsDiv = document.getElementById('compareBarSchools');
+      var countSpan = document.getElementById('compareBarCount');
+      if (compareList.length === 0) {
+        bar.classList.remove('show');
+        return;
+      }
+      bar.classList.add('show');
+      countSpan.textContent = '已选 ' + compareList.length + ' 所';
+      schoolsDiv.innerHTML = compareList.map(function(id) {
+        var s = schools.find(function(x) { return x.id === id; });
+        return '<span class="compare-bar-item">' + (s ? s.name : id) + ' <button onclick="toggleCompare(\'' + id + '\')">×</button></span>';
+      }).join('');
+    }
+
+    function clearCompare() {
+      compareList = [];
+      updateCompareBar();
+      renderSchools();
+    }
+
+    function startCompare() {
+      if (compareList.length < 2) { alert('请至少选择2所院校进行对比'); return; }
+
+      var prov = document.getElementById('volProvince').value || document.getElementById('smartProvince').value || 'guangdong';
+      var cat = '';
+      if (provinces[prov]) {
+        cat = provinces[prov].categories[0] || '';
       }
 
-      text += '\n— 高考GPS 🎯 生成';
-      
-      alert('志愿表内容已生成！\n\n' + text + '\n\n(可复制分享)');
+      var compareSchools = compareList.map(function(id) {
+        return schools.find(function(s) { return s.id === id; });
+      }).filter(Boolean);
+
+      var rows = [
+        { label: '排名', key: 'ranking', format: function(v) { return '#' + (v || '--'); }, best: 'min' },
+        { label: '地区', key: 'province', format: function(v) { return v || '--'; } },
+        { label: '类型', key: 'type', format: function(v) { return v || '--'; } },
+        { label: '学生人数', key: 'studentCount', format: function(v) { return formatNum(v); } },
+        { label: '就业率', key: 'employmentRate', format: function(v) { return (v || '--') + '%'; }, best: 'max' },
+        { label: '男女比', key: 'maleRatio', format: function(v) { return v != null ? v + ':' + (100 - v) : '--'; } },
+        { label: '优势专业', key: 'topMajors', format: function(v) { return (v || []).slice(0, 4).join('、') || '--'; } }
+      ];
+
+      // Add 3-year scores
+      ['2024', '2023', '2022'].forEach(function(year) {
+        rows.push({
+          label: year + '分数线',
+          custom: true,
+          getValue: function(s) {
+            var sc = scores[s.id] && scores[s.id][prov] && scores[s.id][prov][year];
+            if (!sc) return '--';
+            return Object.keys(sc).map(function(c) { return c + ':' + sc[c]; }).join(' / ');
+          },
+          getNumeric: function(s) {
+            var sc = scores[s.id] && scores[s.id][prov] && scores[s.id][prov][year] && scores[s.id][prov][year][cat];
+            return sc || 0;
+          },
+          best: 'max'
+        });
+      });
+
+      var html = '<table class="compare-table"><tr><th></th>';
+      compareSchools.forEach(function(s) {
+        var tags = (s.tags || []).slice(0, 2).map(function(t) {
+          var cls = t === '985' ? 't985' : (t === '211' ? 't211' : '');
+          return '<span class="tag ' + cls + '">' + t + '</span>';
+        }).join(' ');
+        html += '<th><strong>' + s.name + '</strong><br>' + tags + '</th>';
+      });
+      html += '</tr>';
+
+      rows.forEach(function(row) {
+        html += '<tr><td>' + row.label + '</td>';
+        var values = compareSchools.map(function(s) {
+          if (row.custom) return { display: row.getValue(s), numeric: row.getNumeric ? row.getNumeric(s) : 0 };
+          return { display: row.format(s[row.key]), numeric: s[row.key] || 0 };
+        });
+
+        // Find best
+        var bestIdx = -1;
+        if (row.best) {
+          var bestVal = null;
+          values.forEach(function(v, i) {
+            if (v.numeric && v.numeric !== 0) {
+              if (bestVal === null || (row.best === 'max' && v.numeric > bestVal) || (row.best === 'min' && v.numeric < bestVal)) {
+                bestVal = v.numeric;
+                bestIdx = i;
+              }
+            }
+          });
+        }
+
+        values.forEach(function(v, i) {
+          var cls = i === bestIdx ? ' class="best-val"' : '';
+          html += '<td' + cls + '>' + v.display + '</td>';
+        });
+        html += '</tr>';
+      });
+      html += '</table>';
+      html += '<p style="font-size:12px;color:var(--text-light);margin-top:12px;">分数线省份：' + (provinces[prov] ? provinces[prov].name : prov) + '</p>';
+
+      document.getElementById('compareContent').innerHTML = html;
+      document.getElementById('compareOverlay').classList.add('show');
+    }
+
+    function closeCompare() {
+      document.getElementById('compareOverlay').classList.remove('show');
     }
 
     // ============ Navigation & Utils ============
@@ -2027,6 +2723,12 @@
     });
     document.getElementById('majorModal').addEventListener('click', function(e) {
       if (e.target === this) closeMajorModal();
+    });
+    document.getElementById('compareOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeCompare();
+    });
+    document.getElementById('volImageModal').addEventListener('click', function(e) {
+      if (e.target === this) closeVolImageModal();
     });
   </script>
 </body>
