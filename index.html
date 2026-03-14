@@ -748,98 +748,264 @@
     <!-- 填报指南 -->
     <section id="guide">
       <h2>📖 填报指南</h2>
+
+      <!-- 1. 平行志愿规则详解 -->
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>📋 平行志愿规则</span>
+          <span>📋 平行志愿规则详解</span>
           <span class="accordion-arrow">▼</span>
         </div>
         <div class="accordion-content">
           <p><strong>什么是平行志愿？</strong></p>
-          <p>平行志愿是指在同一录取批次中，考生可以填报多个院校志愿，这些志愿之间是平行关系，按照"分数优先、遵循志愿"的原则进行投档。</p>
+          <p>平行志愿是目前全国绝大多数省份采用的投档模式。在同一个录取批次中，考生可以填报多个院校专业组（或院校）志愿，这些志愿之间是"平行"关系——没有主次之分，系统按照固定规则依次检索。</p>
           <br>
-          <p><strong>投档原则：</strong></p>
-          <ul style="margin-left: 20px;">
-            <li>分数优先：按考生成绩从高到低排序，依次检索</li>
-            <li>遵循志愿：按考生填报的志愿顺序依次检索</li>
-            <li>一次投档：每个考生只有一次投档机会</li>
-          </ul>
+
+          <p><strong>核心原则："分数优先、遵循志愿、一轮投档"</strong></p>
+          <div style="background:var(--card-bg);border-radius:8px;padding:16px;margin:12px 0;">
+            <p><strong>① 分数优先</strong></p>
+            <p style="margin-left:16px;">将所有考生按总分从高到低排队。分数高的考生优先被检索，与填报了什么志愿无关。同分情况下，按语文、数学、外语等单科成绩依次比较排序。</p>
+            <br>
+            <p><strong>② 遵循志愿</strong></p>
+            <p style="margin-left:16px;">轮到某考生时，系统按照该考生填报的志愿顺序（从志愿1到志愿N）依次检索。一旦检索到某个志愿院校尚有空额，立即投档到该院校。</p>
+            <br>
+            <p><strong>③ 一轮投档</strong></p>
+            <p style="margin-left:16px;">每位考生在本批次只有一次投档机会。投出后如被退档，不会再投向后面的志愿，只能参加征集志愿或下一批次。</p>
+          </div>
           <br>
-          <p><strong>填报建议：</strong></p>
-          <p>采用"冲一冲、稳一稳、保一保"策略，合理拉开志愿梯度。一般建议：冲刺院校2-3所，稳妥院校2-3所，保底院校1-2所。</p>
+
+          <p><strong>📊 投档流程图解</strong></p>
+          <div style="background:var(--card-bg);border-radius:8px;padding:20px;margin:12px 0;text-align:center;font-size:14px;line-height:2;">
+            <div style="display:inline-block;text-align:left;">
+              <p>📌 第一步：全省考生按分数排队</p>
+              <p style="margin-left:20px;">↓</p>
+              <p>📌 第二步：从第1名开始，逐个检索志愿</p>
+              <p style="margin-left:20px;">↓</p>
+              <p>📌 第三步：检索志愿A → 有空额？→ ✅ 投档！结束</p>
+              <p style="margin-left:20px;">　　　　　　　　↓ 无空额</p>
+              <p>📌 第四步：检索志愿B → 有空额？→ ✅ 投档！结束</p>
+              <p style="margin-left:20px;">　　　　　　　　↓ 无空额</p>
+              <p>📌 第五步：检索志愿C → … 依次类推</p>
+              <p style="margin-left:20px;">↓</p>
+              <p>📌 所有志愿都无法投出 → ❌ 本批次落选，等待征集志愿</p>
+            </div>
+          </div>
+          <br>
+
+          <p><strong>⚠️ 退档风险说明</strong></p>
+          <div style="background:#fff7ed;border-left:4px solid #f59e0b;padding:16px;border-radius:0 8px 8px 0;margin:12px 0;">
+            <p><strong>什么情况会被退档？</strong></p>
+            <ul style="margin-left:20px;margin-top:8px;">
+              <li><strong>不服从专业调剂：</strong>投档后，如果所填的具体专业都已录满，且不服从调剂，院校只能退档。这是最常见的退档原因。</li>
+              <li><strong>体检不合格：</strong>部分专业对视力、色觉、身高等有要求，不符合条件会被退档。</li>
+              <li><strong>单科成绩不达标：</strong>部分院校或专业对英语、数学等单科有最低分要求。</li>
+              <li><strong>超出招生计划：</strong>投档比例为105%时，排名靠后的5%可能被退档（但目前大多数院校实行100%投档）。</li>
+            </ul>
+            <p style="margin-top:12px;color:#dc2626;font-weight:600;">💡 关键建议：一定要勾选"服从专业调剂"，除非你有非常明确的理由拒绝某些专业。退档后只能等征集志愿，选择面会大大缩小。</p>
+          </div>
+          <br>
+
+          <p><strong>志愿填报策略：冲-稳-保</strong></p>
+          <table>
+            <tr><th>策略</th><th>志愿数量</th><th>分差参考</th><th>说明</th></tr>
+            <tr><td>🚀 冲一冲</td><td>约30%志愿</td><td>高于你分数0~15分</td><td>有机会录取但不确定，万一有"大小年"就赚了</td></tr>
+            <tr><td>🎯 稳一稳</td><td>约40%志愿</td><td>与你分数±5分</td><td>最有可能录取的院校，应重点研究专业</td></tr>
+            <tr><td>✅ 保一保</td><td>约30%志愿</td><td>低于你分数15~30分</td><td>确保不滑档的底线，选自己能接受的院校和专业</td></tr>
+          </table>
         </div>
       </div>
+
+      <!-- 2. 新高考选科建议 -->
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>📚 新高考选科</span>
+          <span>📚 新高考选科建议</span>
           <span class="accordion-arrow">▼</span>
         </div>
         <div class="accordion-content">
-          <p><strong>3+1+2模式（14省）：</strong></p>
-          <p>"3"为语文、数学、外语必考科目；"1"为首选科目，在物理、历史中选1门；"2"为再选科目，在化学、生物、思想政治、地理4门中选2门。</p>
-          <p style="color:var(--text-light);font-size:13px;margin-top:4px">适用省份：广东、湖南、湖北、河北、辽宁、江苏、福建、重庆、广西、甘肃、吉林、黑龙江、安徽、江西</p>
+          <p><strong>3+1+2 vs 3+3 模式对比</strong></p>
+          <table>
+            <tr><th></th><th>3+1+2 模式</th><th>3+3 模式</th></tr>
+            <tr><td>适用省份</td><td>广东、湖南、湖北、河北、辽宁、江苏、福建、重庆、广西、甘肃、吉林、黑龙江、安徽、江西（14省）</td><td>上海、浙江、北京、天津、山东、海南（6省市）</td></tr>
+            <tr><td>必考科目</td><td>语文、数学、外语</td><td>语文、数学、外语</td></tr>
+            <tr><td>首选科目</td><td>物理/历史 二选一</td><td>无首选限制</td></tr>
+            <tr><td>再选科目</td><td>化学、生物、政治、地理 四选二</td><td>物理、化学、生物、历史、政治、地理 六选三</td></tr>
+            <tr><td>组合数</td><td>12种组合</td><td>20种组合</td></tr>
+            <tr><td>赋分方式</td><td>首选科目原始分，再选科目赋分</td><td>全部选考科目赋分</td></tr>
+          </table>
           <br>
-          <p><strong>3+3模式（6省市）：</strong></p>
-          <p>"3"为语文、数学、外语必考科目；另外从物理、化学、生物、历史、政治、地理中任选3门。</p>
-          <p style="color:var(--text-light);font-size:13px;margin-top:4px">适用省份：上海、浙江、北京、天津、山东、海南</p>
+
+          <p><strong>📊 各科目组合专业覆盖率分析</strong></p>
+          <p style="color:var(--text-light);font-size:13px;margin-bottom:12px;">覆盖率 = 该选科组合可报考的专业数 ÷ 全部专业数。覆盖率越高，可选专业越多。</p>
+          <div style="background:var(--card-bg);border-radius:8px;padding:16px;margin:12px 0;">
+            <p><strong>高覆盖率组合（推荐）</strong></p>
+            <table>
+              <tr><th>选科组合</th><th>覆盖率</th><th>适合方向</th></tr>
+              <tr><td>🟢 物理 + 化学 + 生物</td><td style="color:#16a34a;font-weight:600;">96%</td><td>理工科、医学、农学、生物科学</td></tr>
+              <tr><td>🟢 物理 + 化学 + 政治</td><td style="color:#16a34a;font-weight:600;">95%</td><td>理工科、军校、公安、法学</td></tr>
+              <tr><td>🟢 物理 + 化学 + 地理</td><td style="color:#16a34a;font-weight:600;">95%</td><td>理工科、地理科学、环境科学</td></tr>
+              <tr><td>🟡 物理 + 生物 + 政治</td><td style="color:#d97706;font-weight:600;">87%</td><td>医学、生物工程、公共管理</td></tr>
+              <tr><td>🟡 物理 + 生物 + 地理</td><td style="color:#d97706;font-weight:600;">87%</td><td>环境、生态、农业相关</td></tr>
+              <tr><td>🟡 物理 + 政治 + 地理</td><td style="color:#d97706;font-weight:600;">82%</td><td>偏文理工科均可</td></tr>
+            </table>
+            <br>
+            <p><strong>中低覆盖率组合</strong></p>
+            <table>
+              <tr><th>选科组合</th><th>覆盖率</th><th>适合方向</th></tr>
+              <tr><td>🟠 历史 + 化学 + 生物</td><td style="color:#d97706;">74%</td><td>生物、化学、部分医学</td></tr>
+              <tr><td>🟠 历史 + 化学 + 政治</td><td style="color:#d97706;">70%</td><td>法学、新闻、化工类</td></tr>
+              <tr><td>🟠 历史 + 生物 + 政治</td><td style="color:#ea580c;">62%</td><td>文科偏生物方向</td></tr>
+              <tr><td>🔴 历史 + 政治 + 地理</td><td style="color:#dc2626;">52%</td><td>纯文科、法学、教育、管理</td></tr>
+            </table>
+          </div>
           <br>
-          <p><strong>传统文理分科（11省区）：</strong></p>
-          <p>文科：语数外+政史地；理科：语数外+理化生。</p>
-          <p style="color:var(--text-light);font-size:13px;margin-top:4px">适用省份：河南、四川、云南、陕西、山西、内蒙古、宁夏、青海、西藏、新疆、贵州</p>
+
+          <p><strong>🎯 选科与职业方向对应</strong></p>
+          <div style="background:var(--card-bg);border-radius:8px;padding:16px;margin:12px 0;">
+            <table>
+              <tr><th>未来方向</th><th>建议选科</th><th>说明</th></tr>
+              <tr><td>计算机/人工智能</td><td>物理 + 化学/生物</td><td>物理是计算机类专业的必选科目</td></tr>
+              <tr><td>临床医学/口腔医学</td><td>物理 + 化学 + 生物</td><td>绝大多数医学院要求物理+化学</td></tr>
+              <tr><td>金融/经济</td><td>物理 + 任意</td><td>顶尖院校金融类通常要求物理</td></tr>
+              <tr><td>法学/公共管理</td><td>历史/物理 + 政治</td><td>政治对法学类有优势</td></tr>
+              <tr><td>建筑/土木</td><td>物理 + 化学/地理</td><td>物理是基础，地理有加分</td></tr>
+              <tr><td>新闻传播/中文</td><td>历史 + 政治 + 任意</td><td>文科类专业对历史有偏好</td></tr>
+              <tr><td>教育/师范</td><td>根据学科方向</td><td>想教什么科目就选什么科目</td></tr>
+              <tr><td>军校/警校</td><td>物理 + 政治</td><td>政审和体能要求之外，政治是加分项</td></tr>
+            </table>
+          </div>
           <br>
-          <p><strong>选科建议：</strong></p>
-          <ul style="margin-left: 20px;">
-            <li>物理+化学+生物：适合理工科、医学类专业</li>
-            <li>物理+化学+地理：工科偏好，选择面广</li>
-            <li>历史+政治+地理：适合文科类、法学、管理类</li>
-            <li>物理+生物+地理：医学、农学、环境科学</li>
-          </ul>
-          <br>
-          <p><strong>注意事项：</strong></p>
-          <p>选科时要综合考虑个人兴趣、学科优势、未来专业方向。部分专业对选科有强制要求，建议提前查阅目标院校的选科要求。</p>
+          <p style="color:var(--text-light);font-size:13px;">💡 <strong>核心建议：</strong>如果没有明确的文科方向，优先选物理+化学，能保证95%以上的专业覆盖率。等到填报志愿时不会因为选科限制而错失心仪专业。</p>
         </div>
       </div>
+
+      <!-- 3. 提前批/特殊批次说明 -->
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>🎖️ 提前批说明</span>
+          <span>🎖️ 提前批/特殊批次说明</span>
           <span class="accordion-arrow">▼</span>
         </div>
         <div class="accordion-content">
-          <p><strong>什么是提前批？</strong></p>
-          <p>提前批是在普通批次之前录取的批次，主要包括军事院校、公安院校、艺术类院校、体育类院校、免费师范生、定向生等。</p>
+          <p><strong>提前批主要类型</strong></p>
+          <div style="background:var(--card-bg);border-radius:8px;padding:16px;margin:12px 0;">
+            <table>
+              <tr><th>类型</th><th>代表院校/项目</th><th>特殊要求</th><th>分数参考</th></tr>
+              <tr><td><strong>军校</strong></td><td>国防科技大学、陆军工程大学等</td><td>政审、体检、面试；年龄≤20周岁，未婚</td><td>一般需超一本线30-80分</td></tr>
+              <tr><td><strong>公费师范生</strong></td><td>北师大、华东师大、东北师大、华中师大、西南大学、陕西师大</td><td>毕业后须在生源省中小学任教≥6年</td><td>通常超一本线20-60分</td></tr>
+              <tr><td><strong>强基计划</strong></td><td>39所"双一流"院校</td><td>需单独报名（4月）；校测（笔试+面试）；高考成绩占85%</td><td>综合成绩排名</td></tr>
+              <tr><td><strong>综合评价</strong></td><td>中科大、南方科技大学、上海纽约大学等</td><td>需单独报名；高考成绩+校测+学业水平三位一体</td><td>因院校而异</td></tr>
+              <tr><td><strong>公安院校</strong></td><td>中国人民公安大学、中国刑事警察学院</td><td>政审、体检、体能测试</td><td>超一本线0-40分</td></tr>
+              <tr><td><strong>航海类</strong></td><td>大连海事大学、上海海事大学</td><td>视力、身高有要求</td><td>接近一本线</td></tr>
+              <tr><td><strong>定向生</strong></td><td>部分院校定向西藏、新疆就业</td><td>毕业后须到指定地区工作</td><td>低于正常线20-40分</td></tr>
+            </table>
+          </div>
           <br>
-          <p><strong>提前批类型：</strong></p>
-          <ul style="margin-left: 20px;">
-            <li>军事类：需政审、体检、面试</li>
-            <li>公安类：需政审、体能测试</li>
-            <li>艺术类：需专业课成绩</li>
-            <li>体育类：需体育专项成绩</li>
-            <li>免费师范生：毕业后定向就业</li>
+
+          <p><strong>提前批是否影响后续批次？</strong></p>
+          <div style="background:#dcfce7;border-left:4px solid #16a34a;padding:16px;border-radius:0 8px 8px 0;margin:12px 0;">
+            <p><strong>不影响！</strong>提前批是独立的录取环节：</p>
+            <ul style="margin-left:20px;margin-top:8px;">
+              <li>未被提前批录取 → 正常参加后续普通批次投档，完全不受影响</li>
+              <li>被提前批录取 → 自动取消后续批次投档资格（相当于已有录取结果）</li>
+            </ul>
+            <p style="margin-top:12px;">💡 <strong>结论：</strong>如果有合适的提前批机会，建议积极报考，等于多了一次录取机会。但不要为了"多一次机会"而随意填报自己不想去的学校。</p>
+          </div>
+          <br>
+
+          <p><strong>什么学生适合报提前批？</strong></p>
+          <ul style="margin-left:20px;line-height:2.2;">
+            <li>✅ 有明确从军/从警/从教意愿的学生</li>
+            <li>✅ 学科竞赛成绩优异，适合走强基计划的学生</li>
+            <li>✅ 综合素质突出，有特长和社会实践经历的学生（综合评价）</li>
+            <li>✅ 家庭经济困难，希望免学费+有编制的学生（公费师范/定向）</li>
+            <li>❌ 对提前批院校和专业没有真正兴趣、只想"碰运气"的学生</li>
           </ul>
           <br>
-          <p><strong>注意事项：</strong></p>
-          <p>提前批录取不影响后续批次录取。如果提前批未被录取，不影响普通批次的投档。但如果被提前批录取，则不能再参加后续批次录取。</p>
+
+          <p><strong>⏰ 重要时间节点</strong></p>
+          <table>
+            <tr><th>批次/项目</th><th>报名时间</th><th>录取时间</th></tr>
+            <tr><td>强基计划</td><td>4月（高考前）</td><td>7月初（高考出分后校测）</td></tr>
+            <tr><td>综合评价</td><td>3-5月</td><td>7月初</td></tr>
+            <tr><td>提前批志愿填报</td><td>6月下旬（出分后）</td><td>7月上旬</td></tr>
+            <tr><td>普通批志愿填报</td><td>6月下旬~7月初</td><td>7月中下旬</td></tr>
+          </table>
         </div>
       </div>
+
+      <!-- 4. 常见误区提醒 -->
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>⚠️ 常见误区</span>
+          <span>⚠️ 常见误区提醒</span>
           <span class="accordion-arrow">▼</span>
         </div>
         <div class="accordion-content">
-          <p><strong>误区一：只看学校排名</strong></p>
-          <p>学校排名固然重要，但专业选择同样关键。有些学校整体排名一般，但某些专业实力很强，就业前景也很好。</p>
-          <br>
-          <p><strong>误区二：盲目追热门专业</strong></p>
-          <p>热门专业竞争激烈，四年后就业形势可能变化。建议结合个人兴趣和能力，不要盲目跟风。</p>
-          <br>
-          <p><strong>误区三：志愿没有梯度</strong></p>
-          <p>所有志愿都填报相同层次的学校，容易造成全部落空。应该合理拉开梯度，确保有保底选择。</p>
-          <br>
-          <p><strong>误区四：忽视地域因素</strong></p>
-          <p>学校所在城市对未来实习、就业、人脉积累都有影响。一线城市机会多，但竞争也大；二线城市生活成本低，发展潜力大。</p>
-          <br>
-          <p><strong>误区五：不服从调剂</strong></p>
-          <p>不服从专业调剂可能导致退档。建议在能接受的范围内勾选服从调剂，增加录取机会。</p>
+
+          <div style="background:#fef2f2;border-left:4px solid #dc2626;padding:16px;border-radius:0 8px 8px 0;margin-bottom:20px;">
+            <p><strong>❌ 误区1：只看学校排名，不看专业</strong></p>
+            <p style="margin-top:8px;">很多家长和考生只盯着"985""211"的牌子，忽略了专业选择。但实际上：</p>
+            <ul style="margin-left:20px;margin-top:8px;">
+              <li>同一所985大学，不同专业的就业差距可能非常大</li>
+              <li>一些"双非"院校的王牌专业，就业质量可能超过985的冷门专业</li>
+              <li>例：某985大学的哲学专业 vs 杭州电子科技大学的计算机专业，后者就业可能更好</li>
+            </ul>
+            <p style="margin-top:8px;color:#16a34a;">✅ <strong>正确做法：</strong>学校层次和专业实力综合考虑。可以用"学校排名×0.4 + 专业排名×0.4 + 地域×0.2"的权重来评估。</p>
+          </div>
+
+          <div style="background:#fef2f2;border-left:4px solid #dc2626;padding:16px;border-radius:0 8px 8px 0;margin-bottom:20px;">
+            <p><strong>❌ 误区2：所有志愿都冲刺</strong></p>
+            <p style="margin-top:8px;">有的考生觉得"万一今年分数线降了呢"，把所有志愿都填高于自己分数的学校。这是极度危险的做法：</p>
+            <ul style="margin-left:20px;margin-top:8px;">
+              <li>平行志愿只有一轮投档机会，全部冲刺意味着很可能一个都投不进</li>
+              <li>即使侥幸投进，因为分数靠后，很可能被调剂到最冷门的专业</li>
+              <li>更糟糕的是，不服从调剂直接被退档，连征集志愿的好学校也没了</li>
+            </ul>
+            <p style="margin-top:8px;color:#16a34a;">✅ <strong>正确做法：</strong>严格执行"冲30%、稳40%、保30%"的梯度策略，确保最后几个志愿是稳稳能进的。</p>
+          </div>
+
+          <div style="background:#fef2f2;border-left:4px solid #dc2626;padding:16px;border-radius:0 8px 8px 0;margin-bottom:20px;">
+            <p><strong>❌ 误区3：不服从专业调剂</strong></p>
+            <p style="margin-top:8px;">这是每年高考填报中最大的"坑"，也是退档的头号原因。</p>
+            <ul style="margin-left:20px;margin-top:8px;">
+              <li>投档到某大学后，如果你填的几个专业都录满了，学校会看你是否服从调剂</li>
+              <li>不服从调剂 → 退档 → 本批次结束 → 只能等征集志愿（通常只剩冷门院校）</li>
+              <li>服从调剂 → 被调剂到有空额的专业 → 至少被录取了，入学后还可以转专业</li>
+            </ul>
+            <p style="margin-top:8px;color:#16a34a;">✅ <strong>正确做法：</strong>几乎所有情况下都应该勾选"服从专业调剂"。入学后多数大学允许大一结束时申请转专业。被调剂远比退档好。</p>
+          </div>
+
+          <div style="background:#fef2f2;border-left:4px solid #dc2626;padding:16px;border-radius:0 8px 8px 0;margin-bottom:20px;">
+            <p><strong>❌ 误区4：忽视地域因素</strong></p>
+            <p style="margin-top:8px;">大学四年不仅是读书，更是生活和成长。学校所在城市会深刻影响你的：</p>
+            <ul style="margin-left:20px;margin-top:8px;">
+              <li><strong>实习机会：</strong>北上广深杭有大量实习岗位，二三线城市相对少</li>
+              <li><strong>就业人脉：</strong>大学校友大多留在学校所在城市，这就是你未来的人脉圈</li>
+              <li><strong>视野开拓：</strong>大城市的讲座、展览、行业活动更多</li>
+              <li><strong>生活成本：</strong>一线城市物价高，但勤工俭学和兼职机会也多</li>
+            </ul>
+            <p style="margin-top:8px;color:#16a34a;">✅ <strong>正确做法：</strong>想好未来想在哪里发展。如果想在长三角工作，优先考虑上海、南京、杭州的大学；如果想回家乡，本省知名度高的大学可能更有优势。</p>
+          </div>
+
+          <div style="background:#fef2f2;border-left:4px solid #dc2626;padding:16px;border-radius:0 8px 8px 0;margin-bottom:20px;">
+            <p><strong>❌ 误区5：盲目追热门专业</strong></p>
+            <p style="margin-top:8px;">每隔几年就会有一波"热门专业"潮，但追风险非常大：</p>
+            <ul style="margin-left:20px;margin-top:8px;">
+              <li>四年后毕业时，"热门"可能变成"过剩"（如2014年的金融、2018年的大数据）</li>
+              <li>热门专业分数虚高，同样的分数在其他专业可以读更好的大学</li>
+              <li>如果选了不喜欢的"热门"专业，大学四年会很痛苦，成绩也不会好</li>
+              <li>用人单位看重的是能力和实习经验，而不仅仅是专业名称</li>
+            </ul>
+            <p style="margin-top:8px;color:#16a34a;">✅ <strong>正确做法：</strong>在"兴趣+能力+就业"三者之间找平衡。先了解自己擅长什么、喜欢什么，再看就业数据。真正的"好专业"是你学得进去、学得好的专业。</p>
+          </div>
+
+          <div style="background:#eff6ff;border-left:4px solid #2563eb;padding:16px;border-radius:0 8px 8px 0;margin-bottom:12px;">
+            <p><strong>💡 总结：填报志愿的五条金律</strong></p>
+            <ol style="margin-left:20px;margin-top:8px;line-height:2;">
+              <li>先选城市，再选学校，最后选专业（除非你有非常明确的专业偏好）</li>
+              <li>一定要勾选"服从专业调剂"</li>
+              <li>冲-稳-保梯度策略，绝不"全冲"</li>
+              <li>多看往年投档线，至少参考3年数据</li>
+              <li>填报前和父母、老师充分沟通，但最终决定权在自己</li>
+            </ol>
+          </div>
         </div>
       </div>
     </section>
@@ -1491,7 +1657,135 @@
       });
       chartHtml += '</div>';
 
-      document.getElementById('scoreResults').innerHTML = '<div class="card"><h3>' + (school ? school.name : schoolId) + ' - ' + (provinces[prov] ? provinces[prov].name : prov) + '</h3>' + chartHtml + tableHtml + batchHtml + '</div>';
+      // Canvas trend chart
+      var trendChartHtml = '<h4 style="margin-top:20px">📈 三年趋势图</h4><canvas id="trendCanvas" width="500" height="280" style="width:100%;max-width:500px;margin-top:12px;"></canvas>';
+
+      document.getElementById('scoreResults').innerHTML = '<div class="card"><h3>' + (school ? school.name : schoolId) + ' - ' + (provinces[prov] ? provinces[prov].name : prov) + '</h3>' + tableHtml + trendChartHtml + batchHtml + '</div>';
+
+      // Draw trend chart
+      drawTrendChart(schoolScores, cats, years);
+    }
+
+    function drawTrendChart(schoolScores, cats, years) {
+      var canvas = document.getElementById('trendCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W = canvas.width, H = canvas.height;
+      var pad = { top: 30, right: 30, bottom: 40, left: 50 };
+      var plotW = W - pad.left - pad.right;
+      var plotH = H - pad.top - pad.bottom;
+
+      // Sort years ascending
+      var sortedYears = years.slice().sort();
+
+      // Collect all scores to find range
+      var allVals = [];
+      cats.forEach(function(c) {
+        sortedYears.forEach(function(y) {
+          if (schoolScores[y] && schoolScores[y][c]) allVals.push(schoolScores[y][c]);
+        });
+      });
+      if (allVals.length === 0) return;
+
+      var minVal = Math.min.apply(null, allVals) - 10;
+      var maxVal = Math.max.apply(null, allVals) + 10;
+      var range = maxVal - minVal || 1;
+
+      // Clear
+      ctx.clearRect(0, 0, W, H);
+
+      // Background
+      ctx.fillStyle = '#f8faff';
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid lines
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 1;
+      for (var i = 0; i <= 4; i++) {
+        var gy = pad.top + plotH * (1 - i / 4);
+        ctx.beginPath();
+        ctx.moveTo(pad.left, gy);
+        ctx.lineTo(pad.left + plotW, gy);
+        ctx.stroke();
+        // Y axis labels
+        var val = Math.round(minVal + range * i / 4);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '11px sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(val, pad.left - 8, gy + 4);
+      }
+
+      // X axis labels
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#64748b';
+      ctx.font = '13px sans-serif';
+      sortedYears.forEach(function(y, idx) {
+        var x = pad.left + (idx / (sortedYears.length - 1 || 1)) * plotW;
+        ctx.fillText(y, x, H - 10);
+      });
+
+      // Colors for categories
+      var colors = ['#2563eb', '#dc2626', '#16a34a', '#d97706'];
+
+      // Draw lines
+      cats.forEach(function(cat, ci) {
+        var color = colors[ci % colors.length];
+        var points = [];
+        sortedYears.forEach(function(y, idx) {
+          var val = schoolScores[y] && schoolScores[y][cat];
+          if (val != null) {
+            var x = pad.left + (idx / (sortedYears.length - 1 || 1)) * plotW;
+            var yPos = pad.top + plotH * (1 - (val - minVal) / range);
+            points.push({ x: x, y: yPos, val: val });
+          }
+        });
+
+        if (points.length < 2) return;
+
+        // Line
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        points.forEach(function(p, i) {
+          if (i === 0) ctx.moveTo(p.x, p.y);
+          else ctx.lineTo(p.x, p.y);
+        });
+        ctx.stroke();
+
+        // Dots and labels
+        points.forEach(function(p) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+          ctx.fillStyle = color;
+          ctx.fill();
+          ctx.strokeStyle = '#fff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          // Score label
+          ctx.fillStyle = color;
+          ctx.font = 'bold 12px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(p.val, p.x, p.y - 12);
+        });
+      });
+
+      // Legend
+      var legendX = pad.left + 10;
+      var legendY = pad.top - 10;
+      ctx.font = '12px sans-serif';
+      cats.forEach(function(cat, ci) {
+        var color = colors[ci % colors.length];
+        ctx.fillStyle = color;
+        ctx.fillRect(legendX, legendY - 8, 16, 3);
+        ctx.beginPath();
+        ctx.arc(legendX + 8, legendY - 6.5, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#1e293b';
+        ctx.textAlign = 'left';
+        ctx.fillText(cat, legendX + 22, legendY - 2);
+        legendX += ctx.measureText(cat).width + 40;
+      });
     }
 
     // ============ Majors ============
