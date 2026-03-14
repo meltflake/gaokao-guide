@@ -13,11 +13,11 @@
   <style>
     :root {
       --bg: #f5faf8;
-      --primary: #5bb89a;
-      --primary-light: #7ecdb5;
-      --primary-dark: #4a9e84;
+      --primary: #88b9a4;
+      --primary-light: #a8d4c0;
+      --primary-dark: #729e8c;
       --card-bg: #f0faf5;
-      --card-hover: #e2f5ed;
+      --card-hover: #edf5f1;
       --text: #1e293b;
       --text-light: #64748b;
       --white: #ffffff;
@@ -151,7 +151,7 @@
       white-space: nowrap;
     }
     .tab-item.active {
-      color: #5bb89a;
+      color: #88b9a4;
       background: rgba(16,163,127,.08);
       border-radius: 10px;
     }
@@ -225,7 +225,7 @@
       color: var(--primary);
     }
     .tag.t985 { background: #fef3c7; color: #92400e; }
-    .tag.t211 { background: #e2f5ed; color: #5bb89a; }
+    .tag.t211 { background: #edf5f1; color: #88b9a4; }
     .tag.tc9 { background: #fce7f3; color: #9d174d; }
 
     /* Forms */
@@ -438,7 +438,7 @@
       margin-left: 4px;
     }
     .req-tag.req { background: #fee2e2; color: #dc2626; }
-    .req-tag.pref { background: #e2f5ed; color: #5bb89a; }
+    .req-tag.pref { background: #edf5f1; color: #88b9a4; }
     .req-tag.any { background: #fef3c7; color: #92400e; }
     .req-tag.ok { background: #dcfce7; color: #16a34a; }
 
@@ -1505,7 +1505,7 @@
             <p style="margin-top:8px;color:#16a34a;">✅ <strong>正确做法：</strong>在"兴趣+能力+就业"三者之间找平衡。先了解自己擅长什么、喜欢什么，再看就业数据。真正的"好专业"是你学得进去、学得好的专业。</p>
           </div>
 
-          <div style="background:#f0faf5;border-left:4px solid #5bb89a;padding:16px;border-radius:0 8px 8px 0;margin-bottom:12px;">
+          <div style="background:#f0faf5;border-left:4px solid #88b9a4;padding:16px;border-radius:0 8px 8px 0;margin-bottom:12px;">
             <p><strong>💡 总结：填报志愿的五条金律</strong></p>
             <ol style="margin-left:20px;margin-top:8px;line-height:2;">
               <li>先选城市，再选学校，最后选专业（除非你有非常明确的专业偏好）</li>
@@ -2260,7 +2260,7 @@
         matches.forEach(function(s){
           var div = document.createElement('div');
           div.style.cssText = 'padding:10px 12px;cursor:pointer;font-size:14px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:6px';
-          var tagStr = s.tags.slice(0,2).map(function(t){return '<span style="font-size:11px;background:#e2f5ed;color:#5bb89a;padding:1px 6px;border-radius:4px">'+t+'</span>'}).join('');
+          var tagStr = s.tags.slice(0,2).map(function(t){return '<span style="font-size:11px;background:#edf5f1;color:#88b9a4;padding:1px 6px;border-radius:4px">'+t+'</span>'}).join('');
           div.innerHTML = '<span>'+s.name+'</span>'+tagStr;
           div.addEventListener('click', function(){
             input.value = s.name;
@@ -2409,7 +2409,7 @@
       });
 
       // Colors for categories
-      var colors = ['#5bb89a', '#dc2626', '#16a34a', '#d97706'];
+      var colors = ['#88b9a4', '#dc2626', '#16a34a', '#d97706'];
 
       // Draw lines
       cats.forEach(function(cat, ci) {
@@ -2797,7 +2797,7 @@
       ctx.fillRect(0, 0, W, H);
 
       // Header
-      ctx.fillStyle = '#5bb89a';
+      ctx.fillStyle = '#88b9a4';
       ctx.fillRect(0, 0, W, headerH);
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 22px sans-serif';
