@@ -89,44 +89,80 @@
       color: var(--white);
     }
     @media (max-width: 768px) {
-      .nav-toggle { display: block; }
-      nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(255,255,255,0.98);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        padding: 0 16px;
-        box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
+      /* Hide hamburger and desktop nav on mobile */
+      .nav-toggle { display: none !important; }
+      nav#mainNav { display: none !important; }
+      .nav-backdrop { display: none !important; }
+
+      /* Show all sections on mobile for scroll-based navigation */
+      section { display: block !important; }
+
+      /* Bottom padding so tab bar doesn't cover content */
+      body { padding-bottom: 70px; }
+
+      /* Bottom Tab Bar */
+      .bottom-tab-bar {
+        display: flex !important;
       }
-      nav.show {
-        max-height: 400px;
-        opacity: 1;
-        padding: 16px;
-      }
-      nav button {
-        width: 100%;
-        text-align: center;
-        padding: 12px 10px;
-        font-size: 15px;
-        border-radius: 12px;
-      }
-      .nav-backdrop {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 99;
-      }
-      .nav-backdrop.show { display: block; }
+    }
+
+    /* Bottom Tab Bar */
+    .bottom-tab-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--white);
+      border-top: 1px solid #ebeef2;
+      box-shadow: 0 -1px 10px rgba(0,0,0,.06);
+      height: 58px;
+      padding-bottom: env(safe-area-inset-bottom);
+      align-items: center;
+      justify-content: space-around;
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+    }
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 6px 0 4px;
+      cursor: pointer;
+      color: #aab0bc;
+      transition: color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      position: relative;
+      text-decoration: none;
+      border: none;
+      background: none;
+    }
+    .tab-item .tab-icon {
+      font-size: 20px;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .tab-item .tab-label {
+      font-size: 10px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .tab-item.active {
+      color: #2563eb;
+    }
+    .tab-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #2563eb;
     }
 
     /* Hero */
@@ -1029,6 +1065,19 @@
     @supports (padding-bottom: env(safe-area-inset-bottom)) {
       .site-footer { padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
     }
+
+    /* Mobile adjustments for bottom tab bar */
+    @media (max-width: 768px) {
+      .back-to-top {
+        bottom: calc(70px + env(safe-area-inset-bottom));
+      }
+      .compare-bar {
+        bottom: calc(58px + env(safe-area-inset-bottom));
+      }
+      .site-footer {
+        padding-bottom: calc(32px + 70px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -1544,6 +1593,34 @@
 
   <!-- Back to top -->
   <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
+
+  <!-- Bottom Tab Bar (mobile only) -->
+  <div class="bottom-tab-bar" id="bottomTabBar">
+    <button class="tab-item active" data-section="smart" onclick="tabNavigate('smart')">
+      <span class="tab-icon">🎯</span>
+      <span class="tab-label">选校</span>
+    </button>
+    <button class="tab-item" data-section="schools" onclick="tabNavigate('schools')">
+      <span class="tab-icon">🏫</span>
+      <span class="tab-label">院校</span>
+    </button>
+    <button class="tab-item" data-section="scores" onclick="tabNavigate('scores')">
+      <span class="tab-icon">📊</span>
+      <span class="tab-label">分数线</span>
+    </button>
+    <button class="tab-item" data-section="majors" onclick="tabNavigate('majors')">
+      <span class="tab-icon">📚</span>
+      <span class="tab-label">专业</span>
+    </button>
+    <button class="tab-item" data-section="volunteer" onclick="tabNavigate('volunteer')">
+      <span class="tab-icon">📝</span>
+      <span class="tab-label">志愿</span>
+    </button>
+    <button class="tab-item" data-section="guide" onclick="tabNavigate('guide')">
+      <span class="tab-icon">📖</span>
+      <span class="tab-label">指南</span>
+    </button>
+  </div>
 
   <script>
     // Global data
@@ -2919,6 +2996,12 @@
     // ============ Navigation & Utils ============
 
     function showSection(name) {
+      // On mobile (≤768px), all sections are visible; just scroll
+      if (window.innerWidth <= 768) {
+        tabNavigate(name);
+        return;
+      }
+      // Desktop: show/hide sections
       document.querySelectorAll('section').forEach(function(s) { s.classList.remove('active'); });
       document.getElementById(name).classList.add('active');
       document.querySelectorAll('nav button').forEach(function(b) { b.classList.remove('active'); });
@@ -3031,6 +3114,72 @@
 
     // Initial observe
     setTimeout(observeAnimations, 200);
+
+    // ============ Bottom Tab Bar (Mobile) ============
+    var tabScrolling = false;
+
+    function tabNavigate(sectionId) {
+      var el = document.getElementById(sectionId);
+      if (!el) return;
+      tabScrolling = true;
+      // Update active tab immediately
+      setActiveTab(sectionId);
+      // Scroll to section
+      var headerHeight = document.querySelector('header').offsetHeight;
+      var top = el.getBoundingClientRect().top + window.pageYOffset - headerHeight - 8;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      // Reset scrolling flag after animation
+      setTimeout(function() { tabScrolling = false; }, 800);
+    }
+
+    function setActiveTab(sectionId) {
+      document.querySelectorAll('.tab-item').forEach(function(tab) {
+        tab.classList.toggle('active', tab.getAttribute('data-section') === sectionId);
+      });
+      // Also sync desktop nav buttons
+      var sectionNames = ['smart', 'schools', 'scores', 'majors', 'volunteer', 'guide'];
+      var idx = sectionNames.indexOf(sectionId);
+      document.querySelectorAll('nav#mainNav button').forEach(function(btn, i) {
+        btn.classList.toggle('active', i === idx);
+      });
+    }
+
+    // IntersectionObserver for scroll-based active tab (mobile)
+    function initTabObserver() {
+      if (!('IntersectionObserver' in window)) return;
+      var sectionIds = ['smart', 'schools', 'scores', 'majors', 'volunteer', 'guide'];
+      var visibleSections = {};
+
+      var observer = new IntersectionObserver(function(entries) {
+        if (tabScrolling) return;
+        entries.forEach(function(entry) {
+          visibleSections[entry.target.id] = entry.intersectionRatio;
+        });
+        // Find the most visible section
+        var best = null, bestRatio = 0;
+        sectionIds.forEach(function(id) {
+          var ratio = visibleSections[id] || 0;
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            best = id;
+          }
+        });
+        if (best && window.innerWidth <= 768) {
+          setActiveTab(best);
+        }
+      }, {
+        threshold: [0, 0.1, 0.2, 0.3, 0.5, 0.7, 1.0],
+        rootMargin: '-80px 0px -40% 0px'
+      });
+
+      sectionIds.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }
+
+    // Initialize tab observer after DOM ready
+    initTabObserver();
   </script>
 </body>
 </html>
