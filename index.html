@@ -12,17 +12,17 @@
   <meta property="og:url" content="https://gaokao-gps.com">
   <style>
     :root {
-      --bg: #f8faff;
-      --primary: #2563eb;
-      --primary-light: #3b82f6;
-      --primary-dark: #1d4ed8;
-      --card-bg: #f0f4ff;
-      --card-hover: #e0e8ff;
+      --bg: #f5faf8;
+      --primary: #10a37f;
+      --primary-light: #2dd4a8;
+      --primary-dark: #0d8a6a;
+      --card-bg: #f0faf5;
+      --card-hover: #d4f5e9;
       --text: #1e293b;
       --text-light: #64748b;
       --white: #ffffff;
-      --shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
-      --shadow-hover: 0 4px 16px rgba(37, 99, 235, 0.15);
+      --shadow: 0 2px 8px rgba(16, 163, 127, 0.08);
+      --shadow-hover: 0 4px 16px rgba(16, 163, 127, 0.15);
       --radius: 12px;
       --radius-sm: 8px;
       --warn: #f59e0b;
@@ -53,7 +53,7 @@
       transition: box-shadow 0.3s;
     }
     header.scrolled {
-      box-shadow: 0 2px 16px rgba(37, 99, 235, 0.12);
+      box-shadow: 0 2px 16px rgba(16, 163, 127, 0.12);
     }
     .header-inner {
       display: flex;
@@ -151,8 +151,8 @@
       white-space: nowrap;
     }
     .tab-item.active {
-      color: #2563eb;
-      background: rgba(37,99,235,.08);
+      color: #10a37f;
+      background: rgba(16,163,127,.08);
       border-radius: 10px;
     }
 
@@ -225,7 +225,7 @@
       color: var(--primary);
     }
     .tag.t985 { background: #fef3c7; color: #92400e; }
-    .tag.t211 { background: #dbeafe; color: #1e40af; }
+    .tag.t211 { background: #d4f5e9; color: #10a37f; }
     .tag.tc9 { background: #fce7f3; color: #9d174d; }
 
     /* Forms */
@@ -248,7 +248,7 @@
     select:focus, input:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
     }
     .btn {
       background: var(--primary);
@@ -438,7 +438,7 @@
       margin-left: 4px;
     }
     .req-tag.req { background: #fee2e2; color: #dc2626; }
-    .req-tag.pref { background: #dbeafe; color: #1e40af; }
+    .req-tag.pref { background: #d4f5e9; color: #10a37f; }
     .req-tag.any { background: #fef3c7; color: #92400e; }
     .req-tag.ok { background: #dcfce7; color: #16a34a; }
 
@@ -779,7 +779,7 @@
       background: rgba(255,255,255,0.95);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 -2px 12px rgba(37, 99, 235, 0.1);
+      box-shadow: 0 -2px 12px rgba(16, 163, 127, 0.1);
       padding: 12px 24px;
       padding-bottom: calc(12px + env(safe-area-inset-bottom));
       display: flex;
@@ -977,7 +977,7 @@
       border: none;
       font-size: 20px;
       cursor: pointer;
-      box-shadow: 0 2px 12px rgba(37, 99, 235, 0.25);
+      box-shadow: 0 2px 12px rgba(16, 163, 127, 0.25);
       opacity: 0;
       transform: translateY(16px);
       transition: opacity 0.3s, transform 0.3s, background 0.2s;
@@ -1505,7 +1505,7 @@
             <p style="margin-top:8px;color:#16a34a;">✅ <strong>正确做法：</strong>在"兴趣+能力+就业"三者之间找平衡。先了解自己擅长什么、喜欢什么，再看就业数据。真正的"好专业"是你学得进去、学得好的专业。</p>
           </div>
 
-          <div style="background:#eff6ff;border-left:4px solid #2563eb;padding:16px;border-radius:0 8px 8px 0;margin-bottom:12px;">
+          <div style="background:#f0faf5;border-left:4px solid #10a37f;padding:16px;border-radius:0 8px 8px 0;margin-bottom:12px;">
             <p><strong>💡 总结：填报志愿的五条金律</strong></p>
             <ol style="margin-left:20px;margin-top:8px;line-height:2;">
               <li>先选城市，再选学校，最后选专业（除非你有非常明确的专业偏好）</li>
@@ -2346,7 +2346,7 @@
       ctx.clearRect(0, 0, W, H);
 
       // Background
-      ctx.fillStyle = '#f8faff';
+      ctx.fillStyle = '#f5faf8';
       ctx.fillRect(0, 0, W, H);
 
       // Grid lines
@@ -2376,7 +2376,7 @@
       });
 
       // Colors for categories
-      var colors = ['#2563eb', '#dc2626', '#16a34a', '#d97706'];
+      var colors = ['#10a37f', '#dc2626', '#16a34a', '#d97706'];
 
       // Draw lines
       cats.forEach(function(cat, ci) {
@@ -2764,7 +2764,7 @@
       ctx.fillRect(0, 0, W, H);
 
       // Header
-      ctx.fillStyle = '#2563eb';
+      ctx.fillStyle = '#10a37f';
       ctx.fillRect(0, 0, W, headerH);
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 22px sans-serif';
@@ -2780,7 +2780,7 @@
       ];
 
       // Column headers
-      ctx.fillStyle = '#f0f4ff';
+      ctx.fillStyle = '#f0faf5';
       ctx.fillRect(20, tableTop, W - 40, colHeaderH);
       ctx.fillStyle = '#1e293b';
       ctx.font = 'bold 13px sans-serif';
@@ -2795,7 +2795,7 @@
         var y = tableTop + colHeaderH + i * rowH;
         // Alternating bg
         if (i % 2 === 0) {
-          ctx.fillStyle = '#f8faff';
+          ctx.fillStyle = '#f5faf8';
           ctx.fillRect(20, y, W - 40, rowH);
         }
         // Border bottom
