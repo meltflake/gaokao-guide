@@ -1189,11 +1189,11 @@
             <option value="">请选择省份</option>
           </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="position:relative">
           <label>选择院校</label>
-          <select id="scoreSchool">
-            <option value="">请先选择省份</option>
-          </select>
+          <input type="text" id="scoreSchoolInput" placeholder="输入院校名称搜索..." autocomplete="off" style="width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:16px;background:#f9fafb">
+          <input type="hidden" id="scoreSchool" value="">
+          <div id="scoreSchoolDropdown" style="display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 8px 8px;max-height:220px;overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.1)"></div>
         </div>
         <button class="btn" onclick="lookupScore()" style="width: 100%;">查询分数线</button>
       </div>
@@ -2224,23 +2224,56 @@
 
     // ============ Score Lookup ============
 
+    var scoreSchoolList = [];
     function updateScoreSchools() {
       var prov = document.getElementById('scoreProvince').value;
-      var schoolSelect = document.getElementById('scoreSchool');
-      schoolSelect.innerHTML = '';
+      var input = document.getElementById('scoreSchoolInput');
+      var hidden = document.getElementById('scoreSchool');
+      input.value = '';
+      hidden.value = '';
+      scoreSchoolList = [];
       if (prov) {
         schools.forEach(function(s) {
           if (scores[s.id] && scores[s.id][prov]) {
-            var opt = document.createElement('option');
-            opt.value = s.id;
-            opt.textContent = s.name;
-            schoolSelect.appendChild(opt);
+            scoreSchoolList.push({id: s.id, name: s.name, tags: s.tags || []});
           }
         });
-      } else {
-        schoolSelect.innerHTML = '<option value="">请先选择省份</option>';
       }
     }
+    (function(){
+      var input = document.getElementById('scoreSchoolInput');
+      var dropdown = document.getElementById('scoreSchoolDropdown');
+      var hidden = document.getElementById('scoreSchool');
+      if(!input||!dropdown||!hidden)return;
+      input.addEventListener('focus', function(){ showScoreDropdown(this.value); });
+      input.addEventListener('input', function(){ showScoreDropdown(this.value); });
+      document.addEventListener('click', function(e){
+        if(!input.contains(e.target)&&!dropdown.contains(e.target)) dropdown.style.display='none';
+      });
+      function showScoreDropdown(q){
+        q = (q||'').trim().toLowerCase();
+        var matches = scoreSchoolList.filter(function(s){
+          return !q || s.name.toLowerCase().indexOf(q)>=0;
+        }).slice(0, 30);
+        if(matches.length===0){ dropdown.style.display='none'; return; }
+        dropdown.innerHTML = '';
+        matches.forEach(function(s){
+          var div = document.createElement('div');
+          div.style.cssText = 'padding:10px 12px;cursor:pointer;font-size:14px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:6px';
+          var tagStr = s.tags.slice(0,2).map(function(t){return '<span style="font-size:11px;background:#d4f5e9;color:#10a37f;padding:1px 6px;border-radius:4px">'+t+'</span>'}).join('');
+          div.innerHTML = '<span>'+s.name+'</span>'+tagStr;
+          div.addEventListener('click', function(){
+            input.value = s.name;
+            hidden.value = s.id;
+            dropdown.style.display = 'none';
+          });
+          div.addEventListener('mouseenter', function(){ this.style.background='#f5faf8'; });
+          div.addEventListener('mouseleave', function(){ this.style.background=''; });
+          dropdown.appendChild(div);
+        });
+        dropdown.style.display = 'block';
+      }
+    })();
 
     function lookupScore() {
       var prov = document.getElementById('scoreProvince').value;
