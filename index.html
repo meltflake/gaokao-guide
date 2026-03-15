@@ -63,6 +63,7 @@
       font-size: 20px;
       font-weight: 700;
       color: var(--text);
+      padding-left: 4px;
     }
     .nav-toggle {
       display: none;
@@ -1136,7 +1137,8 @@
         <div id="smartSubjectArea"></div>
         <div class="form-group">
           <label>③ 高考分数</label>
-          <input type="number" id="smartScore" placeholder="请输入分数 (0-750)" min="0" max="750">
+          <input type="number" id="smartScore" placeholder="请输入分数" min="0" max="750" oninput="validateScore()">
+          <div id="scoreHint" style="color:#e53935;font-size:12px;margin-top:4px;display:none"></div>
         </div>
         <div class="form-group">
           <label>④ 意向地区（可多选，不选=不限）</label>
@@ -1748,10 +1750,33 @@
       return provinces[provKey].examType;
     }
 
+    function getMaxScore(provKey) {
+      return provKey === 'hainan' ? 900 : (provKey === 'shanghai' ? 660 : 750);
+    }
+
+    function validateScore() {
+      var prov = document.getElementById('smartProvince').value;
+      var scoreEl = document.getElementById('smartScore');
+      var hint = document.getElementById('scoreHint');
+      var score = parseInt(scoreEl.value);
+      var max = getMaxScore(prov);
+      if (prov) {
+        scoreEl.max = max;
+        scoreEl.placeholder = '请输入分数 (0-' + max + ')';
+      }
+      if (score && score > max) {
+        hint.textContent = '⚠️ 该省份满分为' + max + '分，请检查输入';
+        hint.style.display = 'block';
+      } else {
+        hint.style.display = 'none';
+      }
+    }
+
     function onSmartProvinceChange() {
       var prov = document.getElementById('smartProvince').value;
       var area = document.getElementById('smartSubjectArea');
       area.innerHTML = '';
+      validateScore();
       
       if (!prov) return;
       
@@ -1954,6 +1979,11 @@
 
       if (!prov || !cat || !score) {
         alert('请填写完整信息（省份、选科、分数）');
+        return;
+      }
+      var maxS = getMaxScore(prov);
+      if (score > maxS) {
+        alert('该省份满分为' + maxS + '分，请检查分数');
         return;
       }
 
