@@ -1132,24 +1132,24 @@
           <label>③ 高考分数</label>
           <input type="number" id="smartScore" placeholder="请输入分数 (0-750)" min="0" max="750">
         </div>
+        <div class="form-group">
+          <label>④ 意向地区（可多选，不选=不限）</label>
+          <div id="regionPicker" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">
+            <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华北')">华北</button>
+            <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华东')">华东</button>
+            <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华南')">华南</button>
+            <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华中')">华中</button>
+            <button type="button" class="region-btn" onclick="toggleRegionPref(this,'西南')">西南</button>
+            <button type="button" class="region-btn" onclick="toggleRegionPref(this,'西北')">西北</button>
+            <button type="button" class="region-btn" onclick="toggleRegionPref(this,'东北')">东北</button>
+          </div>
+        </div>
         <div class="toggle-group">
           <label class="toggle">
             <input type="checkbox" id="prefer985">
             <span class="toggle-box"></span>
             <span>985优先</span>
           </label>
-          <div class="form-group" style="margin:0">
-            <label style="font-size:13px;margin-bottom:4px;display:block">意向地区（可多选）</label>
-            <div id="regionPicker" style="display:flex;flex-wrap:wrap;gap:6px">
-              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华北')">华北</button>
-              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华东')">华东</button>
-              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华南')">华南</button>
-              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华中')">华中</button>
-              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'西南')">西南</button>
-              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'西北')">西北</button>
-              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'东北')">东北</button>
-            </div>
-          </div>
           <label class="toggle">
             <input type="checkbox" id="preferJob">
             <span class="toggle-box"></span>
