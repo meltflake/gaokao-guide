@@ -197,6 +197,8 @@
     }
 
     /* Cards */
+    .region-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--text-light);font-size:13px;cursor:pointer;transition:all .2s;font-family:inherit}
+    .region-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
     .smart-layout{display:flex;gap:24px;align-items:flex-start}
     .smart-left{flex:1;min-width:0}
     .smart-right{flex:1;min-width:0}
@@ -1141,11 +1143,18 @@
             <span class="toggle-box"></span>
             <span>985优先</span>
           </label>
-          <label class="toggle">
-            <input type="checkbox" id="preferRegion">
-            <span class="toggle-box"></span>
-            <span>地区偏好</span>
-          </label>
+          <div class="form-group" style="margin:0">
+            <label style="font-size:13px;margin-bottom:4px;display:block">意向地区（可多选）</label>
+            <div id="regionPicker" style="display:flex;flex-wrap:wrap;gap:6px">
+              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华北')">华北</button>
+              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华东')">华东</button>
+              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华南')">华南</button>
+              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'华中')">华中</button>
+              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'西南')">西南</button>
+              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'西北')">西北</button>
+              <button type="button" class="region-btn" onclick="toggleRegionPref(this,'东北')">东北</button>
+            </div>
+          </div>
           <label class="toggle">
             <input type="checkbox" id="preferJob">
             <span class="toggle-box"></span>
@@ -1926,6 +1935,13 @@
 
     // ============ Smart Match ============
 
+    var preferredRegions = [];
+    function toggleRegionPref(btn, region) {
+      var idx = preferredRegions.indexOf(region);
+      if (idx >= 0) { preferredRegions.splice(idx, 1); btn.classList.remove('active'); }
+      else { preferredRegions.push(region); btn.classList.add('active'); }
+    }
+
     function doSmartMatch() {
       var prov = document.getElementById('smartProvince').value;
       var examType = getExamType(prov);
@@ -1951,6 +1967,7 @@
         var priority = 0;
         if (prefer985 && (school.tags || []).indexOf('985') >= 0) priority += 10;
         if (preferJob) priority += (school.employmentRate || 90) / 10;
+        if (preferredRegions.length > 0 && school.region && preferredRegions.indexOf(school.region) >= 0) priority += 15;
         
         // Check how many of this school's majors are compatible
         var compatMajors = 0;
