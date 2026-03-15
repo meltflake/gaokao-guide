@@ -197,6 +197,13 @@
     }
 
     /* Cards */
+    .smart-layout{display:flex;gap:24px;align-items:flex-start}
+    .smart-left{flex:1;min-width:0}
+    .smart-right{flex:1;min-width:0}
+    @media(max-width:768px){
+      .smart-layout{flex-direction:column}
+      .smart-right{display:none}
+    }
     .card {
       background: var(--white);
       border-radius: 16px;
@@ -1115,7 +1122,8 @@
     <!-- 智能选校 -->
     <section id="smart" class="active">
       <h2>🎯 智能选校</h2>
-      <div class="card" style="max-width: 600px; margin: 0 auto;">
+      <div class="smart-layout">
+      <div class="card smart-left">
         <div class="form-group">
           <label>① 选择省份</label>
           <select id="smartProvince" onchange="onSmartProvinceChange()">
@@ -1146,6 +1154,24 @@
         </div>
         <button class="btn" onclick="doSmartMatch()" style="width: 100%;">开始匹配</button>
       </div>
+      <div class="card smart-right">
+        <h3 style="margin-bottom:16px;font-size:1.1rem">📊 分数线快查</h3>
+        <div class="form-group">
+          <label>选择省份</label>
+          <select id="scoreProvinceSide" onchange="updateScoreSchoolsSide()">
+            <option value="">请选择省份</option>
+          </select>
+        </div>
+        <div class="form-group" style="position:relative">
+          <label>选择院校</label>
+          <input type="text" id="scoreSchoolInputSide" placeholder="输入院校名称搜索..." autocomplete="off" style="width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:16px;background:#f9fafb">
+          <input type="hidden" id="scoreSchoolSide" value="">
+          <div id="scoreSchoolDropdownSide" style="display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 8px 8px;max-height:220px;overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.1)"></div>
+        </div>
+        <button class="btn" onclick="lookupScoreSide()" style="width:100%;">查询分数线</button>
+        <div id="scoreResultsSide" style="margin-top:16px;"></div>
+      </div>
+      </div><!-- end smart-layout -->
       <div id="smartResults" style="margin-top: 32px;"></div>
     </section>
 
@@ -2475,6 +2501,72 @@
         legendX += ctx.measureText(cat).width + 40;
       });
     }
+
+    // ============ Side Score Panel ============
+    var scoreSchoolListSide = [];
+    function updateScoreSchoolsSide() {
+      var prov = document.getElementById('scoreProvinceSide').value;
+      var input = document.getElementById('scoreSchoolInputSide');
+      var hidden = document.getElementById('scoreSchoolSide');
+      input.value = ''; hidden.value = '';
+      scoreSchoolListSide = [];
+      if (prov) {
+        schools.forEach(function(s) {
+          if (scores[s.id] && scores[s.id][prov]) {
+            scoreSchoolListSide.push({id: s.id, name: s.name, tags: s.tags || []});
+          }
+        });
+      }
+    }
+    function lookupScoreSide() {
+      var prov = document.getElementById('scoreProvinceSide').value;
+      var schoolId = document.getElementById('scoreSchoolSide').value;
+      if (!prov || !schoolId) { alert('请选择省份和院校'); return; }
+      var school = schools.find(function(s) { return s.id === schoolId; });
+      var ss = scores[schoolId] && scores[schoolId][prov];
+      if (!ss) { document.getElementById('scoreResultsSide').innerHTML = '<p style="color:var(--text-light);font-size:14px">暂无数据</p>'; return; }
+      var years = Object.keys(ss).sort().reverse();
+      var cats = Object.keys(ss[years[0]] || {});
+      var h = '<table style="width:100%;font-size:13px"><tr><th>年份</th>';
+      cats.forEach(function(c) { h += '<th>' + c + '</th>'; });
+      h += '</tr>';
+      years.forEach(function(y) {
+        h += '<tr><td>' + y + '</td>';
+        cats.forEach(function(c) { h += '<td>' + (ss[y] && ss[y][c] ? ss[y][c] : '--') + '</td>'; });
+        h += '</tr>';
+      });
+      h += '</table>';
+      document.getElementById('scoreResultsSide').innerHTML = '<h4 style="font-size:14px;margin-bottom:8px">' + (school ? school.name : schoolId) + '</h4>' + h;
+    }
+    // Populate side province & setup search
+    (function(){
+      var sel = document.getElementById('scoreProvinceSide');
+      if(!sel)return;
+      Object.keys(provinces).sort().forEach(function(k){
+        var o=document.createElement('option');o.value=k;o.textContent=provinces[k].name;sel.appendChild(o);
+      });
+      var input=document.getElementById('scoreSchoolInputSide'),dropdown=document.getElementById('scoreSchoolDropdownSide'),hidden=document.getElementById('scoreSchoolSide');
+      if(!input||!dropdown||!hidden)return;
+      input.addEventListener('focus',function(){showDrop(this.value)});
+      input.addEventListener('input',function(){showDrop(this.value)});
+      document.addEventListener('click',function(e){if(!input.contains(e.target)&&!dropdown.contains(e.target))dropdown.style.display='none'});
+      function showDrop(q){
+        q=(q||'').trim().toLowerCase();
+        var m=scoreSchoolListSide.filter(function(s){return!q||s.name.toLowerCase().indexOf(q)>=0}).slice(0,20);
+        if(!m.length){dropdown.style.display='none';return}
+        dropdown.innerHTML='';
+        m.forEach(function(s){
+          var d2=document.createElement('div');
+          d2.style.cssText='padding:8px 12px;cursor:pointer;font-size:13px;border-bottom:1px solid #f0f0f0';
+          d2.textContent=s.name;
+          d2.addEventListener('click',function(){input.value=s.name;hidden.value=s.id;dropdown.style.display='none'});
+          d2.addEventListener('mouseenter',function(){this.style.background='#f5faf8'});
+          d2.addEventListener('mouseleave',function(){this.style.background=''});
+          dropdown.appendChild(d2);
+        });
+        dropdown.style.display='block';
+      }
+    })();
 
     // ============ Majors ============
 
