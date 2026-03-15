@@ -195,9 +195,11 @@
     /* Cards */
     .region-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--text-light);font-size:13px;cursor:pointer;transition:all .2s;font-family:inherit}
     .region-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-    .smart-layout{display:flex;gap:24px;align-items:flex-start}
+    .smart-layout{display:flex;gap:24px;align-items:stretch}
     .smart-left{flex:1;min-width:0}
-    .smart-right{flex:1;min-width:0}
+    .smart-right{flex:1;min-width:0;display:flex;flex-direction:column}
+    .smart-right .form-group{margin-bottom:24px}
+    .smart-right .btn{margin-top:auto}
     @media(max-width:768px){
       .smart-layout{flex-direction:column}
       .smart-right{display:none}
@@ -1118,9 +1120,9 @@
   <main class="container">
     <!-- 智能选校 -->
     <section id="smart" class="active">
-      <h2>🎯 智能选校</h2>
       <div class="smart-layout">
       <div class="card smart-left">
+        <h3 style="margin-bottom:20px;font-size:1.2rem;font-weight:700">🎯 智能选校</h3>
         <div class="form-group">
           <label>① 选择省份</label>
           <select id="smartProvince" onchange="onSmartProvinceChange()">
@@ -1159,7 +1161,7 @@
         <button class="btn" onclick="doSmartMatch()" style="width: 100%;">开始匹配</button>
       </div>
       <div class="card smart-right">
-        <h3 style="margin-bottom:16px;font-size:1.1rem">📊 分数线快查</h3>
+        <h3 style="margin-bottom:20px;font-size:1.2rem;font-weight:700">📊 分数线查询</h3>
         <div class="form-group">
           <label>选择省份</label>
           <select id="scoreProvinceSide" onchange="updateScoreSchoolsSide()">
@@ -1173,7 +1175,7 @@
           <div id="scoreSchoolDropdownSide" style="display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 8px 8px;max-height:220px;overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.1)"></div>
         </div>
         <button class="btn" onclick="lookupScoreSide()" style="width:100%;">查询分数线</button>
-        <div id="scoreResultsSide" style="margin-top:16px;"></div>
+        <div id="scoreResultsSide" style="margin-top:24px;border-top:1px solid var(--border);padding-top:20px;"></div>
       </div>
       </div><!-- end smart-layout -->
       <div id="smartResults" style="margin-top: 32px;"></div>
