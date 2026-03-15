@@ -1696,6 +1696,7 @@
         document.getElementById('majorCount').textContent = majors.length;
         
         initProvinceSelects();
+        initSideScorePanel();
         renderSchools();
         renderMajors();
         initVolunteerSlots();
@@ -2554,7 +2555,7 @@
       document.getElementById('scoreResultsSide').innerHTML = '<h4 style="font-size:14px;margin-bottom:8px">' + (school ? school.name : schoolId) + '</h4>' + h;
     }
     // Populate side province & setup search
-    (function(){
+    function initSideScorePanel(){
       var sel = document.getElementById('scoreProvinceSide');
       if(!sel)return;
       Object.keys(provinces).sort().forEach(function(k){
@@ -2581,7 +2582,7 @@
         });
         dropdown.style.display='block';
       }
-    })();
+    }
 
     // ============ Majors ============
 
