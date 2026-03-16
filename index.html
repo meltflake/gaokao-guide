@@ -1246,14 +1246,17 @@
     <!-- 专业库 -->
     <section id="majors">
       <h2>📚 专业库</h2>
+      <div style="max-width:400px;margin-bottom:16px;">
+        <input type="text" id="majorSearch" placeholder="🔍 搜索专业名称..." oninput="renderMajors()" style="width:100%;padding:10px 14px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;">
+      </div>
       <div class="filter-bar">
         <button class="filter-btn active" onclick="filterMajors('all', this)">全部</button>
-        <button class="filter-btn" onclick="filterMajors('热门', this)">热门</button>
-        <button class="filter-btn" onclick="filterMajors('高薪', this)">高薪</button>
-        <button class="filter-btn" onclick="filterMajors('理工', this)">理工</button>
-        <button class="filter-btn" onclick="filterMajors('文科', this)">文科</button>
-        <button class="filter-btn" onclick="filterMajors('医学', this)">医学</button>
-        <button class="filter-btn" onclick="filterMajors('艺术', this)">艺术</button>
+        <button class="filter-btn" onclick="filterMajors('热门', this)">🔥 热门</button>
+        <button class="filter-btn" onclick="filterMajors('高薪', this)">💰 高薪</button>
+        <button class="filter-btn" onclick="filterMajors('理工', this)">⚙️ 理工</button>
+        <button class="filter-btn" onclick="filterMajors('文科', this)">📖 文科</button>
+        <button class="filter-btn" onclick="filterMajors('医学', this)">🏥 医学</button>
+        <button class="filter-btn" onclick="filterMajors('艺术', this)">🎨 艺术</button>
       </div>
       <div class="filter-bar" id="majorSubjectFilterBar">
         <label class="toggle" style="margin-right:8px;">
@@ -1263,6 +1266,7 @@
         </label>
         <span style="font-size:13px;color:var(--text-light);" id="majorMySubjectsLabel"></span>
       </div>
+      <p style="font-size:13px;color:var(--text-light);margin-bottom:8px;" id="majorCountLabel"></p>
       <div id="majorList" class="major-grid"></div>
     </section>
 
@@ -2636,8 +2640,12 @@
 
     function renderMajors() {
       var onlyCompat = document.getElementById('majorOnlyCompatible').checked;
+      var searchQ = (document.getElementById('majorSearch').value || '').toLowerCase().trim();
       
       var filtered = majors.filter(function(m) {
+        if (searchQ && m.name.toLowerCase().indexOf(searchQ) < 0 && 
+            (m.category || '').toLowerCase().indexOf(searchQ) < 0 &&
+            (m.careers || []).join('').toLowerCase().indexOf(searchQ) < 0) return false;
         if (currentMajorFilter !== 'all' && (m.tags || []).indexOf(currentMajorFilter) < 0) return false;
         if (onlyCompat && userSubjects.length > 0) {
           var compat = checkMajorCompat(m, userSubjects);
@@ -2646,20 +2654,26 @@
         return true;
       });
 
+      var countLabel = document.getElementById('majorCountLabel');
+      if (countLabel) countLabel.textContent = '共 ' + filtered.length + ' 个专业';
+
       var html = filtered.map(function(m) {
         var reqHtml = renderSubjectReqTags(m);
         var compatClass = '';
         if (userSubjects.length > 0) {
           var compat = checkMajorCompat(m, userSubjects);
-          if (!compat.compatible) compatClass = ' style="opacity:0.6"';
+          if (!compat.compatible) compatClass = ' style="opacity:0.5"';
         }
+        var salaryHtml = m.salaryRange ? '<div style="font-size:11px;color:#d97706;margin-top:4px;">💰 ' + m.salaryRange + '</div>' : '';
+        var catHtml = m.category ? '<div style="font-size:11px;color:var(--text-light);margin-top:2px;">' + m.category + '</div>' : '';
         return '<div class="major-card"' + compatClass + ' onclick="openMajorModal(\'' + m.id + '\')">' +
           '<div class="major-icon">' + (m.icon || '📚') + '</div>' +
           '<div class="major-name">' + m.name + '</div>' +
+          catHtml + salaryHtml +
           '<div class="major-req-note">' + reqHtml + '</div></div>';
       }).join('');
 
-      document.getElementById('majorList').innerHTML = html;
+      document.getElementById('majorList').innerHTML = html || '<p style="text-align:center;color:var(--text-light);padding:40px;">未找到匹配的专业</p>';
     }
 
     function filterMajors(tag, btn) {
@@ -2677,7 +2691,7 @@
 
       var topSchoolsHtml = (major.topSchools || []).map(function(sid) {
         var s = schools.find(function(x) { return x.id === sid; });
-        return s ? '<span class="tag">' + s.name + '</span>' : '';
+        return s ? '<span class="tag" style="cursor:pointer" onclick="closeMajorModal();openSchoolDetail(\'' + sid + '\')">' + s.name + ' →</span>' : '';
       }).join('');
 
       // Subject req info
