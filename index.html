@@ -1165,6 +1165,11 @@
             <span>211优先</span>
           </label>
           <label class="toggle">
+            <input type="checkbox" id="preferSYL">
+            <span class="toggle-box"></span>
+            <span>双一流优先</span>
+          </label>
+          <label class="toggle">
             <input type="checkbox" id="preferJob">
             <span class="toggle-box"></span>
             <span>就业优先</span>
@@ -2016,6 +2021,7 @@
       var score = parseInt(document.getElementById('smartScore').value) || 0;
       var prefer985 = document.getElementById('prefer985').checked;
       var prefer211 = document.getElementById('prefer211').checked;
+      var preferSYL = document.getElementById('preferSYL').checked;
       var preferJob = document.getElementById('preferJob').checked;
 
       if (!prov || !cat || !score) {
@@ -2041,6 +2047,7 @@
         var priority = 0;
         if (prefer985 && (school.tags || []).indexOf('985') >= 0) priority += 10;
         if (prefer211 && (school.tags || []).indexOf('211') >= 0) priority += 5;
+        if (preferSYL && (school.tags || []).indexOf('双一流') >= 0) priority += 3;
         if (preferJob) priority += (school.employmentRate || 90) / 10;
         if (preferredRegions.length > 0 && school.region && preferredRegions.indexOf(school.region) >= 0) priority += 15;
         
