@@ -3095,86 +3095,79 @@
       if (all.length === 0) return;
 
       var canvas = document.getElementById('matchCanvas');
-      var W = 540, rowH = 44, headerH = 90, footerH = 80, pad = 20;
+      var W = 520, rowH = 42, headerH = 80, footerH = 70, pad = 24;
       var H = headerH + all.length * rowH + footerH;
       canvas.width = W * 2; canvas.height = H * 2;
       var ctx = canvas.getContext('2d');
       ctx.scale(2, 2);
 
-      // BG gradient
-      var grad = ctx.createLinearGradient(0, 0, 0, H);
-      grad.addColorStop(0, '#0f172a'); grad.addColorStop(1, '#1e293b');
-      ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+      // White BG
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
 
       // Header
       var provName = provinces[d.prov] ? provinces[d.prov].name : d.prov;
-      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 20px sans-serif'; ctx.textAlign = 'left';
-      ctx.fillText('高考GPS 选校报告', pad, 32);
-      ctx.font = '13px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.6)';
-      ctx.fillText(provName + ' · ' + d.cat + ' · ' + d.score + '分', pad, 52);
-      // Summary pills
-      ctx.font = 'bold 12px sans-serif';
-      var sx = pad;
-      [['冲刺 '+d.reach.length, '#f87171'], ['稳妥 '+d.match.length, '#fbbf24'], ['保底 '+d.safe.length, '#4ade80']].forEach(function(p) {
-        ctx.fillStyle = p[1]; ctx.globalAlpha = 0.2;
-        ctx.fillRect(sx, 60, ctx.measureText(p[0]).width + 16, 20);
-        ctx.globalAlpha = 1; ctx.fillStyle = p[1];
-        // Rounded rect approx
-        ctx.fillText(p[0], sx + 8, 74);
-        sx += ctx.measureText(p[0]).width + 24;
-      });
+      ctx.fillStyle = '#111'; ctx.font = 'bold 18px -apple-system,sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText('高考GPS · 选校报告', pad, 30);
+      ctx.font = '12px -apple-system,sans-serif'; ctx.fillStyle = '#999';
+      ctx.fillText(provName + ' · ' + d.cat + ' · ' + d.score + '分', pad, 48);
+      // Summary
+      ctx.font = '12px -apple-system,sans-serif';
+      ctx.textAlign = 'right'; ctx.fillStyle = '#666';
+      ctx.fillText('冲' + d.reach.length + ' / 稳' + d.match.length + ' / 保' + d.safe.length, W - pad, 30);
+      ctx.textAlign = 'left';
+
+      // Thin divider
+      ctx.strokeStyle = '#eee'; ctx.lineWidth = 1; ctx.beginPath();
+      ctx.moveTo(pad, 60); ctx.lineTo(W - pad, 60); ctx.stroke();
 
       // Rows
       var startY = headerH;
       all.forEach(function(item, i) {
         var y = startY + i * rowH;
-        ctx.fillStyle = i % 2 === 0 ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.01)';
-        ctx.fillRect(pad, y, W - pad*2, rowH);
+        // Subtle alternating
+        if (i % 2 === 0) { ctx.fillStyle = '#fafafa'; ctx.fillRect(pad, y, W - pad*2, rowH); }
 
         var cy = y + rowH/2 + 4;
-        // Type dot
-        var dotColor = item.type === '冲刺' ? '#f87171' : (item.type === '稳妥' ? '#fbbf24' : '#4ade80');
-        ctx.fillStyle = dotColor;
-        ctx.beginPath(); ctx.arc(pad + 12, cy - 3, 4, 0, Math.PI * 2); ctx.fill();
+        // Type label
+        var typeColor = item.type === '冲刺' ? '#e53935' : (item.type === '稳妥' ? '#f59e0b' : '#16a34a');
+        ctx.font = '11px -apple-system,sans-serif'; ctx.fillStyle = typeColor; ctx.textAlign = 'left';
+        ctx.fillText(item.type, pad + 4, cy);
 
         // School name
-        ctx.font = 'bold 14px sans-serif'; ctx.fillStyle = '#ffffff'; ctx.textAlign = 'left';
-        ctx.fillText(item.s.school.name, pad + 24, cy);
-
-        // Tags compact
-        var tags = (item.s.school.tags || []).filter(function(t){ return t==='985'||t==='211'||t==='C9'; }).slice(0,1).join('');
-        if (tags) {
-          ctx.font = '10px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.35)';
-          ctx.fillText(tags, pad + 24 + ctx.measureText(item.s.school.name).width + 8, cy);
-        }
+        ctx.font = '14px -apple-system,sans-serif'; ctx.fillStyle = '#222';
+        ctx.fillText(item.s.school.name, pad + 44, cy);
 
         // Diff
         var diffText = (item.s.diff >= 0 ? '+' : '') + item.s.diff;
-        ctx.font = 'bold 15px sans-serif'; ctx.textAlign = 'right';
-        ctx.fillStyle = item.s.diff >= 0 ? '#4ade80' : '#f87171';
-        ctx.fillText(diffText, W - pad - 8, cy);
+        ctx.font = 'bold 14px -apple-system,sans-serif'; ctx.textAlign = 'right';
+        ctx.fillStyle = item.s.diff >= 0 ? '#16a34a' : '#e53935';
+        ctx.fillText(diffText, W - pad - 4, cy);
         ctx.textAlign = 'left';
       });
 
-      // Footer with QR
-      var fy = startY + all.length * rowH + 16;
-      ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.beginPath();
-      ctx.moveTo(pad, fy - 4); ctx.lineTo(W - pad, fy - 4); ctx.stroke();
+      // Footer
+      var fy = startY + all.length * rowH + 8;
+      ctx.strokeStyle = '#eee'; ctx.lineWidth = 1; ctx.beginPath();
+      ctx.moveTo(pad, fy); ctx.lineTo(W - pad, fy); ctx.stroke();
 
-      // QR code
-      var qrCanvas = generateQRCanvas('https://1yong.com/gaokao-guide/', 48);
-      ctx.drawImage(qrCanvas, W - pad - 48, fy, 48, 48);
+      // QR (black on white)
+      var qrC = generateQRCanvas('https://1yong.com/gaokao-guide/', 44);
+      // Invert QR to black
+      var qrCtx = qrC.getContext('2d');
+      var imgData = qrCtx.getImageData(0, 0, qrC.width, qrC.height);
+      for (var px = 0; px < imgData.data.length; px += 4) {
+        if (imgData.data[px] === 255) { imgData.data[px]=34; imgData.data[px+1]=34; imgData.data[px+2]=34; imgData.data[px+3]=255; }
+        else { imgData.data[px+3] = 0; }
+      }
+      qrCtx.putImageData(imgData, 0, 0);
+      ctx.drawImage(qrC, W - pad - 44, fy + 6, 44, 44);
 
-      // Text next to QR
-      ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
-      ctx.fillText('扫码免费使用', W - pad - 48 - 90, fy + 20);
-      ctx.fillText('1yong.com/gaokao-guide', W - pad - 48 - 90, fy + 36);
-
-      // Date on left
-      ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.font = '11px sans-serif';
+      // Footer text
+      ctx.fillStyle = '#bbb'; ctx.font = '10px -apple-system,sans-serif'; ctx.textAlign = 'left';
       var today = new Date();
       var dateStr = today.getFullYear() + '.' + String(today.getMonth()+1).padStart(2,'0') + '.' + String(today.getDate()).padStart(2,'0');
       ctx.fillText('高考GPS · ' + dateStr, pad, fy + 28);
+      ctx.fillText('1yong.com/gaokao-guide', pad, fy + 42);
 
       // Show & download
       canvas.style.display = 'block';
