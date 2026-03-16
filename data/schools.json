@@ -5805,5 +5805,967 @@
     ],
     "website": "https://www.ctgu.edu.cn",
     "desc": "依托三峡水利资源，水电和土木工程专业特色鲜明"
+  },
+  {
+    "id": "wit",
+    "name": "武汉工程大学",
+    "province": "湖北",
+    "city": "武汉",
+    "type": "理工",
+    "tags": [],
+    "region": "华中",
+    "ranking": 214,
+    "studentCount": 23000,
+    "employmentRate": 92,
+    "maleRatio": 56,
+    "topMajors": [
+      "化学工程与工艺",
+      "制药工程",
+      "材料科学与工程",
+      "计算机科学与技术",
+      "自动化"
+    ],
+    "features": [
+      "化工与制药工程特色鲜明",
+      "湖北省属重点大学"
+    ],
+    "website": "https://www.wit.edu.cn",
+    "desc": "以化工、制药为特色的省属重点理工大学"
+  },
+  {
+    "id": "hbut",
+    "name": "湖北工业大学",
+    "province": "湖北",
+    "city": "武汉",
+    "type": "理工",
+    "tags": [],
+    "region": "华中",
+    "ranking": 217,
+    "studentCount": 22000,
+    "employmentRate": 91,
+    "maleRatio": 58,
+    "topMajors": [
+      "机械工程",
+      "电气工程",
+      "土木工程",
+      "食品科学与工程",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "轻工食品类专业有特色",
+      "工科就业率高"
+    ],
+    "website": "https://www.hbut.edu.cn",
+    "desc": "湖北省属工科特色大学，轻工和机械专业实力较强"
+  },
+  {
+    "id": "xust",
+    "name": "西安科技大学",
+    "province": "陕西",
+    "city": "西安",
+    "type": "理工",
+    "tags": [],
+    "region": "西北",
+    "ranking": 230,
+    "studentCount": 23000,
+    "employmentRate": 91,
+    "maleRatio": 60,
+    "topMajors": [
+      "采矿工程",
+      "安全工程",
+      "测绘工程",
+      "地质工程",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "矿业安全工程全国领先",
+      "地矿类就业好"
+    ],
+    "website": "https://www.xust.edu.cn",
+    "desc": "以地矿安全为特色的陕西省属重点大学"
+  },
+  {
+    "id": "xupt",
+    "name": "西安邮电大学",
+    "province": "陕西",
+    "city": "西安",
+    "type": "理工",
+    "tags": [],
+    "region": "西北",
+    "ranking": 255,
+    "studentCount": 18000,
+    "employmentRate": 93,
+    "maleRatio": 58,
+    "topMajors": [
+      "通信工程",
+      "计算机科学与技术",
+      "电子信息工程",
+      "网络工程",
+      "信息安全"
+    ],
+    "features": [
+      "通信与IT类就业率极高",
+      "西北地区信息通信人才培养基地"
+    ],
+    "website": "https://www.xupt.edu.cn",
+    "desc": "以信息通信为特色，IT类专业就业率突出"
+  },
+  {
+    "id": "cqjtu",
+    "name": "重庆交通大学",
+    "province": "重庆",
+    "city": "重庆",
+    "type": "理工",
+    "tags": [],
+    "region": "西南",
+    "ranking": 218,
+    "studentCount": 28000,
+    "employmentRate": 92,
+    "maleRatio": 60,
+    "topMajors": [
+      "土木工程",
+      "交通运输",
+      "桥梁与隧道工程",
+      "港口航道",
+      "水利水电工程"
+    ],
+    "features": [
+      "桥梁隧道工程全国知名",
+      "交通基建类就业好"
+    ],
+    "website": "https://www.cqjtu.edu.cn",
+    "desc": "以交通土建为特色，桥梁隧道工程实力突出"
+  },
+  {
+    "id": "cuit",
+    "name": "成都信息工程大学",
+    "province": "四川",
+    "city": "成都",
+    "type": "理工",
+    "tags": [],
+    "region": "西南",
+    "ranking": 253,
+    "studentCount": 26000,
+    "employmentRate": 92,
+    "maleRatio": 56,
+    "topMajors": [
+      "大气科学",
+      "计算机科学与技术",
+      "电子信息工程",
+      "通信工程",
+      "软件工程"
+    ],
+    "features": [
+      "气象类专业全国领先",
+      "IT类专业就业好"
+    ],
+    "website": "https://www.cuit.edu.cn",
+    "desc": "以气象和信息技术为特色，计算机类就业率高"
+  },
+  {
+    "id": "lzjtu",
+    "name": "兰州交通大学",
+    "province": "甘肃",
+    "city": "兰州",
+    "type": "理工",
+    "tags": [],
+    "region": "西北",
+    "ranking": 225,
+    "studentCount": 30000,
+    "employmentRate": 91,
+    "maleRatio": 62,
+    "topMajors": [
+      "土木工程",
+      "交通运输",
+      "机械工程",
+      "自动化",
+      "桥梁与隧道工程"
+    ],
+    "features": [
+      "铁路交通特色突出",
+      "中铁系统就业渠道广"
+    ],
+    "website": "https://www.lzjtu.edu.cn",
+    "desc": "铁路交通类传统强校，中铁系统就业率高"
+  },
+  {
+    "id": "lut",
+    "name": "兰州理工大学",
+    "province": "甘肃",
+    "city": "兰州",
+    "type": "理工",
+    "tags": [],
+    "region": "西北",
+    "ranking": 235,
+    "studentCount": 28000,
+    "employmentRate": 90,
+    "maleRatio": 62,
+    "topMajors": [
+      "材料科学与工程",
+      "机械工程",
+      "能源与动力工程",
+      "土木工程",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "材料与机械类实力较强",
+      "西北工业人才培养基地"
+    ],
+    "website": "https://www.lut.edu.cn",
+    "desc": "甘肃省属工科重点大学，材料和机械专业有特色"
+  },
+  {
+    "id": "tykjdx",
+    "name": "太原科技大学",
+    "province": "山西",
+    "city": "太原",
+    "type": "理工",
+    "tags": [],
+    "region": "华北",
+    "ranking": 295,
+    "studentCount": 22000,
+    "employmentRate": 89,
+    "maleRatio": 60,
+    "topMajors": [
+      "机械工程",
+      "材料成型",
+      "冶金工程",
+      "自动化",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "重型机械和冶金装备特色",
+      "山西省属重点大学"
+    ],
+    "website": "https://www.tyust.edu.cn",
+    "desc": "以重型机械和冶金为特色的山西省属理工大学"
+  },
+  {
+    "id": "njit",
+    "name": "南京工程学院",
+    "province": "江苏",
+    "city": "南京",
+    "type": "理工",
+    "tags": [],
+    "region": "华东",
+    "ranking": 310,
+    "studentCount": 24000,
+    "employmentRate": 93,
+    "maleRatio": 58,
+    "topMajors": [
+      "电气工程",
+      "机械工程",
+      "自动化",
+      "能源与动力工程",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "电力行业就业渠道广",
+      "应用型工科院校"
+    ],
+    "website": "https://www.njit.edu.cn",
+    "desc": "电力和机械类应用型特色院校，行业就业率高"
+  },
+  {
+    "id": "cczu",
+    "name": "常州大学",
+    "province": "江苏",
+    "city": "常州",
+    "type": "理工",
+    "tags": [],
+    "region": "华东",
+    "ranking": 265,
+    "studentCount": 24000,
+    "employmentRate": 93,
+    "maleRatio": 54,
+    "topMajors": [
+      "化学工程与工艺",
+      "材料科学与工程",
+      "石油工程",
+      "计算机科学与技术",
+      "机械工程"
+    ],
+    "features": [
+      "石油化工类专业特色",
+      "长三角就业地理优势"
+    ],
+    "website": "https://www.cczu.edu.cn",
+    "desc": "以石油化工为特色，地处长三角就业便利"
+  },
+  {
+    "id": "zust",
+    "name": "浙江科技大学",
+    "province": "浙江",
+    "city": "杭州",
+    "type": "理工",
+    "tags": [],
+    "region": "华东",
+    "ranking": 280,
+    "studentCount": 18000,
+    "employmentRate": 94,
+    "maleRatio": 52,
+    "topMajors": [
+      "机械工程",
+      "计算机科学与技术",
+      "土木工程",
+      "化学工程",
+      "自动化"
+    ],
+    "features": [
+      "中德合作办学特色",
+      "杭州就业优势明显"
+    ],
+    "website": "https://www.zust.edu.cn",
+    "desc": "中德合作办学特色鲜明，地处杭州就业优势大"
+  },
+  {
+    "id": "shiep",
+    "name": "上海电力大学",
+    "province": "上海",
+    "city": "上海",
+    "type": "理工",
+    "tags": [],
+    "region": "华东",
+    "ranking": 305,
+    "studentCount": 13000,
+    "employmentRate": 95,
+    "maleRatio": 60,
+    "topMajors": [
+      "电气工程",
+      "能源与动力工程",
+      "自动化",
+      "计算机科学与技术",
+      "新能源科学与工程"
+    ],
+    "features": [
+      "电力行业就业率极高",
+      "上海地理优势突出"
+    ],
+    "website": "https://www.shiep.edu.cn",
+    "desc": "电力行业特色院校，就业率和薪资水平突出"
+  },
+  {
+    "id": "tjut",
+    "name": "天津理工大学",
+    "province": "天津",
+    "city": "天津",
+    "type": "理工",
+    "tags": [],
+    "region": "华北",
+    "ranking": 250,
+    "studentCount": 27000,
+    "employmentRate": 91,
+    "maleRatio": 55,
+    "topMajors": [
+      "计算机科学与技术",
+      "电子信息工程",
+      "机械工程",
+      "自动化",
+      "通信工程"
+    ],
+    "features": [
+      "天津市属重点理工大学",
+      "工科专业覆盖面广"
+    ],
+    "website": "https://www.tjut.edu.cn",
+    "desc": "天津市属重点理工大学，工科覆盖面广"
+  },
+  {
+    "id": "tust",
+    "name": "天津科技大学",
+    "province": "天津",
+    "city": "天津",
+    "type": "理工",
+    "tags": [],
+    "region": "华北",
+    "ranking": 245,
+    "studentCount": 26000,
+    "employmentRate": 91,
+    "maleRatio": 48,
+    "topMajors": [
+      "食品科学与工程",
+      "生物工程",
+      "化学工程",
+      "轻化工程",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "食品和轻工类全国知名",
+      "天津市属重点大学"
+    ],
+    "website": "https://www.tust.edu.cn",
+    "desc": "食品与轻工类专业全国知名的天津市属重点大学"
+  },
+  {
+    "id": "hpu",
+    "name": "河南理工大学",
+    "province": "河南",
+    "city": "焦作",
+    "type": "理工",
+    "tags": [],
+    "region": "华中",
+    "ranking": 222,
+    "studentCount": 40000,
+    "employmentRate": 90,
+    "maleRatio": 60,
+    "topMajors": [
+      "采矿工程",
+      "安全工程",
+      "测绘工程",
+      "电气工程",
+      "土木工程"
+    ],
+    "features": [
+      "安全工程和采矿全国知名",
+      "百年办学历史"
+    ],
+    "website": "https://www.hpu.edu.cn",
+    "desc": "以安全和矿业为特色的百年老校"
+  },
+  {
+    "id": "ahut",
+    "name": "安徽工业大学",
+    "province": "安徽",
+    "city": "马鞍山",
+    "type": "理工",
+    "tags": [],
+    "region": "华东",
+    "ranking": 240,
+    "studentCount": 24000,
+    "employmentRate": 92,
+    "maleRatio": 60,
+    "topMajors": [
+      "冶金工程",
+      "材料科学与工程",
+      "机械工程",
+      "化学工程",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "冶金材料类全国有名",
+      "长三角就业辐射"
+    ],
+    "website": "https://www.ahut.edu.cn",
+    "desc": "以冶金材料为特色，毗邻长三角就业便利"
+  },
+  {
+    "id": "cqnu",
+    "name": "重庆师范大学",
+    "province": "重庆",
+    "city": "重庆",
+    "type": "师范",
+    "tags": [],
+    "region": "西南",
+    "ranking": 270,
+    "studentCount": 27000,
+    "employmentRate": 91,
+    "maleRatio": 35,
+    "topMajors": [
+      "数学与应用数学",
+      "汉语言文学",
+      "学前教育",
+      "英语",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "师范类专业就业稳定",
+      "重庆市属重点师范"
+    ],
+    "website": "https://www.cqnu.edu.cn",
+    "desc": "重庆市属重点师范大学，师范类就业稳定"
+  },
+  {
+    "id": "sicnu",
+    "name": "四川师范大学",
+    "province": "四川",
+    "city": "成都",
+    "type": "师范",
+    "tags": [],
+    "region": "西南",
+    "ranking": 215,
+    "studentCount": 37000,
+    "employmentRate": 91,
+    "maleRatio": 35,
+    "topMajors": [
+      "汉语言文学",
+      "数学与应用数学",
+      "教育学",
+      "英语",
+      "历史学"
+    ],
+    "features": [
+      "四川省属重点师范",
+      "师范教育历史悠久"
+    ],
+    "website": "https://www.sicnu.edu.cn",
+    "desc": "四川最大的师范大学，基础教育师资培养重镇"
+  },
+  {
+    "id": "ahnu",
+    "name": "安徽师范大学",
+    "province": "安徽",
+    "city": "芜湖",
+    "type": "师范",
+    "tags": [],
+    "region": "华东",
+    "ranking": 198,
+    "studentCount": 28000,
+    "employmentRate": 91,
+    "maleRatio": 38,
+    "topMajors": [
+      "汉语言文学",
+      "化学",
+      "数学与应用数学",
+      "历史学",
+      "地理科学"
+    ],
+    "features": [
+      "安徽省属重点师范",
+      "化学和中文学科实力强"
+    ],
+    "website": "https://www.ahnu.edu.cn",
+    "desc": "安徽省历史最悠久的高校之一，化学和文学学科有优势"
+  },
+  {
+    "id": "gxnu",
+    "name": "广西师范大学",
+    "province": "广西",
+    "city": "桂林",
+    "type": "师范",
+    "tags": [],
+    "region": "华南",
+    "ranking": 230,
+    "studentCount": 28000,
+    "employmentRate": 90,
+    "maleRatio": 38,
+    "topMajors": [
+      "汉语言文学",
+      "化学",
+      "数学与应用数学",
+      "历史学",
+      "教育学"
+    ],
+    "features": [
+      "广西师范教育龙头",
+      "桂林山水校园环境优美"
+    ],
+    "website": "https://www.gxnu.edu.cn",
+    "desc": "广西最好的师范大学，文学和化学学科有特色"
+  },
+  {
+    "id": "hrbnu",
+    "name": "哈尔滨师范大学",
+    "province": "黑龙江",
+    "city": "哈尔滨",
+    "type": "师范",
+    "tags": [],
+    "region": "东北",
+    "ranking": 240,
+    "studentCount": 30000,
+    "employmentRate": 89,
+    "maleRatio": 35,
+    "topMajors": [
+      "汉语言文学",
+      "英语",
+      "数学与应用数学",
+      "音乐学",
+      "美术学"
+    ],
+    "features": [
+      "黑龙江省属重点师范",
+      "艺术类专业有特色"
+    ],
+    "website": "https://www.hrbnu.edu.cn",
+    "desc": "黑龙江省最大的师范大学，艺术教育有特色"
+  },
+  {
+    "id": "qfnu",
+    "name": "曲阜师范大学",
+    "province": "山东",
+    "city": "曲阜",
+    "type": "师范",
+    "tags": [],
+    "region": "华东",
+    "ranking": 248,
+    "studentCount": 33000,
+    "employmentRate": 90,
+    "maleRatio": 38,
+    "topMajors": [
+      "数学与应用数学",
+      "汉语言文学",
+      "教育学",
+      "物理学",
+      "英语"
+    ],
+    "features": [
+      "数学学科实力突出",
+      "考研氛围浓厚"
+    ],
+    "website": "https://www.qfnu.edu.cn",
+    "desc": "学风严谨考研率高，数学学科在省属高校中领先"
+  },
+  {
+    "id": "jhu",
+    "name": "江汉大学",
+    "province": "湖北",
+    "city": "武汉",
+    "type": "综合",
+    "tags": [],
+    "region": "华中",
+    "ranking": 330,
+    "studentCount": 20000,
+    "employmentRate": 90,
+    "maleRatio": 48,
+    "topMajors": [
+      "临床医学",
+      "化学工程",
+      "机械工程",
+      "教育学",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "武汉市属综合大学",
+      "医学和化工有特色"
+    ],
+    "website": "https://www.jhun.edu.cn",
+    "desc": "武汉市属综合大学，医学和化工类有特色"
+  },
+  {
+    "id": "dlu",
+    "name": "大连大学",
+    "province": "辽宁",
+    "city": "大连",
+    "type": "综合",
+    "tags": [],
+    "region": "东北",
+    "ranking": 310,
+    "studentCount": 18000,
+    "employmentRate": 90,
+    "maleRatio": 46,
+    "topMajors": [
+      "临床医学",
+      "机械工程",
+      "日语",
+      "护理学",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "大连城市就业优势",
+      "医学和日语有特色"
+    ],
+    "website": "https://www.dlu.edu.cn",
+    "desc": "大连市属综合大学，医学和日语专业有特色"
+  },
+  {
+    "id": "syu",
+    "name": "沈阳大学",
+    "province": "辽宁",
+    "city": "沈阳",
+    "type": "综合",
+    "tags": [],
+    "region": "东北",
+    "ranking": 345,
+    "studentCount": 19000,
+    "employmentRate": 89,
+    "maleRatio": 48,
+    "topMajors": [
+      "机械工程",
+      "自动化",
+      "环境工程",
+      "计算机科学与技术",
+      "会计学"
+    ],
+    "features": [
+      "沈阳市属综合大学",
+      "工科和管理类有特色"
+    ],
+    "website": "https://www.syu.edu.cn",
+    "desc": "沈阳市属综合大学，工科和管理学有一定特色"
+  },
+  {
+    "id": "wzu",
+    "name": "温州大学",
+    "province": "浙江",
+    "city": "温州",
+    "type": "综合",
+    "tags": [],
+    "region": "华东",
+    "ranking": 285,
+    "studentCount": 20000,
+    "employmentRate": 93,
+    "maleRatio": 45,
+    "topMajors": [
+      "化学",
+      "数学",
+      "计算机科学与技术",
+      "机械工程",
+      "国际经济与贸易"
+    ],
+    "features": [
+      "温州商业文化氛围",
+      "创业教育有特色"
+    ],
+    "website": "https://www.wzu.edu.cn",
+    "desc": "浙江省属综合大学，创业教育和化学学科有特色"
+  },
+  {
+    "id": "usx",
+    "name": "绍兴文理学院",
+    "province": "浙江",
+    "city": "绍兴",
+    "type": "综合",
+    "tags": [],
+    "region": "华东",
+    "ranking": 360,
+    "studentCount": 16000,
+    "employmentRate": 92,
+    "maleRatio": 42,
+    "topMajors": [
+      "汉语言文学",
+      "纺织工程",
+      "教育学",
+      "化学",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "鲁迅故乡人文底蕴",
+      "纺织工程有特色"
+    ],
+    "website": "https://www.usx.edu.cn",
+    "desc": "地处鲁迅故乡绍兴，人文底蕴深厚，纺织工程有特色"
+  },
+  {
+    "id": "lcu",
+    "name": "聊城大学",
+    "province": "山东",
+    "city": "聊城",
+    "type": "综合",
+    "tags": [],
+    "region": "华东",
+    "ranking": 320,
+    "studentCount": 32000,
+    "employmentRate": 90,
+    "maleRatio": 46,
+    "topMajors": [
+      "化学",
+      "教育学",
+      "汉语言文学",
+      "计算机科学与技术",
+      "机械工程"
+    ],
+    "features": [
+      "考研率在山东省属高校中突出",
+      "化学学科有实力"
+    ],
+    "website": "https://www.lcu.edu.cn",
+    "desc": "学风扎实考研率高，化学学科在省属高校中有一定优势"
+  },
+  {
+    "id": "cqwu",
+    "name": "重庆文理学院",
+    "province": "重庆",
+    "city": "永川",
+    "type": "综合",
+    "tags": [],
+    "region": "西南",
+    "ranking": 380,
+    "studentCount": 21000,
+    "employmentRate": 90,
+    "maleRatio": 42,
+    "topMajors": [
+      "材料科学与工程",
+      "园林",
+      "计算机科学与技术",
+      "机器人工程",
+      "学前教育"
+    ],
+    "features": [
+      "新材料和智能制造有特色",
+      "应用型本科转型示范"
+    ],
+    "website": "https://www.cqwu.edu.cn",
+    "desc": "重庆市属应用型本科院校，新材料和智能制造方向有特色"
+  },
+  {
+    "id": "huel",
+    "name": "河南财经政法大学",
+    "province": "河南",
+    "city": "郑州",
+    "type": "财经",
+    "tags": [],
+    "region": "华中",
+    "ranking": 290,
+    "studentCount": 30000,
+    "employmentRate": 91,
+    "maleRatio": 40,
+    "topMajors": [
+      "会计学",
+      "金融学",
+      "法学",
+      "工商管理",
+      "经济学"
+    ],
+    "features": [
+      "河南省财经类龙头",
+      "法学和会计实力较强"
+    ],
+    "website": "https://www.huel.edu.cn",
+    "desc": "河南省最好的财经政法类大学，会计和法学专业受认可"
+  },
+  {
+    "id": "hutb",
+    "name": "湖南工商大学",
+    "province": "湖南",
+    "city": "长沙",
+    "type": "财经",
+    "tags": [],
+    "region": "华中",
+    "ranking": 300,
+    "studentCount": 22000,
+    "employmentRate": 91,
+    "maleRatio": 42,
+    "topMajors": [
+      "会计学",
+      "金融学",
+      "工商管理",
+      "国际经济与贸易",
+      "计算机科学与技术"
+    ],
+    "features": [
+      "湖南省属财经特色大学",
+      "商科就业面广"
+    ],
+    "website": "https://www.hutb.edu.cn",
+    "desc": "湖南省属财经特色大学，商科和管理类就业面广"
+  },
+  {
+    "id": "ctbu",
+    "name": "重庆工商大学",
+    "province": "重庆",
+    "city": "重庆",
+    "type": "财经",
+    "tags": [],
+    "region": "西南",
+    "ranking": 260,
+    "studentCount": 30000,
+    "employmentRate": 91,
+    "maleRatio": 42,
+    "topMajors": [
+      "会计学",
+      "金融学",
+      "工商管理",
+      "经济学",
+      "统计学"
+    ],
+    "features": [
+      "重庆市属财经特色大学",
+      "经管类就业率高"
+    ],
+    "website": "https://www.ctbu.edu.cn",
+    "desc": "重庆市属财经大学，经管类专业在西南地区有影响力"
+  },
+  {
+    "id": "hrbcu",
+    "name": "哈尔滨商业大学",
+    "province": "黑龙江",
+    "city": "哈尔滨",
+    "type": "财经",
+    "tags": [],
+    "region": "东北",
+    "ranking": 310,
+    "studentCount": 25000,
+    "employmentRate": 89,
+    "maleRatio": 40,
+    "topMajors": [
+      "会计学",
+      "金融学",
+      "食品科学与工程",
+      "药学",
+      "工商管理"
+    ],
+    "features": [
+      "东北财经商科重要院校",
+      "食品和药学有特色"
+    ],
+    "website": "https://www.hrbcu.edu.cn",
+    "desc": "东北地区重要的商科院校，食品和药学也有特色"
+  },
+  {
+    "id": "gxmu",
+    "name": "广西医科大学",
+    "province": "广西",
+    "city": "南宁",
+    "type": "医药",
+    "tags": [],
+    "region": "华南",
+    "ranking": 260,
+    "studentCount": 20000,
+    "employmentRate": 93,
+    "maleRatio": 38,
+    "topMajors": [
+      "临床医学",
+      "口腔医学",
+      "预防医学",
+      "药学",
+      "护理学"
+    ],
+    "features": [
+      "广西医学教育龙头",
+      "临床和口腔医学实力强"
+    ],
+    "website": "https://www.gxmu.edu.cn",
+    "desc": "广西最好的医科大学，临床和口腔医学在区内领先"
+  },
+  {
+    "id": "gmc",
+    "name": "贵州医科大学",
+    "province": "贵州",
+    "city": "贵阳",
+    "type": "医药",
+    "tags": [],
+    "region": "西南",
+    "ranking": 285,
+    "studentCount": 22000,
+    "employmentRate": 92,
+    "maleRatio": 38,
+    "topMajors": [
+      "临床医学",
+      "药学",
+      "预防医学",
+      "医学检验技术",
+      "护理学"
+    ],
+    "features": [
+      "贵州省医学教育龙头",
+      "地方医疗人才培养主力"
+    ],
+    "website": "https://www.gmc.edu.cn",
+    "desc": "贵州省最好的医科大学，临床和药学专业有实力"
+  },
+  {
+    "id": "xxmu",
+    "name": "新乡医学院",
+    "province": "河南",
+    "city": "新乡",
+    "type": "医药",
+    "tags": [],
+    "region": "华中",
+    "ranking": 340,
+    "studentCount": 18000,
+    "employmentRate": 92,
+    "maleRatio": 38,
+    "topMajors": [
+      "临床医学",
+      "护理学",
+      "药学",
+      "医学检验技术",
+      "口腔医学"
+    ],
+    "features": [
+      "河南省属医学院校",
+      "临床医学专业认可度高"
+    ],
+    "website": "https://www.xxmu.edu.cn",
+    "desc": "河南省重要的医学人才培养基地，临床医学专业受认可"
   }
 ]
