@@ -1160,6 +1160,11 @@
             <span>985优先</span>
           </label>
           <label class="toggle">
+            <input type="checkbox" id="prefer211">
+            <span class="toggle-box"></span>
+            <span>含211院校</span>
+          </label>
+          <label class="toggle">
             <input type="checkbox" id="preferJob">
             <span class="toggle-box"></span>
             <span>就业优先</span>
@@ -2010,6 +2015,7 @@
       var cat = getSmartCategory(examType);
       var score = parseInt(document.getElementById('smartScore').value) || 0;
       var prefer985 = document.getElementById('prefer985').checked;
+      var prefer211 = document.getElementById('prefer211').checked;
       var preferJob = document.getElementById('preferJob').checked;
 
       if (!prov || !cat || !score) {
@@ -2034,6 +2040,7 @@
         var diff = score - schoolScore;
         var priority = 0;
         if (prefer985 && (school.tags || []).indexOf('985') >= 0) priority += 10;
+        if (prefer211 && (school.tags || []).indexOf('211') >= 0) priority += 5;
         if (preferJob) priority += (school.employmentRate || 90) / 10;
         if (preferredRegions.length > 0 && school.region && preferredRegions.indexOf(school.region) >= 0) priority += 15;
         
