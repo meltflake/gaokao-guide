@@ -2262,7 +2262,7 @@
 
       var reach = results.filter(function(r) { return r.diff >= -20 && r.diff < 0; }).slice(0, 10);
       var match = results.filter(function(r) { return r.diff >= 0 && r.diff < 20; }).slice(0, 10);
-      var safe = results.filter(function(r) { return r.diff >= 20; }).slice(0, 10);
+      var safe = results.filter(function(r) { return r.diff >= 20 && r.diff <= 60; }).slice(0, 10);
 
       // Separate schools with NO compatible majors
       var limited = [];
