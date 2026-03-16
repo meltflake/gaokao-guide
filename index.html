@@ -1615,6 +1615,18 @@
   </div>
 
   <!-- Volunteer table image modal -->
+  <!-- 通用分享图片弹窗 -->
+  <div class="vol-image-modal" id="shareImageModal">
+    <div class="vol-image-modal-inner" style="max-width:400px;">
+      <img id="shareImagePreview" style="width:100%;border-radius:8px;display:block;" alt="分享图片">
+      <p style="text-align:center;color:#999;font-size:12px;margin:12px 0 4px;">长按图片 → 保存到相册</p>
+      <div class="actions">
+        <button class="btn" onclick="shareOrDownload()">💾 保存 / 分享</button>
+        <button class="btn btn-outline" onclick="document.getElementById('shareImageModal').classList.remove('show')">关闭</button>
+      </div>
+    </div>
+  </div>
+
   <div class="vol-image-modal" id="volImageModal">
     <div class="vol-image-modal-inner">
       <h3 style="margin-bottom:16px;">📸 我的高考志愿表</h3>
@@ -3169,15 +3181,11 @@
       ctx.fillText('高考GPS · ' + dateStr, pad, fy + 28);
       ctx.fillText('1yong.com/gaokao-guide', pad, fy + 42);
 
-      // Show & download
-      canvas.style.display = 'block';
-      canvas.style.maxWidth = '100%';
-      canvas.style.margin = '16px auto';
-      canvas.style.borderRadius = '12px';
-      var link = document.createElement('a');
-      link.download = '高考GPS_' + provName + '_' + d.score + '.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+      // Show in modal for long-press save
+      var dataUrl = canvas.toDataURL('image/png');
+      window._shareImageData = { dataUrl: dataUrl, filename: '高考GPS_' + provName + '_' + d.score + '.png' };
+      document.getElementById('shareImagePreview').src = dataUrl;
+      document.getElementById('shareImageModal').classList.add('show');
     }
 
     // Generate volunteer table image
@@ -3287,8 +3295,35 @@
       var today = new Date();
       ctx.fillText('高考GPS · 1yong.com/gaokao-guide · ' + today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0'), W - 24, fy);
 
-      // Show modal
-      document.getElementById('volImageModal').classList.add('show');
+      // Show in share modal
+      var dataUrl = canvas.toDataURL('image/png');
+      window._shareImageData = { dataUrl: dataUrl, filename: '高考志愿表.png' };
+      document.getElementById('shareImagePreview').src = dataUrl;
+      document.getElementById('shareImageModal').classList.add('show');
+    }
+
+    function shareOrDownload() {
+      var sd = window._shareImageData;
+      if (!sd) return;
+      // Try Web Share API (mobile)
+      if (navigator.share && navigator.canShare) {
+        fetch(sd.dataUrl).then(function(r) { return r.blob(); }).then(function(blob) {
+          var file = new File([blob], sd.filename, { type: 'image/png' });
+          if (navigator.canShare({ files: [file] })) {
+            navigator.share({ files: [file], title: '高考GPS选校报告' }).catch(function() {});
+          } else {
+            fallbackDownload(sd);
+          }
+        }).catch(function() { fallbackDownload(sd); });
+      } else {
+        fallbackDownload(sd);
+      }
+    }
+    function fallbackDownload(sd) {
+      var link = document.createElement('a');
+      link.download = sd.filename;
+      link.href = sd.dataUrl;
+      link.click();
     }
 
     function downloadVolImage() {
