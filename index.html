@@ -1619,9 +1619,9 @@
   <div class="vol-image-modal" id="shareImageModal">
     <div class="vol-image-modal-inner" style="max-width:400px;">
       <img id="shareImagePreview" style="width:100%;border-radius:8px;display:block;" alt="分享图片">
-      <p style="text-align:center;color:#999;font-size:12px;margin:12px 0 4px;">长按图片 → 保存到相册</p>
+      <p style="text-align:center;color:#999;font-size:12px;margin:12px 0 4px;">长按图片保存到相册</p>
       <div class="actions">
-        <button class="btn" onclick="shareOrDownload()">💾 保存 / 分享</button>
+        <button class="btn" onclick="saveToAlbum()">💾 保存到相册</button>
         <button class="btn btn-outline" onclick="document.getElementById('shareImageModal').classList.remove('show')">关闭</button>
       </div>
     </div>
@@ -3302,24 +3302,9 @@
       document.getElementById('shareImageModal').classList.add('show');
     }
 
-    function shareOrDownload() {
+    function saveToAlbum() {
       var sd = window._shareImageData;
       if (!sd) return;
-      // Try Web Share API (mobile)
-      if (navigator.share && navigator.canShare) {
-        fetch(sd.dataUrl).then(function(r) { return r.blob(); }).then(function(blob) {
-          var file = new File([blob], sd.filename, { type: 'image/png' });
-          if (navigator.canShare({ files: [file] })) {
-            navigator.share({ files: [file], title: '高考GPS选校报告' }).catch(function() {});
-          } else {
-            fallbackDownload(sd);
-          }
-        }).catch(function() { fallbackDownload(sd); });
-      } else {
-        fallbackDownload(sd);
-      }
-    }
-    function fallbackDownload(sd) {
       var link = document.createElement('a');
       link.download = sd.filename;
       link.href = sd.dataUrl;
@@ -3327,15 +3312,11 @@
     }
 
     function downloadVolImage() {
-      var canvas = document.getElementById('volTableCanvas');
-      var link = document.createElement('a');
-      link.download = '高考志愿表.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+      saveToAlbum();
     }
 
     function closeVolImageModal() {
-      document.getElementById('volImageModal').classList.remove('show');
+      document.getElementById('shareImageModal').classList.remove('show');
     }
 
     // ============ Compare Feature ============
