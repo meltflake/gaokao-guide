@@ -768,6 +768,7 @@
     .risk-stable { background: #fef3c7; color: #d97706; }
     .risk-risky { background: #ffedd5; color: #ea580c; }
     .risk-reach { background: #fee2e2; color: #dc2626; }
+    .risk-danger { background: #f3f4f6; color: #6b7280; }
     .vol-remove {
       background: none;
       border: none;
@@ -1284,10 +1285,12 @@
           </div>
           <div class="form-group" style="margin-bottom:0">
             <label>你的分数</label>
-            <input type="number" id="volScore" placeholder="请输入分数" min="0" max="750" oninput="updateVolunteerRisks()">
+            <input type="number" id="volScore" placeholder="请输入分数" min="0" max="750" oninput="validateVolScore();updateVolunteerRisks()">
+            <div id="volScoreHint" style="color:#e53935;font-size:12px;margin-top:4px;display:none"></div>
           </div>
         </div>
         <p style="font-size:13px;color:var(--text-light);" id="volSlotInfo"></p>
+        <button class="btn" onclick="autoFillVolunteer()" style="margin-top:12px;">🤖 一键智能填报</button>
       </div>
       <div id="volunteerList" style="margin-top:20px;max-width:800px;"></div>
       <div class="vol-actions" style="max-width:800px;">
@@ -2774,15 +2777,16 @@
       var prov = document.getElementById('volProvince').value;
       var cat = document.getElementById('volCategory').value;
       var userScore = parseInt(document.getElementById('volScore').value) || 0;
-      if (!schoolId || !prov || !cat || !userScore) return { label: '--', cls: '', cutoff: null };
+      if (!schoolId || !prov || !cat || !userScore) return { label: '--', cls: '', cutoff: null, diff: null, year: '' };
       var sd = getSchoolScore(schoolId, prov, cat);
-      if (!sd) return { label: '无数据', cls: '', cutoff: null };
+      if (!sd) return { label: '无数据', cls: '', cutoff: null, diff: null, year: '' };
       var cutoff = sd.score;
       var diff = userScore - cutoff;
-      if (diff >= 20) return { label: '🟢 安全', cls: 'risk-safe2', cutoff: cutoff };
-      if (diff >= 0) return { label: '🟡 稳妥', cls: 'risk-stable', cutoff: cutoff };
-      if (diff >= -10) return { label: '🟠 有风险', cls: 'risk-risky', cutoff: cutoff };
-      return { label: '🔴 冲刺', cls: 'risk-reach', cutoff: cutoff };
+      if (diff >= 20) return { label: '🟢 安全', cls: 'risk-safe2', cutoff: cutoff, diff: diff, year: sd.year };
+      if (diff >= 10) return { label: '🟡 稳妥', cls: 'risk-stable', cutoff: cutoff, diff: diff, year: sd.year };
+      if (diff >= 0) return { label: '🟠 可冲', cls: 'risk-risky', cutoff: cutoff, diff: diff, year: sd.year };
+      if (diff >= -15) return { label: '🔴 冲刺', cls: 'risk-reach', cutoff: cutoff, diff: diff, year: sd.year };
+      return { label: '⚫ 极难', cls: 'risk-danger', cutoff: cutoff, diff: diff, year: sd.year };
     }
 
     function renderVolSlots() {
@@ -2804,10 +2808,14 @@
           }).join('');
           html += '<div class="vol-slot-header"><span class="vol-slot-school">' + school.name + '</span>' + tags + '</div>';
           html += '<div class="vol-slot-meta">';
-          if (risk.cutoff) html += '2024录取线：' + risk.cutoff + '分';
+          if (risk.cutoff) html += (risk.year||'') + '录取线：' + risk.cutoff + '分';
           html += '</div>';
           html += '</div>';
-          html += '<span class="risk-pill ' + risk.cls + '">' + risk.label + '</span>';
+          var diffText = '';
+          if (risk.diff !== undefined && risk.diff !== null) {
+            diffText = ' ' + (risk.diff >= 0 ? '+' : '') + risk.diff + '分';
+          }
+          html += '<span class="risk-pill ' + risk.cls + '">' + risk.label + diffText + '</span>';
           html += '<button class="vol-remove" onclick="removeVolSlot(' + i + ')" title="移除">×</button>';
         } else {
           html += '<div class="vol-search-wrap">';
@@ -2869,9 +2877,90 @@
       renderVolSlots();
     }
 
+    function autoFillVolunteer() {
+      var prov = document.getElementById('volProvince').value;
+      var cat = document.getElementById('volCategory').value;
+      var userScore = parseInt(document.getElementById('volScore').value) || 0;
+      if (!prov || !cat || !userScore) {
+        alert('请先选择省份、科类并输入分数');
+        return;
+      }
+      var maxS = getMaxScore(prov);
+      if (userScore > maxS) {
+        alert('该省份满分为' + maxS + '分，请检查分数');
+        return;
+      }
+
+      // Collect all schools with score data
+      var candidates = [];
+      schools.forEach(function(school) {
+        var sd = getSchoolScore(school.id, prov, cat);
+        if (!sd) return;
+        candidates.push({ school: school, cutoff: sd.score, diff: userScore - sd.score });
+      });
+
+      // Sort by diff ascending (hardest first)
+      candidates.sort(function(a, b) { return a.diff - b.diff; });
+
+      // Strategy: 冲(reach) 30%, 稳(stable) 40%, 保(safe) 30%
+      var total = Math.min(volSlotCount, candidates.length);
+      var reachCount = Math.max(1, Math.round(total * 0.3));
+      var safeCount = Math.max(1, Math.round(total * 0.3));
+      var stableCount = total - reachCount - safeCount;
+
+      // 冲: diff between -15 and +5
+      var reach = candidates.filter(function(c) { return c.diff >= -15 && c.diff < 5; });
+      // 稳: diff between 5 and 20
+      var stable = candidates.filter(function(c) { return c.diff >= 5 && c.diff < 20; });
+      // 保: diff >= 20
+      var safe = candidates.filter(function(c) { return c.diff >= 20; });
+
+      var picks = [];
+      // Pick reach schools (from closest to user score)
+      reach.sort(function(a, b) { return a.diff - b.diff; });
+      for (var i = 0; i < reachCount && i < reach.length; i++) picks.push(reach[i]);
+      // Pick stable
+      for (var i = 0; i < stableCount && i < stable.length; i++) picks.push(stable[i]);
+      // Pick safe
+      for (var i = 0; i < safeCount && i < safe.length; i++) picks.push(safe[i]);
+
+      if (picks.length === 0) {
+        alert('未找到匹配的院校，请调整分数或省份');
+        return;
+      }
+
+      // Sort final picks: reach first, then stable, then safe
+      picks.sort(function(a, b) { return a.diff - b.diff; });
+
+      // Fill slots
+      volSlots = new Array(volSlotCount).fill(null);
+      for (var i = 0; i < picks.length && i < volSlotCount; i++) {
+        volSlots[i] = { schoolId: picks[i].school.id, school: picks[i].school };
+      }
+      renderVolSlots();
+    }
+
     function clearAllVolunteers() {
       volSlots = new Array(volSlotCount).fill(null);
       renderVolSlots();
+    }
+
+    function validateVolScore() {
+      var prov = document.getElementById('volProvince').value;
+      var scoreEl = document.getElementById('volScore');
+      var hint = document.getElementById('volScoreHint');
+      var score = parseInt(scoreEl.value);
+      var max = getMaxScore(prov);
+      if (prov) {
+        scoreEl.max = max;
+        scoreEl.placeholder = '请输入分数 (0-' + max + ')';
+      }
+      if (score && score > max) {
+        hint.textContent = '⚠️ 该省份满分为' + max + '分，请检查输入';
+        hint.style.display = 'block';
+      } else {
+        hint.style.display = 'none';
+      }
     }
 
     function updateVolunteerRisks() {
