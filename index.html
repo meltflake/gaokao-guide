@@ -1666,6 +1666,7 @@
     </button>
   </div>
 
+  <script src="qr.min.js"></script>
   <script>
     // Global data
     var schools = [];
@@ -3062,91 +3063,126 @@
       }
     });
 
+    // Generate QR code canvas
+    function generateQRCanvas(text, size) {
+      var qr = qrcode(0, 'M');
+      qr.addData(text);
+      qr.make();
+      var modules = qr.getModuleCount();
+      var cellSize = Math.floor(size / modules);
+      var c = document.createElement('canvas');
+      c.width = cellSize * modules;
+      c.height = cellSize * modules;
+      var cx = c.getContext('2d');
+      for (var r = 0; r < modules; r++) {
+        for (var col = 0; col < modules; col++) {
+          cx.fillStyle = qr.isDark(r, col) ? '#ffffff' : 'rgba(0,0,0,0)';
+          cx.fillRect(col * cellSize, r * cellSize, cellSize, cellSize);
+        }
+      }
+      return c;
+    }
+
     // Generate smart match share image
     function generateMatchImage() {
       var d = window._matchData;
       if (!d) { alert('请先进行匹配'); return; }
       var all = [];
-      d.reach.forEach(function(r) { all.push({s:r, type:'🔴 冲刺'}); });
-      d.match.forEach(function(r) { all.push({s:r, type:'🎯 稳妥'}); });
-      d.safe.forEach(function(r) { all.push({s:r, type:'✅ 保底'}); });
+      // Take 2 reach, 2 match, 2 safe max = 6 schools
+      d.reach.slice(0, 2).forEach(function(r) { all.push({s:r, type:'冲刺'}); });
+      d.match.slice(0, 2).forEach(function(r) { all.push({s:r, type:'稳妥'}); });
+      d.safe.slice(0, 2).forEach(function(r) { all.push({s:r, type:'保底'}); });
       if (all.length === 0) return;
-      // Limit to top 12
-      all = all.slice(0, 12);
 
       var canvas = document.getElementById('matchCanvas');
-      var W = 600, rowH = 48, headerH = 120, footerH = 70, pad = 24;
-      var H = headerH + all.length * rowH + footerH + 40;
+      var W = 540, rowH = 44, headerH = 90, footerH = 80, pad = 20;
+      var H = headerH + all.length * rowH + footerH;
       canvas.width = W * 2; canvas.height = H * 2;
-      canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
       var ctx = canvas.getContext('2d');
       ctx.scale(2, 2);
 
       // BG gradient
       var grad = ctx.createLinearGradient(0, 0, 0, H);
-      grad.addColorStop(0, '#1a1a2e'); grad.addColorStop(1, '#16213e');
+      grad.addColorStop(0, '#0f172a'); grad.addColorStop(1, '#1e293b');
       ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
 
       // Header
-      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 24px sans-serif'; ctx.textAlign = 'center';
-      ctx.fillText('🎯 高考GPS 智能选校报告', W/2, 40);
-      ctx.font = '14px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.7)';
       var provName = provinces[d.prov] ? provinces[d.prov].name : d.prov;
-      ctx.fillText(provName + ' · ' + d.cat + ' · ' + d.score + '分', W/2, 65);
-      ctx.fillText('冲刺 ' + d.reach.length + '所 · 稳妥 ' + d.match.length + '所 · 保底 ' + d.safe.length + '所', W/2, 88);
-
-      // Divider
-      ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.beginPath();
-      ctx.moveTo(pad, 100); ctx.lineTo(W-pad, 100); ctx.stroke();
+      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 20px sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText('高考GPS 选校报告', pad, 32);
+      ctx.font = '13px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.fillText(provName + ' · ' + d.cat + ' · ' + d.score + '分', pad, 52);
+      // Summary pills
+      ctx.font = 'bold 12px sans-serif';
+      var sx = pad;
+      [['冲刺 '+d.reach.length, '#f87171'], ['稳妥 '+d.match.length, '#fbbf24'], ['保底 '+d.safe.length, '#4ade80']].forEach(function(p) {
+        ctx.fillStyle = p[1]; ctx.globalAlpha = 0.2;
+        ctx.fillRect(sx, 60, ctx.measureText(p[0]).width + 16, 20);
+        ctx.globalAlpha = 1; ctx.fillStyle = p[1];
+        // Rounded rect approx
+        ctx.fillText(p[0], sx + 8, 74);
+        sx += ctx.measureText(p[0]).width + 24;
+      });
 
       // Rows
       var startY = headerH;
       all.forEach(function(item, i) {
         var y = startY + i * rowH;
-        // Row bg
-        ctx.fillStyle = i % 2 === 0 ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.02)';
+        ctx.fillStyle = i % 2 === 0 ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.01)';
         ctx.fillRect(pad, y, W - pad*2, rowH);
 
-        var cy = y + rowH/2 + 5;
-        // Type badge
-        ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
-        ctx.fillStyle = item.type.indexOf('冲刺') >= 0 ? '#f87171' : (item.type.indexOf('稳妥') >= 0 ? '#fbbf24' : '#4ade80');
-        ctx.fillText(item.type, pad + 8, cy);
+        var cy = y + rowH/2 + 4;
+        // Type dot
+        var dotColor = item.type === '冲刺' ? '#f87171' : (item.type === '稳妥' ? '#fbbf24' : '#4ade80');
+        ctx.fillStyle = dotColor;
+        ctx.beginPath(); ctx.arc(pad + 12, cy - 3, 4, 0, Math.PI * 2); ctx.fill();
 
         // School name
-        ctx.font = 'bold 14px sans-serif'; ctx.fillStyle = '#ffffff';
-        ctx.fillText(item.s.school.name, pad + 80, cy);
+        ctx.font = 'bold 14px sans-serif'; ctx.fillStyle = '#ffffff'; ctx.textAlign = 'left';
+        ctx.fillText(item.s.school.name, pad + 24, cy);
 
-        // Tags
-        var tagStr = (item.s.school.tags || []).slice(0,2).join(' ');
-        ctx.font = '11px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.5)';
-        ctx.fillText(tagStr, pad + 280, cy);
+        // Tags compact
+        var tags = (item.s.school.tags || []).filter(function(t){ return t==='985'||t==='211'||t==='C9'; }).slice(0,1).join('');
+        if (tags) {
+          ctx.font = '10px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.35)';
+          ctx.fillText(tags, pad + 24 + ctx.measureText(item.s.school.name).width + 8, cy);
+        }
 
         // Diff
-        var diffText = (item.s.diff >= 0 ? '+' : '') + item.s.diff + '分';
-        ctx.font = 'bold 14px sans-serif'; ctx.textAlign = 'right';
+        var diffText = (item.s.diff >= 0 ? '+' : '') + item.s.diff;
+        ctx.font = 'bold 15px sans-serif'; ctx.textAlign = 'right';
         ctx.fillStyle = item.s.diff >= 0 ? '#4ade80' : '#f87171';
-        ctx.fillText(diffText, W - pad - 10, cy);
+        ctx.fillText(diffText, W - pad - 8, cy);
         ctx.textAlign = 'left';
       });
 
-      // Footer
-      var fy = startY + all.length * rowH + 24;
-      ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.font = '12px sans-serif'; ctx.textAlign = 'center';
-      var today = new Date();
-      var dateStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
-      ctx.fillText('高考GPS · 1yong.com/gaokao-guide · ' + dateStr, W/2, fy);
-      ctx.fillText('扫码使用 · 免费智能填报', W/2, fy + 18);
+      // Footer with QR
+      var fy = startY + all.length * rowH + 16;
+      ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.beginPath();
+      ctx.moveTo(pad, fy - 4); ctx.lineTo(W - pad, fy - 4); ctx.stroke();
 
-      // Show as downloadable
+      // QR code
+      var qrCanvas = generateQRCanvas('https://1yong.com/gaokao-guide/', 48);
+      ctx.drawImage(qrCanvas, W - pad - 48, fy, 48, 48);
+
+      // Text next to QR
+      ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText('扫码免费使用', W - pad - 48 - 90, fy + 20);
+      ctx.fillText('1yong.com/gaokao-guide', W - pad - 48 - 90, fy + 36);
+
+      // Date on left
+      ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.font = '11px sans-serif';
+      var today = new Date();
+      var dateStr = today.getFullYear() + '.' + String(today.getMonth()+1).padStart(2,'0') + '.' + String(today.getDate()).padStart(2,'0');
+      ctx.fillText('高考GPS · ' + dateStr, pad, fy + 28);
+
+      // Show & download
       canvas.style.display = 'block';
       canvas.style.maxWidth = '100%';
       canvas.style.margin = '16px auto';
       canvas.style.borderRadius = '12px';
-
-      // Auto download
       var link = document.createElement('a');
-      link.download = '高考GPS选校报告_' + provName + '_' + d.score + '分.png';
+      link.download = '高考GPS_' + provName + '_' + d.score + '.png';
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
