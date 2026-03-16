@@ -1186,6 +1186,10 @@
       </div>
       </div><!-- end smart-layout -->
       <div id="smartResults" style="margin-top: 32px;"></div>
+      <div id="smartShareBtn" style="display:none;text-align:center;margin-top:16px;">
+        <button class="btn" onclick="generateMatchImage()">📸 生成分享图片</button>
+      </div>
+      <canvas id="matchCanvas" style="display:none;"></canvas>
     </section>
 
     <!-- 院校库 -->
@@ -2086,6 +2090,9 @@
       }
 
       document.getElementById('smartResults').innerHTML = html;
+      document.getElementById('smartShareBtn').style.display = (reach.length || match.length || safe.length) ? 'block' : 'none';
+      // Store for image generation
+      window._matchData = { reach: reach, match: match, safe: safe, prov: prov, cat: cat, score: score };
     }
 
     function renderResultCard(r, type) {
@@ -3055,6 +3062,95 @@
       }
     });
 
+    // Generate smart match share image
+    function generateMatchImage() {
+      var d = window._matchData;
+      if (!d) { alert('请先进行匹配'); return; }
+      var all = [];
+      d.reach.forEach(function(r) { all.push({s:r, type:'🔴 冲刺'}); });
+      d.match.forEach(function(r) { all.push({s:r, type:'🎯 稳妥'}); });
+      d.safe.forEach(function(r) { all.push({s:r, type:'✅ 保底'}); });
+      if (all.length === 0) return;
+      // Limit to top 12
+      all = all.slice(0, 12);
+
+      var canvas = document.getElementById('matchCanvas');
+      var W = 600, rowH = 48, headerH = 120, footerH = 70, pad = 24;
+      var H = headerH + all.length * rowH + footerH + 40;
+      canvas.width = W * 2; canvas.height = H * 2;
+      canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+      var ctx = canvas.getContext('2d');
+      ctx.scale(2, 2);
+
+      // BG gradient
+      var grad = ctx.createLinearGradient(0, 0, 0, H);
+      grad.addColorStop(0, '#1a1a2e'); grad.addColorStop(1, '#16213e');
+      ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+
+      // Header
+      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 24px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('🎯 高考GPS 智能选校报告', W/2, 40);
+      ctx.font = '14px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      var provName = provinces[d.prov] ? provinces[d.prov].name : d.prov;
+      ctx.fillText(provName + ' · ' + d.cat + ' · ' + d.score + '分', W/2, 65);
+      ctx.fillText('冲刺 ' + d.reach.length + '所 · 稳妥 ' + d.match.length + '所 · 保底 ' + d.safe.length + '所', W/2, 88);
+
+      // Divider
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.beginPath();
+      ctx.moveTo(pad, 100); ctx.lineTo(W-pad, 100); ctx.stroke();
+
+      // Rows
+      var startY = headerH;
+      all.forEach(function(item, i) {
+        var y = startY + i * rowH;
+        // Row bg
+        ctx.fillStyle = i % 2 === 0 ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.02)';
+        ctx.fillRect(pad, y, W - pad*2, rowH);
+
+        var cy = y + rowH/2 + 5;
+        // Type badge
+        ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
+        ctx.fillStyle = item.type.indexOf('冲刺') >= 0 ? '#f87171' : (item.type.indexOf('稳妥') >= 0 ? '#fbbf24' : '#4ade80');
+        ctx.fillText(item.type, pad + 8, cy);
+
+        // School name
+        ctx.font = 'bold 14px sans-serif'; ctx.fillStyle = '#ffffff';
+        ctx.fillText(item.s.school.name, pad + 80, cy);
+
+        // Tags
+        var tagStr = (item.s.school.tags || []).slice(0,2).join(' ');
+        ctx.font = '11px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.fillText(tagStr, pad + 280, cy);
+
+        // Diff
+        var diffText = (item.s.diff >= 0 ? '+' : '') + item.s.diff + '分';
+        ctx.font = 'bold 14px sans-serif'; ctx.textAlign = 'right';
+        ctx.fillStyle = item.s.diff >= 0 ? '#4ade80' : '#f87171';
+        ctx.fillText(diffText, W - pad - 10, cy);
+        ctx.textAlign = 'left';
+      });
+
+      // Footer
+      var fy = startY + all.length * rowH + 24;
+      ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.font = '12px sans-serif'; ctx.textAlign = 'center';
+      var today = new Date();
+      var dateStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+      ctx.fillText('高考GPS · 1yong.com/gaokao-guide · ' + dateStr, W/2, fy);
+      ctx.fillText('扫码使用 · 免费智能填报', W/2, fy + 18);
+
+      // Show as downloadable
+      canvas.style.display = 'block';
+      canvas.style.maxWidth = '100%';
+      canvas.style.margin = '16px auto';
+      canvas.style.borderRadius = '12px';
+
+      // Auto download
+      var link = document.createElement('a');
+      link.download = '高考GPS选校报告_' + provName + '_' + d.score + '分.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
     // Generate volunteer table image
     function generateVolunteerImage() {
       var prov = document.getElementById('volProvince').value;
@@ -3142,11 +3238,13 @@
         ctx.fillStyle = '#94a3b8';
         ctx.fillText('—', 20 + cols[2].x + cols[2].w / 2, textY);
 
-        // Risk
+        // Risk with diff
         var risk = getRiskInfo(slot.schoolId);
-        var riskColors = { 'risk-safe2': '#16a34a', 'risk-stable': '#d97706', 'risk-risky': '#ea580c', 'risk-reach': '#dc2626' };
+        var riskColors = { 'risk-safe2': '#16a34a', 'risk-stable': '#d97706', 'risk-risky': '#ea580c', 'risk-reach': '#dc2626', 'risk-danger': '#6b7280' };
         ctx.fillStyle = riskColors[risk.cls] || '#64748b';
-        ctx.fillText(risk.label, 20 + cols[3].x + cols[3].w / 2, textY);
+        var riskText = risk.label;
+        if (risk.diff !== undefined && risk.diff !== null) riskText += ' ' + (risk.diff >= 0 ? '+' : '') + risk.diff;
+        ctx.fillText(riskText, 20 + cols[3].x + cols[3].w / 2, textY);
       });
 
       // Footer
@@ -3158,7 +3256,7 @@
       ctx.fillText('省份：' + provName + '　科类：' + (cat || '未选择') + '　分数：' + (userScore || '未填写'), 24, fy);
       ctx.textAlign = 'right';
       var today = new Date();
-      ctx.fillText('高考GPS 🎯  ' + today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0'), W - 24, fy);
+      ctx.fillText('高考GPS · 1yong.com/gaokao-guide · ' + today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0'), W - 24, fy);
 
       // Show modal
       document.getElementById('volImageModal').classList.add('show');
