@@ -6767,5 +6767,1201 @@
     ],
     "website": "https://www.xxmu.edu.cn",
     "desc": "河南省重要的医学人才培养基地，临床医学专业受认可"
+  },
+  {
+    "id": "cbmc",
+    "name": "川北医学院",
+    "province": "四川",
+    "city": "南充",
+    "type": "医药",
+    "tags": [],
+    "region": "西南",
+    "ranking": 420,
+    "studentCount": 16000,
+    "employmentRate": 91,
+    "maleRatio": 38,
+    "topMajors": [
+      "临床医学",
+      "医学影像学",
+      "麻醉学",
+      "口腔医学",
+      "预防医学"
+    ],
+    "features": [
+      "四川省属医学院校",
+      "医学影像学为国家特色专业"
+    ],
+    "website": "https://www.nsmc.edu.cn",
+    "desc": "四川省重要的医学人才培养基地，医学影像学专业全国知名"
+  },
+  {
+    "id": "bzmc",
+    "name": "滨州医学院",
+    "province": "山东",
+    "city": "滨州",
+    "type": "医药",
+    "tags": [],
+    "region": "华东",
+    "ranking": 420,
+    "studentCount": 15000,
+    "employmentRate": 90,
+    "maleRatio": 37,
+    "topMajors": [
+      "临床医学",
+      "护理学",
+      "口腔医学",
+      "药学",
+      "康复治疗学"
+    ],
+    "features": [
+      "残疾人高等教育先驱",
+      "临床医学专业扎实"
+    ],
+    "website": "https://www.bzmc.edu.cn",
+    "desc": "山东省属医学院校，残疾人高等教育的开创者"
+  },
+  {
+    "id": "wfmc",
+    "name": "潍坊医学院",
+    "province": "山东",
+    "city": "潍坊",
+    "type": "医药",
+    "tags": [],
+    "region": "华东",
+    "ranking": 400,
+    "studentCount": 16000,
+    "employmentRate": 91,
+    "maleRatio": 36,
+    "topMajors": [
+      "临床医学",
+      "公共卫生与预防医学",
+      "麻醉学",
+      "口腔医学",
+      "药学"
+    ],
+    "features": [
+      "公共卫生学科有优势",
+      "山东省应用型本科"
+    ],
+    "website": "https://www.wfmc.edu.cn",
+    "desc": "山东省属医学院校，公共卫生与预防医学学科实力突出"
+  },
+  {
+    "id": "glmc",
+    "name": "桂林医学院",
+    "province": "广西",
+    "city": "桂林",
+    "type": "医药",
+    "tags": [],
+    "region": "华南",
+    "ranking": 450,
+    "studentCount": 15000,
+    "employmentRate": 90,
+    "maleRatio": 37,
+    "topMajors": [
+      "临床医学",
+      "药学",
+      "生物技术",
+      "护理学",
+      "口腔医学"
+    ],
+    "features": [
+      "广西医学人才培养重镇",
+      "药学专业有特色"
+    ],
+    "website": "https://www.glmc.edu.cn",
+    "desc": "广西重要的医学院校，药学与临床医学为优势专业"
+  },
+  {
+    "id": "ymcn",
+    "name": "右江民族医学院",
+    "province": "广西",
+    "city": "百色",
+    "type": "医药",
+    "tags": [],
+    "region": "华南",
+    "ranking": 500,
+    "studentCount": 12000,
+    "employmentRate": 89,
+    "maleRatio": 38,
+    "topMajors": [
+      "临床医学",
+      "口腔医学",
+      "护理学",
+      "医学检验技术",
+      "药学"
+    ],
+    "features": [
+      "少数民族医学教育特色",
+      "服务基层医疗"
+    ],
+    "website": "https://www.ymcn.edu.cn",
+    "desc": "广西少数民族地区重要的医学人才培养基地"
+  },
+  {
+    "id": "jzmu",
+    "name": "锦州医科大学",
+    "province": "辽宁",
+    "city": "锦州",
+    "type": "医药",
+    "tags": [],
+    "region": "东北",
+    "ranking": 400,
+    "studentCount": 16000,
+    "employmentRate": 90,
+    "maleRatio": 38,
+    "topMajors": [
+      "临床医学",
+      "口腔医学",
+      "药学",
+      "医学检验技术",
+      "麻醉学"
+    ],
+    "features": [
+      "辽宁省属医科大学",
+      "畜牧兽医学科有传统"
+    ],
+    "website": "https://www.jzmu.edu.cn",
+    "desc": "辽宁省属医科大学，临床医学与口腔医学专业认可度高"
+  },
+  {
+    "id": "cdmc",
+    "name": "承德医学院",
+    "province": "河北",
+    "city": "承德",
+    "type": "医药",
+    "tags": [],
+    "region": "华北",
+    "ranking": 450,
+    "studentCount": 13000,
+    "employmentRate": 90,
+    "maleRatio": 37,
+    "topMajors": [
+      "临床医学",
+      "护理学",
+      "中医学",
+      "药学",
+      "医学检验技术"
+    ],
+    "features": [
+      "河北省属医学院校",
+      "中医学有传统优势"
+    ],
+    "website": "https://www.cdmc.edu.cn",
+    "desc": "河北省属医学院校，为基层培养大量医学人才"
+  },
+  {
+    "id": "hbmu",
+    "name": "湖北医药学院",
+    "province": "湖北",
+    "city": "十堰",
+    "type": "医药",
+    "tags": [],
+    "region": "华中",
+    "ranking": 450,
+    "studentCount": 15000,
+    "employmentRate": 90,
+    "maleRatio": 38,
+    "topMajors": [
+      "临床医学",
+      "麻醉学",
+      "护理学",
+      "口腔医学",
+      "药学"
+    ],
+    "features": [
+      "麻醉学为国家特色专业",
+      "附属太和医院实力强"
+    ],
+    "website": "https://www.hbmu.edu.cn",
+    "desc": "湖北省属医学院校，麻醉学专业全国有影响力"
+  },
+  {
+    "id": "bbmc",
+    "name": "蚌埠医科大学",
+    "province": "安徽",
+    "city": "蚌埠",
+    "type": "医药",
+    "tags": [],
+    "region": "华东",
+    "ranking": 380,
+    "studentCount": 17000,
+    "employmentRate": 91,
+    "maleRatio": 38,
+    "topMajors": [
+      "临床医学",
+      "医学检验技术",
+      "药学",
+      "护理学",
+      "口腔医学"
+    ],
+    "features": [
+      "安徽省属医科大学",
+      "医学检验全国领先"
+    ],
+    "website": "https://www.bbmu.edu.cn",
+    "desc": "安徽省重要的医学院校，医学检验技术专业全国知名"
+  },
+  {
+    "id": "gnmc",
+    "name": "赣南医科大学",
+    "province": "江西",
+    "city": "赣州",
+    "type": "医药",
+    "tags": [],
+    "region": "华东",
+    "ranking": 450,
+    "studentCount": 15000,
+    "employmentRate": 90,
+    "maleRatio": 37,
+    "topMajors": [
+      "临床医学",
+      "麻醉学",
+      "药学",
+      "护理学",
+      "预防医学"
+    ],
+    "features": [
+      "赣南地区唯一医学院校",
+      "麻醉学有特色"
+    ],
+    "website": "https://www.gnmu.edu.cn",
+    "desc": "江西省属医科大学，服务赣南老区医疗卫生事业"
+  },
+  {
+    "id": "cdmu",
+    "name": "成都医学院",
+    "province": "四川",
+    "city": "成都",
+    "type": "医药",
+    "tags": [],
+    "region": "西南",
+    "ranking": 430,
+    "studentCount": 14000,
+    "employmentRate": 91,
+    "maleRatio": 38,
+    "topMajors": [
+      "临床医学",
+      "药学",
+      "医学检验技术",
+      "预防医学",
+      "护理学"
+    ],
+    "features": [
+      "军队转隶地方院校",
+      "成都区位优势明显"
+    ],
+    "website": "https://www.cmc.edu.cn",
+    "desc": "四川省属医学院校，位于成都，区位和就业优势突出"
+  },
+  {
+    "id": "gszy",
+    "name": "甘肃中医药大学",
+    "province": "甘肃",
+    "city": "兰州",
+    "type": "医药",
+    "tags": [],
+    "region": "西北",
+    "ranking": 460,
+    "studentCount": 14000,
+    "employmentRate": 89,
+    "maleRatio": 40,
+    "topMajors": [
+      "中医学",
+      "中药学",
+      "针灸推拿学",
+      "中西医临床医学",
+      "药学"
+    ],
+    "features": [
+      "西北中医药教育重镇",
+      "敦煌医学研究特色"
+    ],
+    "website": "https://www.gszy.edu.cn",
+    "desc": "甘肃省中医药高等教育基地，敦煌医学研究独具特色"
+  },
+  {
+    "id": "sliac",
+    "name": "上海立信会计金融学院",
+    "province": "上海",
+    "city": "上海",
+    "type": "财经",
+    "tags": [],
+    "region": "华东",
+    "ranking": 350,
+    "studentCount": 20000,
+    "employmentRate": 93,
+    "maleRatio": 40,
+    "topMajors": [
+      "会计学",
+      "金融学",
+      "审计学",
+      "财务管理",
+      "税收学"
+    ],
+    "features": [
+      "上海金融行业就业好",
+      "会计审计专业历史悠久"
+    ],
+    "website": "https://www.lixin.edu.cn",
+    "desc": "上海市属财经院校，会计金融专业就业率高，地处上海优势明显"
+  },
+  {
+    "id": "gduf",
+    "name": "广东金融学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "财经",
+    "tags": [],
+    "region": "华南",
+    "ranking": 380,
+    "studentCount": 22000,
+    "employmentRate": 92,
+    "maleRatio": 42,
+    "topMajors": [
+      "金融学",
+      "保险学",
+      "会计学",
+      "信用管理",
+      "投资学"
+    ],
+    "features": [
+      "华南金融人才摇篮",
+      "金融学为省级重点学科"
+    ],
+    "website": "https://www.gduf.edu.cn",
+    "desc": "广东省属金融类院校，被誉为华南金融人才的摇篮"
+  },
+  {
+    "id": "hbue",
+    "name": "湖北经济学院",
+    "province": "湖北",
+    "city": "武汉",
+    "type": "财经",
+    "tags": [],
+    "region": "华中",
+    "ranking": 400,
+    "studentCount": 20000,
+    "employmentRate": 91,
+    "maleRatio": 42,
+    "topMajors": [
+      "金融学",
+      "会计学",
+      "财务管理",
+      "国际经济与贸易",
+      "市场营销"
+    ],
+    "features": [
+      "湖北省属财经院校",
+      "金融会计专业受认可"
+    ],
+    "website": "https://www.hbue.edu.cn",
+    "desc": "湖北省属财经院校，金融学和会计学专业就业质量好"
+  },
+  {
+    "id": "hbfu",
+    "name": "河北金融学院",
+    "province": "河北",
+    "city": "保定",
+    "type": "财经",
+    "tags": [],
+    "region": "华北",
+    "ranking": 450,
+    "studentCount": 15000,
+    "employmentRate": 90,
+    "maleRatio": 43,
+    "topMajors": [
+      "金融学",
+      "保险学",
+      "会计学",
+      "投资学",
+      "经济学"
+    ],
+    "features": [
+      "央行系统创办院校",
+      "金融学传统深厚"
+    ],
+    "website": "https://www.hbfu.edu.cn",
+    "desc": "河北省属金融院校，由央行系统创办，金融类专业有传统优势"
+  },
+  {
+    "id": "sdupsl",
+    "name": "山东政法学院",
+    "province": "山东",
+    "city": "济南",
+    "type": "政法",
+    "tags": [],
+    "region": "华东",
+    "ranking": 450,
+    "studentCount": 14000,
+    "employmentRate": 90,
+    "maleRatio": 45,
+    "topMajors": [
+      "法学",
+      "知识产权",
+      "监狱学",
+      "经济学",
+      "行政管理"
+    ],
+    "features": [
+      "山东省唯一政法类院校",
+      "法学专业通过率高"
+    ],
+    "website": "https://www.sdupsl.edu.cn",
+    "desc": "山东省唯一政法类本科院校，法学专业司法考试通过率高"
+  },
+  {
+    "id": "gsupl",
+    "name": "甘肃政法大学",
+    "province": "甘肃",
+    "city": "兰州",
+    "type": "政法",
+    "tags": [],
+    "region": "西北",
+    "ranking": 420,
+    "studentCount": 15000,
+    "employmentRate": 90,
+    "maleRatio": 48,
+    "topMajors": [
+      "法学",
+      "侦查学",
+      "知识产权",
+      "社会工作",
+      "公安学"
+    ],
+    "features": [
+      "西北政法教育重镇",
+      "公安司法类专业齐全"
+    ],
+    "website": "https://www.gsli.edu.cn",
+    "desc": "甘肃省属政法大学，西北地区重要的法治人才培养基地"
+  },
+  {
+    "id": "sit",
+    "name": "上海应用技术大学",
+    "province": "上海",
+    "city": "上海",
+    "type": "理工",
+    "tags": [],
+    "region": "华东",
+    "ranking": 370,
+    "studentCount": 18000,
+    "employmentRate": 93,
+    "maleRatio": 55,
+    "topMajors": [
+      "化学工程与工艺",
+      "材料科学与工程",
+      "机械工程",
+      "香料香精技术",
+      "环境工程"
+    ],
+    "features": [
+      "香料香精专业全国独有",
+      "上海就业优势"
+    ],
+    "website": "https://www.sit.edu.cn",
+    "desc": "上海市属应用型大学，香料香精技术专业全国独一无二"
+  },
+  {
+    "id": "sues",
+    "name": "上海工程技术大学",
+    "province": "上海",
+    "city": "上海",
+    "type": "理工",
+    "tags": [],
+    "region": "华东",
+    "ranking": 360,
+    "studentCount": 22000,
+    "employmentRate": 93,
+    "maleRatio": 55,
+    "topMajors": [
+      "车辆工程",
+      "飞行技术",
+      "服装设计与工程",
+      "机械工程",
+      "交通运输"
+    ],
+    "features": [
+      "产学合作办学模式",
+      "飞行技术专业知名"
+    ],
+    "website": "https://www.sues.edu.cn",
+    "desc": "上海市属工程技术大学，飞行技术和车辆工程专业特色鲜明"
+  },
+  {
+    "id": "bipt",
+    "name": "北京石油化工学院",
+    "province": "北京",
+    "city": "北京",
+    "type": "理工",
+    "tags": [],
+    "region": "华北",
+    "ranking": 420,
+    "studentCount": 15000,
+    "employmentRate": 92,
+    "maleRatio": 58,
+    "topMajors": [
+      "化学工程与工艺",
+      "机械工程",
+      "自动化",
+      "环境工程",
+      "材料科学"
+    ],
+    "features": [
+      "石油化工行业背景深厚",
+      "北京区位就业好"
+    ],
+    "website": "https://www.bipt.edu.cn",
+    "desc": "北京市属理工院校，石油化工类专业行业认可度高"
+  },
+  {
+    "id": "sjzu",
+    "name": "沈阳建筑大学",
+    "province": "辽宁",
+    "city": "沈阳",
+    "type": "理工",
+    "tags": [],
+    "region": "东北",
+    "ranking": 340,
+    "studentCount": 18000,
+    "employmentRate": 91,
+    "maleRatio": 60,
+    "topMajors": [
+      "建筑学",
+      "土木工程",
+      "城乡规划",
+      "给排水工程",
+      "工程管理"
+    ],
+    "features": [
+      "建筑土木类东北领先",
+      "建筑学历史悠久"
+    ],
+    "website": "https://www.sjzu.edu.cn",
+    "desc": "以建筑土木为特色的辽宁省属大学，建筑学专业东北地区领先"
+  },
+  {
+    "id": "xatu",
+    "name": "西安工业大学",
+    "province": "陕西",
+    "city": "西安",
+    "type": "理工",
+    "tags": [],
+    "region": "西北",
+    "ranking": 380,
+    "studentCount": 20000,
+    "employmentRate": 91,
+    "maleRatio": 62,
+    "topMajors": [
+      "光电信息科学与工程",
+      "机械设计制造",
+      "测控技术",
+      "材料成型",
+      "计算机科学"
+    ],
+    "features": [
+      "兵器工业背景",
+      "光学工程学科突出"
+    ],
+    "website": "https://www.xatu.edu.cn",
+    "desc": "陕西省属理工大学，兵器行业背景深厚，光学工程学科实力强"
+  },
+  {
+    "id": "zzti",
+    "name": "中原工学院",
+    "province": "河南",
+    "city": "郑州",
+    "type": "理工",
+    "tags": [],
+    "region": "华中",
+    "ranking": 450,
+    "studentCount": 20000,
+    "employmentRate": 90,
+    "maleRatio": 55,
+    "topMajors": [
+      "纺织工程",
+      "建筑环境与能源",
+      "机械设计制造",
+      "电气工程",
+      "计算机科学"
+    ],
+    "features": [
+      "纺织服装学科有传统",
+      "河南省骨干大学"
+    ],
+    "website": "https://www.zut.edu.cn",
+    "desc": "河南省属理工院校，纺织工程等学科有鲜明行业特色"
+  },
+  {
+    "id": "hnut",
+    "name": "湖南工业大学",
+    "province": "湖南",
+    "city": "株洲",
+    "type": "理工",
+    "tags": [],
+    "region": "华中",
+    "ranking": 400,
+    "studentCount": 22000,
+    "employmentRate": 90,
+    "maleRatio": 58,
+    "topMajors": [
+      "包装工程",
+      "机械工程",
+      "自动化",
+      "计算机科学",
+      "土木工程"
+    ],
+    "features": [
+      "包装教育全国第一",
+      "中国包装总公司共建"
+    ],
+    "website": "https://www.hut.edu.cn",
+    "desc": "湖南省属理工大学，包装工程专业全国排名第一"
+  },
+  {
+    "id": "xmut",
+    "name": "厦门理工学院",
+    "province": "福建",
+    "city": "厦门",
+    "type": "理工",
+    "tags": [],
+    "region": "华东",
+    "ranking": 400,
+    "studentCount": 20000,
+    "employmentRate": 92,
+    "maleRatio": 55,
+    "topMajors": [
+      "机械工程",
+      "光电信息",
+      "车辆工程",
+      "计算机科学",
+      "土木工程"
+    ],
+    "features": [
+      "厦门区位优势突出",
+      "应用型本科示范"
+    ],
+    "website": "https://www.xmut.edu.cn",
+    "desc": "福建省属理工院校，地处厦门，就业区位优势明显"
+  },
+  {
+    "id": "cdu",
+    "name": "成都大学",
+    "province": "四川",
+    "city": "成都",
+    "type": "综合",
+    "tags": [],
+    "region": "西南",
+    "ranking": 380,
+    "studentCount": 24000,
+    "employmentRate": 91,
+    "maleRatio": 48,
+    "topMajors": [
+      "动画",
+      "计算机科学",
+      "食品科学与工程",
+      "机械设计制造",
+      "旅游管理"
+    ],
+    "features": [
+      "成都市属综合大学",
+      "动画专业全国知名"
+    ],
+    "website": "https://www.cdu.edu.cn",
+    "desc": "成都市属综合性大学，动画专业国内知名，成都生活就业优势大"
+  },
+  {
+    "id": "cqust",
+    "name": "重庆科技大学",
+    "province": "重庆",
+    "city": "重庆",
+    "type": "理工",
+    "tags": [],
+    "region": "西南",
+    "ranking": 400,
+    "studentCount": 20000,
+    "employmentRate": 91,
+    "maleRatio": 58,
+    "topMajors": [
+      "石油工程",
+      "冶金工程",
+      "安全工程",
+      "机械工程",
+      "化学工程"
+    ],
+    "features": [
+      "石油冶金行业背景",
+      "安全工程学科突出"
+    ],
+    "website": "https://www.cqust.edu.cn",
+    "desc": "重庆市属理工大学，石油冶金行业背景深厚，安全工程全国有名"
+  },
+  {
+    "id": "wtu",
+    "name": "武汉纺织大学",
+    "province": "湖北",
+    "city": "武汉",
+    "type": "理工",
+    "tags": [],
+    "region": "华中",
+    "ranking": 380,
+    "studentCount": 20000,
+    "employmentRate": 91,
+    "maleRatio": 42,
+    "topMajors": [
+      "纺织工程",
+      "服装设计与工程",
+      "机械工程",
+      "材料科学",
+      "环境工程"
+    ],
+    "features": [
+      "纺织服装学科全国前列",
+      "服装设计艺术特色"
+    ],
+    "website": "https://www.wtu.edu.cn",
+    "desc": "湖北省属大学，纺织工程和服装设计专业全国领先"
+  },
+  {
+    "id": "zjweu",
+    "name": "浙江水利水电学院",
+    "province": "浙江",
+    "city": "杭州",
+    "type": "理工",
+    "tags": [],
+    "region": "华东",
+    "ranking": 480,
+    "studentCount": 13000,
+    "employmentRate": 92,
+    "maleRatio": 60,
+    "topMajors": [
+      "水利水电工程",
+      "土木工程",
+      "电气工程",
+      "测绘工程",
+      "港口航道"
+    ],
+    "features": [
+      "浙江省唯一水利类院校",
+      "水利工程特色鲜明"
+    ],
+    "website": "https://www.zjweu.edu.cn",
+    "desc": "浙江省唯一水利类本科院校，水利水电工程专业特色突出"
+  },
+  {
+    "id": "ccut",
+    "name": "长春工业大学",
+    "province": "吉林",
+    "city": "长春",
+    "type": "理工",
+    "tags": [],
+    "region": "东北",
+    "ranking": 380,
+    "studentCount": 20000,
+    "employmentRate": 90,
+    "maleRatio": 58,
+    "topMajors": [
+      "化学工程与工艺",
+      "机械工程",
+      "自动化",
+      "材料科学",
+      "计算机科学"
+    ],
+    "features": [
+      "吉林省属重点大学",
+      "化工机械学科有优势"
+    ],
+    "website": "https://www.ccut.edu.cn",
+    "desc": "吉林省属重点理工大学，化学工程和机械工程专业实力强"
+  },
+  {
+    "id": "glut",
+    "name": "桂林理工大学",
+    "province": "广西",
+    "city": "桂林",
+    "type": "理工",
+    "tags": [],
+    "region": "华南",
+    "ranking": 380,
+    "studentCount": 22000,
+    "employmentRate": 90,
+    "maleRatio": 58,
+    "topMajors": [
+      "地质工程",
+      "材料科学与工程",
+      "土木工程",
+      "环境工程",
+      "化学工程"
+    ],
+    "features": [
+      "地质材料学科突出",
+      "广西重点大学"
+    ],
+    "website": "https://www.glut.edu.cn",
+    "desc": "广西省属理工大学，地质工程和材料科学学科实力突出"
+  },
+  {
+    "id": "tjnu",
+    "name": "天津师范大学",
+    "province": "天津",
+    "city": "天津",
+    "type": "师范",
+    "tags": [],
+    "region": "华北",
+    "ranking": 310,
+    "studentCount": 25000,
+    "employmentRate": 92,
+    "maleRatio": 35,
+    "topMajors": [
+      "汉语言文学",
+      "心理学",
+      "教育学",
+      "数学",
+      "英语"
+    ],
+    "features": [
+      "天津基础教育师资摇篮",
+      "心理学学科实力强"
+    ],
+    "website": "https://www.tjnu.edu.cn",
+    "desc": "天津市属重点师范大学，心理学学科全国有影响力"
+  },
+  {
+    "id": "synu",
+    "name": "沈阳师范大学",
+    "province": "辽宁",
+    "city": "沈阳",
+    "type": "师范",
+    "tags": [],
+    "region": "东北",
+    "ranking": 380,
+    "studentCount": 22000,
+    "employmentRate": 90,
+    "maleRatio": 35,
+    "topMajors": [
+      "教育学",
+      "汉语言文学",
+      "学前教育",
+      "英语",
+      "数学"
+    ],
+    "features": [
+      "辽宁省基础教育师资基地",
+      "学前教育专业有特色"
+    ],
+    "website": "https://www.synu.edu.cn",
+    "desc": "辽宁省属师范大学，为辽宁基础教育培养大量优秀师资"
+  },
+  {
+    "id": "hebtu",
+    "name": "河北师范大学",
+    "province": "河北",
+    "city": "石家庄",
+    "type": "师范",
+    "tags": [],
+    "region": "华北",
+    "ranking": 320,
+    "studentCount": 25000,
+    "employmentRate": 91,
+    "maleRatio": 36,
+    "topMajors": [
+      "汉语言文学",
+      "数学",
+      "英语",
+      "历史学",
+      "化学"
+    ],
+    "features": [
+      "河北省属重点师范大学",
+      "师范类专业齐全"
+    ],
+    "website": "https://www.hebtu.edu.cn",
+    "desc": "河北省属重点师范大学，河北基础教育师资的主要来源"
+  },
+  {
+    "id": "sxnu",
+    "name": "山西师范大学",
+    "province": "山西",
+    "city": "太原",
+    "type": "师范",
+    "tags": [],
+    "region": "华北",
+    "ranking": 380,
+    "studentCount": 22000,
+    "employmentRate": 90,
+    "maleRatio": 37,
+    "topMajors": [
+      "汉语言文学",
+      "数学",
+      "物理学",
+      "历史学",
+      "教育学"
+    ],
+    "features": [
+      "山西省师范教育主力",
+      "戏剧影视学有特色"
+    ],
+    "website": "https://www.sxnu.edu.cn",
+    "desc": "山西省属师范大学，山西基础教育师资培养的重要基地"
+  },
+  {
+    "id": "imnu",
+    "name": "内蒙古师范大学",
+    "province": "内蒙古",
+    "city": "呼和浩特",
+    "type": "师范",
+    "tags": [],
+    "region": "华北",
+    "ranking": 400,
+    "studentCount": 23000,
+    "employmentRate": 89,
+    "maleRatio": 38,
+    "topMajors": [
+      "汉语言文学",
+      "蒙古语言文学",
+      "数学",
+      "教育学",
+      "美术学"
+    ],
+    "features": [
+      "蒙古语教育全国领先",
+      "民族师范教育特色"
+    ],
+    "website": "https://www.imnu.edu.cn",
+    "desc": "内蒙古自治区师范教育主力，蒙古语言文学专业全国领先"
+  },
+  {
+    "id": "gznu",
+    "name": "贵州师范大学",
+    "province": "贵州",
+    "city": "贵阳",
+    "type": "师范",
+    "tags": [],
+    "region": "西南",
+    "ranking": 380,
+    "studentCount": 24000,
+    "employmentRate": 90,
+    "maleRatio": 38,
+    "topMajors": [
+      "汉语言文学",
+      "数学",
+      "地理科学",
+      "教育学",
+      "英语"
+    ],
+    "features": [
+      "贵州省属重点师范大学",
+      "地理学学科有优势"
+    ],
+    "website": "https://www.gznu.edu.cn",
+    "desc": "贵州省属重点师范大学，为贵州基础教育培养大量人才"
+  },
+  {
+    "id": "ynni",
+    "name": "云南民族大学",
+    "province": "云南",
+    "city": "昆明",
+    "type": "民族",
+    "tags": [],
+    "region": "西南",
+    "ranking": 400,
+    "studentCount": 23000,
+    "employmentRate": 89,
+    "maleRatio": 42,
+    "topMajors": [
+      "民族学",
+      "社会学",
+      "东南亚语种",
+      "法学",
+      "中国少数民族语言文学"
+    ],
+    "features": [
+      "民族学学科全国知名",
+      "东南亚小语种有特色"
+    ],
+    "website": "https://www.ynni.edu.cn",
+    "desc": "云南省属民族类大学，民族学和东南亚语种专业特色鲜明"
+  },
+  {
+    "id": "xhu",
+    "name": "西华大学",
+    "province": "四川",
+    "city": "成都",
+    "type": "综合",
+    "tags": [],
+    "region": "西南",
+    "ranking": 380,
+    "studentCount": 24000,
+    "employmentRate": 91,
+    "maleRatio": 52,
+    "topMajors": [
+      "车辆工程",
+      "食品科学与工程",
+      "机械工程",
+      "能源与动力",
+      "计算机科学"
+    ],
+    "features": [
+      "四川省属综合大学",
+      "车辆工程专业有优势"
+    ],
+    "website": "https://www.xhu.edu.cn",
+    "desc": "四川省属综合性大学，车辆工程和食品科学专业有特色"
+  },
+  {
+    "id": "sanxiau",
+    "name": "重庆三峡学院",
+    "province": "重庆",
+    "city": "万州",
+    "type": "综合",
+    "tags": [],
+    "region": "西南",
+    "ranking": 500,
+    "studentCount": 18000,
+    "employmentRate": 89,
+    "maleRatio": 45,
+    "topMajors": [
+      "电子信息工程",
+      "汉语言文学",
+      "土木工程",
+      "计算机科学",
+      "食品科学"
+    ],
+    "features": [
+      "三峡库区唯一本科院校",
+      "服务库区经济发展"
+    ],
+    "website": "https://www.sanxiau.edu.cn",
+    "desc": "重庆市属综合院校，三峡库区唯一普通本科高校"
+  },
+  {
+    "id": "dlufl",
+    "name": "大连外国语大学",
+    "province": "辽宁",
+    "city": "大连",
+    "type": "语言",
+    "tags": [],
+    "region": "东北",
+    "ranking": 330,
+    "studentCount": 15000,
+    "employmentRate": 92,
+    "maleRatio": 28,
+    "topMajors": [
+      "日语",
+      "英语",
+      "韩语",
+      "俄语",
+      "翻译"
+    ],
+    "features": [
+      "日语专业全国顶尖",
+      "东北亚语言教育重镇"
+    ],
+    "website": "https://www.dlufl.edu.cn",
+    "desc": "辽宁省属外国语大学，日语专业全国顶尖，东北亚语言优势突出"
+  },
+  {
+    "id": "tjfsu",
+    "name": "天津外国语大学",
+    "province": "天津",
+    "city": "天津",
+    "type": "语言",
+    "tags": [],
+    "region": "华北",
+    "ranking": 330,
+    "studentCount": 14000,
+    "employmentRate": 92,
+    "maleRatio": 28,
+    "topMajors": [
+      "英语",
+      "日语",
+      "翻译",
+      "朝鲜语",
+      "法语"
+    ],
+    "features": [
+      "天津市属外国语大学",
+      "翻译专业有优势"
+    ],
+    "website": "https://www.tjfsu.edu.cn",
+    "desc": "天津市属外国语大学，外语翻译类专业就业面广"
+  },
+  {
+    "id": "xisu",
+    "name": "西安外国语大学",
+    "province": "陕西",
+    "city": "西安",
+    "type": "语言",
+    "tags": [],
+    "region": "西北",
+    "ranking": 320,
+    "studentCount": 18000,
+    "employmentRate": 92,
+    "maleRatio": 30,
+    "topMajors": [
+      "英语",
+      "翻译",
+      "法语",
+      "日语",
+      "西班牙语"
+    ],
+    "features": [
+      "西北地区唯一外语类大学",
+      "翻译专业全国有名"
+    ],
+    "website": "https://www.xisu.edu.cn",
+    "desc": "西北地区唯一外国语大学，翻译和小语种专业就业好"
+  },
+  {
+    "id": "nua",
+    "name": "南京艺术学院",
+    "province": "江苏",
+    "city": "南京",
+    "type": "艺术",
+    "tags": [],
+    "region": "华东",
+    "ranking": 300,
+    "studentCount": 12000,
+    "employmentRate": 90,
+    "maleRatio": 35,
+    "topMajors": [
+      "美术学",
+      "设计学",
+      "音乐学",
+      "舞蹈学",
+      "影视学"
+    ],
+    "features": [
+      "中国最早的艺术院校之一",
+      "综合艺术学科齐全"
+    ],
+    "website": "https://www.nua.edu.cn",
+    "desc": "中国历史最悠久的综合性艺术院校之一，美术设计音乐全面发展"
+  },
+  {
+    "id": "caa",
+    "name": "中国美术学院",
+    "province": "浙江",
+    "city": "杭州",
+    "type": "艺术",
+    "tags": [],
+    "region": "华东",
+    "ranking": 300,
+    "studentCount": 10000,
+    "employmentRate": 91,
+    "maleRatio": 38,
+    "topMajors": [
+      "美术学",
+      "设计学",
+      "建筑学",
+      "影视动画",
+      "中国画"
+    ],
+    "features": [
+      "中国顶尖美术学院",
+      "设计学全国领先"
+    ],
+    "website": "https://www.caa.edu.cn",
+    "desc": "中国顶尖美术学院，美术学和设计学全国领先"
   }
 ]
