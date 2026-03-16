@@ -2256,17 +2256,41 @@
 
       var femaleRatio = school.maleRatio != null ? (100 - school.maleRatio) : '--';
 
-      var html = '<p style="color:var(--text-light)">' + (school.province || '') + ' · ' + (school.city || '') + ' · ' + (school.type || '') + '</p>' +
+      // Quick score check for user
+      var userProv = document.getElementById('smartProvince').value || document.getElementById('volProvince').value || '';
+      var userScore = parseInt(document.getElementById('smartScore').value || document.getElementById('volScore').value) || 0;
+      var quickMatchHtml = '';
+      if (userProv && userScore) {
+        var examType = getExamType(userProv);
+        var smartCat = getSmartCategory(examType);
+        if (smartCat) {
+          var sd = getSchoolScore(id, userProv, smartCat);
+          if (sd) {
+            var diff = userScore - sd.score;
+            var matchLabel = diff >= 20 ? '🟢 安全' : (diff >= 10 ? '🟡 稳妥' : (diff >= 0 ? '🟠 可冲' : (diff >= -15 ? '🔴 冲刺' : '⚫ 极难')));
+            var diffStr = (diff >= 0 ? '+' : '') + diff;
+            quickMatchHtml = '<div style="background:linear-gradient(135deg,#f8fafc,#eef2f7);border-radius:12px;padding:16px;margin:16px 0;border:1px solid #e2e8f0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">' +
+              '<div><span style="font-size:13px;color:var(--text-light)">你的分数 vs ' + sd.year + '录取线（' + provinces[userProv].name + ' · ' + smartCat + '）</span>' +
+              '<div style="font-size:24px;font-weight:700;margin-top:4px;">' + userScore + ' vs ' + sd.score + '</div></div>' +
+              '<div style="text-align:right"><div style="font-size:20px;font-weight:700;' + (diff >= 0 ? 'color:#16a34a' : 'color:#dc2626') + '">' + diffStr + '分</div>' +
+              '<div style="font-size:14px;margin-top:2px;">' + matchLabel + '</div></div></div></div>';
+          }
+        }
+      }
+
+      var html = '<p style="color:var(--text-light);font-size:15px">' + (school.province || '') + ' · ' + (school.city || '') + ' · ' + (school.type || '') + '</p>' +
         '<div class="tags" style="margin:12px 0">' + tags + '</div>' +
-        '<p>' + (school.desc || '') + '</p>' +
-        '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:16px">' +
-        '<div class="card" style="text-align:center"><strong>排名</strong><br>#' + (school.ranking || '--') + '</div>' +
-        '<div class="card" style="text-align:center"><strong>就业率</strong><br>' + (school.employmentRate || '--') + '%</div>' +
-        '<div class="card" style="text-align:center"><strong>学生数</strong><br>' + formatNum(school.studentCount) + '</div>' +
-        '<div class="card" style="text-align:center"><strong>男女比</strong><br>' + (school.maleRatio || '--') + ':' + femaleRatio + '</div></div>' +
+        '<p style="line-height:1.7">' + (school.desc || '') + '</p>' +
+        quickMatchHtml +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:16px">' +
+        '<div class="card" style="text-align:center;padding:14px"><div style="font-size:11px;color:var(--text-light)">全国排名</div><div style="font-size:22px;font-weight:700;margin-top:4px">#' + (school.ranking || '--') + '</div></div>' +
+        '<div class="card" style="text-align:center;padding:14px"><div style="font-size:11px;color:var(--text-light)">就业率</div><div style="font-size:22px;font-weight:700;margin-top:4px;color:#16a34a">' + (school.employmentRate || '--') + '%</div></div>' +
+        '<div class="card" style="text-align:center;padding:14px"><div style="font-size:11px;color:var(--text-light)">在校生</div><div style="font-size:22px;font-weight:700;margin-top:4px">' + formatNum(school.studentCount) + '</div></div>' +
+        '<div class="card" style="text-align:center;padding:14px"><div style="font-size:11px;color:var(--text-light)">男女比</div><div style="font-size:22px;font-weight:700;margin-top:4px">' + (school.maleRatio || '--') + ':' + femaleRatio + '</div></div></div>' +
         majorsHtml +
-        '<h4 style="margin-top:20px">✨ 特色</h4><p>' + (school.features || []).join('、') + '</p>' +
-        (school.website ? '<p style="margin-top:16px"><a href="' + school.website + '" target="_blank" style="color:var(--primary)">🔗 学校官网</a></p>' : '') +
+        '<h4 style="margin-top:20px">✨ 学校特色</h4><div class="tags" style="margin-top:8px">' + (school.features || []).map(function(f) { return '<span class="tag">' + f + '</span>'; }).join('') + '</div>' +
+        (school.website ? '<p style="margin-top:16px"><a href="' + school.website + '" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:500">🔗 访问学校官网 →</a></p>' : '') +
         provSelectorHtml + scoreTableHtml + chartHtml;
 
       document.getElementById('modalContent').innerHTML = html;
@@ -2275,6 +2299,8 @@
       // Draw chart
       setTimeout(function() { drawDetailTrendChart(id, detailModalProvince); }, 50);
     }
+
+    function openSchoolDetail(id) { openSchoolModal(id); }
 
     function formatNum(n) {
       if (n == null) return '--';
