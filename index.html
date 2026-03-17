@@ -2565,24 +2565,22 @@
       // Get score categories (exclude 位次 fields)
       var allCats = Object.keys(schoolScores[years[0]] || {});
       var cats = allCats.filter(function(c) { return c.indexOf('位次') < 0; });
-      var hasRank = false;
-      years.forEach(function(y) { cats.forEach(function(c) { if (schoolScores[y] && schoolScores[y][c + '位次']) hasRank = true; }); });
+      var rankCats = cats.filter(function(c) {
+        return years.some(function(y) { return schoolScores[y] && schoolScores[y][c + '位次']; });
+      });
       var html = '<table class="detail-score-table"><tr><th>年份</th>';
       cats.forEach(function(c) { html += '<th>' + c + '</th>'; });
-      if (hasRank) html += '<th style="color:#e53935">省排名</th>';
+      rankCats.forEach(function(c) { html += '<th style="color:#e53935">' + c.replace('类','') + '排名</th>'; });
       html += '</tr>';
       years.forEach(function(y) {
         html += '<tr><td>' + y + '</td>';
-        var ranks = [];
         cats.forEach(function(c) {
           html += '<td>' + (schoolScores[y] && schoolScores[y][c] ? schoolScores[y][c] : '--') + '</td>';
-          var r = schoolScores[y] && schoolScores[y][c + '位次'];
-          if (r) ranks.push(r);
         });
-        if (hasRank) {
-          var best = ranks.length > 0 ? Math.min.apply(null, ranks) : null;
-          html += '<td style="color:#e53935;font-weight:700;font-size:15px">' + (best || '') + '</td>';
-        }
+        rankCats.forEach(function(c) {
+          var r = schoolScores[y] && schoolScores[y][c + '位次'];
+          html += '<td style="color:#e53935;font-weight:700;font-size:14px">' + (r || '') + '</td>';
+        });
         html += '</tr>';
       });
       html += '</table>';
@@ -2884,24 +2882,22 @@
       var years = Object.keys(ss).sort().reverse();
       var allCats = Object.keys(ss[years[0]] || {});
       var cats = allCats.filter(function(c) { return c.indexOf('位次') < 0; });
-      var hasRank = false;
-      years.forEach(function(y) { cats.forEach(function(c) { if (ss[y] && ss[y][c + '位次']) hasRank = true; }); });
+      var rankCats = cats.filter(function(c) {
+        return years.some(function(y) { return ss[y] && ss[y][c + '位次']; });
+      });
       var h = '<table style="width:100%;font-size:13px"><tr><th>年份</th>';
       cats.forEach(function(c) { h += '<th>' + c + '</th>'; });
-      if (hasRank) h += '<th style="color:#e53935">省排名</th>';
+      rankCats.forEach(function(c) { h += '<th style="color:#e53935">' + c.replace('类','') + '排名</th>'; });
       h += '</tr>';
       years.forEach(function(y) {
         h += '<tr><td>' + y + '</td>';
-        var ranks = [];
         cats.forEach(function(c) {
           h += '<td>' + (ss[y] && ss[y][c] ? ss[y][c] : '--') + '</td>';
-          var r = ss[y] && ss[y][c + '位次'];
-          if (r) ranks.push(r);
         });
-        if (hasRank) {
-          var best = ranks.length > 0 ? Math.min.apply(null, ranks) : null;
-          h += '<td style="color:#e53935;font-weight:700;font-size:15px">' + (best || '') + '</td>';
-        }
+        rankCats.forEach(function(c) {
+          var r = ss[y] && ss[y][c + '位次'];
+          h += '<td style="color:#e53935;font-weight:700;font-size:14px">' + (r || '') + '</td>';
+        });
         h += '</tr>';
       });
       h += '</table>';
