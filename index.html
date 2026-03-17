@@ -2562,14 +2562,21 @@
       var schoolScores = scores[schoolId] && scores[schoolId][provKey];
       if (!schoolScores) return '<p style="color:var(--text-light);font-size:14px;margin-top:8px;">暂无该省份分数数据</p>';
       var years = Object.keys(schoolScores).sort().reverse();
-      var cats = Object.keys(schoolScores[years[0]] || {});
+      // Get score categories (exclude 位次 fields)
+      var allCats = Object.keys(schoolScores[years[0]] || {});
+      var cats = allCats.filter(function(c) { return c.indexOf('位次') < 0; });
       var html = '<table class="detail-score-table"><tr><th>年份</th>';
       cats.forEach(function(c) { html += '<th>' + c + '</th>'; });
       html += '</tr>';
       years.forEach(function(y) {
         html += '<tr><td>' + y + '</td>';
         cats.forEach(function(c) {
-          html += '<td>' + (schoolScores[y] && schoolScores[y][c] ? schoolScores[y][c] : '--') + '</td>';
+          var score = schoolScores[y] && schoolScores[y][c] ? schoolScores[y][c] : '--';
+          var rankKey = c + '位次';
+          var rank = schoolScores[y] && schoolScores[y][rankKey];
+          var cell = score;
+          if (rank) cell += '<br><span style="font-size:11px;color:var(--text-light);">位次 ' + rank + '</span>';
+          html += '<td>' + cell + '</td>';
         });
         html += '</tr>';
       });
@@ -2870,13 +2877,21 @@
       var ss = scores[schoolId] && scores[schoolId][prov];
       if (!ss) { document.getElementById('scoreResultsSide').innerHTML = '<p style="color:var(--text-light);font-size:14px">暂无数据</p>'; return; }
       var years = Object.keys(ss).sort().reverse();
-      var cats = Object.keys(ss[years[0]] || {});
+      var allCats = Object.keys(ss[years[0]] || {});
+      var cats = allCats.filter(function(c) { return c.indexOf('位次') < 0; });
       var h = '<table style="width:100%;font-size:13px"><tr><th>年份</th>';
       cats.forEach(function(c) { h += '<th>' + c + '</th>'; });
       h += '</tr>';
       years.forEach(function(y) {
         h += '<tr><td>' + y + '</td>';
-        cats.forEach(function(c) { h += '<td>' + (ss[y] && ss[y][c] ? ss[y][c] : '--') + '</td>'; });
+        cats.forEach(function(c) {
+          var score = ss[y] && ss[y][c] ? ss[y][c] : '--';
+          var rankKey = c + '位次';
+          var rank = ss[y] && ss[y][rankKey];
+          var cell = score;
+          if (rank) cell += '<br><span style="font-size:11px;color:#999">位次' + rank + '</span>';
+          h += '<td>' + cell + '</td>';
+        });
         h += '</tr>';
       });
       h += '</table>';
