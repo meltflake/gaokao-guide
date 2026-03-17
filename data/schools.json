@@ -8264,5 +8264,414 @@
     ],
     "website": "https://www.gzhu.edu.cn",
     "desc": "广州市属综合性大学，学科门类齐全，工学与人文社科实力较强。"
+  },
+  {
+    "id": "gdei",
+    "name": "广东第二师范学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "师范",
+    "tags": [],
+    "region": "华南",
+    "ranking": 420,
+    "studentCount": 16000,
+    "employmentRate": 91,
+    "maleRatio": 35,
+    "topMajors": [
+      "学前教育",
+      "小学教育",
+      "英语",
+      "数学",
+      "计算机科学"
+    ],
+    "features": [
+      "师范特色",
+      "基础教育师资培养"
+    ],
+    "website": "https://www.gdei.edu.cn",
+    "desc": "广东省属师范院校，以培养基础教育师资为特色。"
+  },
+  {
+    "id": "zhku",
+    "name": "仲恺农业工程学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "农林",
+    "tags": [],
+    "region": "华南",
+    "ranking": 380,
+    "studentCount": 22000,
+    "employmentRate": 91,
+    "maleRatio": 48,
+    "topMajors": [
+      "食品科学",
+      "农学",
+      "园艺",
+      "生物工程",
+      "机械设计"
+    ],
+    "features": [
+      "农工结合",
+      "廖仲恺先生创办"
+    ],
+    "website": "https://www.zhku.edu.cn",
+    "desc": "广东省属农工结合院校，以农学和工学见长。"
+  },
+  {
+    "id": "gdupt",
+    "name": "广东石油化工学院",
+    "province": "广东",
+    "city": "茂名",
+    "type": "理工",
+    "tags": [],
+    "region": "华南",
+    "ranking": 450,
+    "studentCount": 20000,
+    "employmentRate": 90,
+    "maleRatio": 58,
+    "topMajors": [
+      "化学工程",
+      "石油工程",
+      "机械工程",
+      "环境工程",
+      "电气工程"
+    ],
+    "features": [
+      "石化特色",
+      "粤西地区"
+    ],
+    "website": "https://www.gdupt.edu.cn",
+    "desc": "广东省属理工院校，以石油化工类专业为特色。"
+  },
+  {
+    "id": "lingnan_normal",
+    "name": "岭南师范学院",
+    "province": "广东",
+    "city": "湛江",
+    "type": "师范",
+    "tags": [],
+    "region": "华南",
+    "ranking": 440,
+    "studentCount": 25000,
+    "employmentRate": 90,
+    "maleRatio": 38,
+    "topMajors": [
+      "教育学",
+      "汉语言文学",
+      "英语",
+      "数学",
+      "化学"
+    ],
+    "features": [
+      "师范特色",
+      "粤西师资摇篮"
+    ],
+    "website": "https://www.lingnan.edu.cn",
+    "desc": "粤西地区师范院校，师范教育底蕴深厚。"
+  },
+  {
+    "id": "zqu",
+    "name": "肇庆学院",
+    "province": "广东",
+    "city": "肇庆",
+    "type": "综合",
+    "tags": [],
+    "region": "华南",
+    "ranking": 460,
+    "studentCount": 24000,
+    "employmentRate": 89,
+    "maleRatio": 42,
+    "topMajors": [
+      "教育学",
+      "机械设计",
+      "环境工程",
+      "汉语言文学",
+      "旅游管理"
+    ],
+    "features": [
+      "应用型",
+      "肇庆市属"
+    ],
+    "website": "https://www.zqu.edu.cn",
+    "desc": "肇庆市属综合性应用型本科院校。"
+  },
+  {
+    "id": "wyu",
+    "name": "五邑大学",
+    "province": "广东",
+    "city": "江门",
+    "type": "综合",
+    "tags": [],
+    "region": "华南",
+    "ranking": 370,
+    "studentCount": 23000,
+    "employmentRate": 91,
+    "maleRatio": 50,
+    "topMajors": [
+      "纺织工程",
+      "交通工程",
+      "机械工程",
+      "土木工程",
+      "计算机"
+    ],
+    "features": [
+      "侨乡特色",
+      "江门市属"
+    ],
+    "website": "https://www.wyu.edu.cn",
+    "desc": "江门市属综合性大学，具有侨乡文化特色。"
+  },
+  {
+    "id": "baiyunu",
+    "name": "广东白云学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "综合",
+    "tags": [
+      "民办"
+    ],
+    "region": "华南",
+    "ranking": 600,
+    "studentCount": 30000,
+    "employmentRate": 88,
+    "maleRatio": 48,
+    "topMajors": [
+      "机械设计",
+      "计算机",
+      "工商管理",
+      "艺术设计",
+      "外语"
+    ],
+    "features": [
+      "民办本科",
+      "应用型"
+    ],
+    "website": "https://www.baiyunu.edu.cn",
+    "desc": "广东省老牌民办本科院校，应用型人才培养。"
+  },
+  {
+    "id": "gzmtu",
+    "name": "广州航海学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "理工",
+    "tags": [],
+    "region": "华南",
+    "ranking": 470,
+    "studentCount": 12000,
+    "employmentRate": 91,
+    "maleRatio": 65,
+    "topMajors": [
+      "航海技术",
+      "轮机工程",
+      "港口航道",
+      "交通运输",
+      "物流管理"
+    ],
+    "features": [
+      "航海特色",
+      "华南唯一航海本科"
+    ],
+    "website": "https://www.gzmtu.edu.cn",
+    "desc": "华南地区唯一独立建制的海事本科院校。"
+  },
+  {
+    "id": "gzcc",
+    "name": "广州商学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "财经",
+    "tags": [
+      "民办"
+    ],
+    "region": "华南",
+    "ranking": 650,
+    "studentCount": 20000,
+    "employmentRate": 87,
+    "maleRatio": 42,
+    "topMajors": [
+      "会计学",
+      "金融学",
+      "电子商务",
+      "国际经济与贸易",
+      "法学"
+    ],
+    "features": [
+      "民办本科",
+      "商科特色"
+    ],
+    "website": "https://www.gzcc.edu.cn",
+    "desc": "广东民办财经类本科院校，以商科见长。"
+  },
+  {
+    "id": "peizheng",
+    "name": "广东培正学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "综合",
+    "tags": [
+      "民办"
+    ],
+    "region": "华南",
+    "ranking": 680,
+    "studentCount": 15000,
+    "employmentRate": 86,
+    "maleRatio": 40,
+    "topMajors": [
+      "会计学",
+      "工商管理",
+      "英语",
+      "计算机",
+      "法学"
+    ],
+    "features": [
+      "民办本科",
+      "培正百年品牌"
+    ],
+    "website": "https://www.peizheng.edu.cn",
+    "desc": "广东民办综合性本科院校，具有百年培正教育品牌。"
+  },
+  {
+    "id": "uic",
+    "name": "北京师范大学-香港浸会大学联合国际学院",
+    "province": "广东",
+    "city": "珠海",
+    "type": "综合",
+    "tags": [
+      "中外合作"
+    ],
+    "region": "华南",
+    "ranking": 280,
+    "studentCount": 9000,
+    "employmentRate": 95,
+    "maleRatio": 40,
+    "topMajors": [
+      "传播学",
+      "统计学",
+      "计算机",
+      "金融数学",
+      "应用心理学"
+    ],
+    "features": [
+      "中外合作办学",
+      "全英文教学",
+      "博雅教育"
+    ],
+    "website": "https://www.uic.edu.cn",
+    "desc": "内地与香港首家合作大学，实行博雅教育和全英文教学。"
+  },
+  {
+    "id": "cuhksz",
+    "name": "香港中文大学(深圳)",
+    "province": "广东",
+    "city": "深圳",
+    "type": "综合",
+    "tags": [
+      "中外合作"
+    ],
+    "region": "华南",
+    "ranking": 50,
+    "studentCount": 10000,
+    "employmentRate": 97,
+    "maleRatio": 48,
+    "topMajors": [
+      "经济学",
+      "金融工程",
+      "计算机",
+      "数据科学",
+      "翻译"
+    ],
+    "features": [
+      "中外合作办学",
+      "港中大品牌",
+      "国际化"
+    ],
+    "website": "https://www.cuhk.edu.cn",
+    "desc": "香港中文大学在深圳设立的中外合作大学，教学质量和国际化程度高。"
+  },
+  {
+    "id": "gtiit",
+    "name": "广东以色列理工学院",
+    "province": "广东",
+    "city": "汕头",
+    "type": "理工",
+    "tags": [
+      "中外合作"
+    ],
+    "region": "华南",
+    "ranking": 250,
+    "studentCount": 2000,
+    "employmentRate": 95,
+    "maleRatio": 60,
+    "topMajors": [
+      "化学工程",
+      "生物技术",
+      "材料工程",
+      "机械工程",
+      "数学"
+    ],
+    "features": [
+      "中外合作办学",
+      "以色列理工品牌",
+      "小而精"
+    ],
+    "website": "https://www.gtiit.edu.cn",
+    "desc": "汕头大学与以色列理工学院合办，理工科精英教育。"
+  },
+  {
+    "id": "stu",
+    "name": "汕头大学",
+    "province": "广东",
+    "city": "汕头",
+    "type": "综合",
+    "tags": [
+      "省重点"
+    ],
+    "region": "华南",
+    "ranking": 180,
+    "studentCount": 28000,
+    "employmentRate": 93,
+    "maleRatio": 48,
+    "topMajors": [
+      "临床医学",
+      "法学",
+      "新闻学",
+      "土木工程",
+      "机械设计"
+    ],
+    "features": [
+      "李嘉诚基金会支持",
+      "省部共建"
+    ],
+    "website": "https://www.stu.edu.cn",
+    "desc": "广东省重点综合性大学，李嘉诚基金会长期支持。"
+  },
+  {
+    "id": "gwnc",
+    "name": "广东外语外贸大学南国商学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "财经",
+    "tags": [
+      "民办"
+    ],
+    "region": "华南",
+    "ranking": 700,
+    "studentCount": 12000,
+    "employmentRate": 86,
+    "maleRatio": 35,
+    "topMajors": [
+      "英语",
+      "商务英语",
+      "会计学",
+      "国际经贸",
+      "金融学"
+    ],
+    "features": [
+      "民办本科",
+      "外语+商科"
+    ],
+    "website": "https://www.gwng.edu.cn",
+    "desc": "广东外语外贸大学举办的民办本科院校，外语和商科特色。"
   }
 ]
