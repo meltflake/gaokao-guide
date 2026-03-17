@@ -2565,19 +2565,20 @@
       // Get score categories (exclude 位次 fields)
       var allCats = Object.keys(schoolScores[years[0]] || {});
       var cats = allCats.filter(function(c) { return c.indexOf('位次') < 0; });
+      var hasRank = allCats.some(function(c) { return c.indexOf('位次') >= 0; });
       var html = '<table class="detail-score-table"><tr><th>年份</th>';
       cats.forEach(function(c) { html += '<th>' + c + '</th>'; });
+      if (hasRank) html += '<th style="color:#e53935">全省排名</th>';
       html += '</tr>';
       years.forEach(function(y) {
         html += '<tr><td>' + y + '</td>';
+        var bestRank = null;
         cats.forEach(function(c) {
-          var score = schoolScores[y] && schoolScores[y][c] ? schoolScores[y][c] : '--';
-          var rankKey = c + '位次';
-          var rank = schoolScores[y] && schoolScores[y][rankKey];
-          var cell = score;
-          if (rank) cell += '<br><span style="font-size:11px;color:var(--text-light);">位次 ' + rank + '</span>';
-          html += '<td>' + cell + '</td>';
+          html += '<td>' + (schoolScores[y] && schoolScores[y][c] ? schoolScores[y][c] : '--') + '</td>';
+          var r = schoolScores[y] && schoolScores[y][c + '位次'];
+          if (r && (!bestRank || r < bestRank)) bestRank = r;
         });
+        if (hasRank) html += '<td style="color:#e53935;font-weight:700;font-size:16px">' + (bestRank || '--') + '</td>';
         html += '</tr>';
       });
       html += '</table>';
@@ -2879,19 +2880,20 @@
       var years = Object.keys(ss).sort().reverse();
       var allCats = Object.keys(ss[years[0]] || {});
       var cats = allCats.filter(function(c) { return c.indexOf('位次') < 0; });
+      var hasRank = allCats.some(function(c) { return c.indexOf('位次') >= 0; });
       var h = '<table style="width:100%;font-size:13px"><tr><th>年份</th>';
       cats.forEach(function(c) { h += '<th>' + c + '</th>'; });
+      if (hasRank) h += '<th style="color:#e53935">全省排名</th>';
       h += '</tr>';
       years.forEach(function(y) {
         h += '<tr><td>' + y + '</td>';
+        var bestRank = null;
         cats.forEach(function(c) {
-          var score = ss[y] && ss[y][c] ? ss[y][c] : '--';
-          var rankKey = c + '位次';
-          var rank = ss[y] && ss[y][rankKey];
-          var cell = score;
-          if (rank) cell += '<br><span style="font-size:11px;color:#999">位次' + rank + '</span>';
-          h += '<td>' + cell + '</td>';
+          h += '<td>' + (ss[y] && ss[y][c] ? ss[y][c] : '--') + '</td>';
+          var r = ss[y] && ss[y][c + '位次'];
+          if (r && (!bestRank || r < bestRank)) bestRank = r;
         });
+        if (hasRank) h += '<td style="color:#e53935;font-weight:700;font-size:16px">' + (bestRank || '--') + '</td>';
         h += '</tr>';
       });
       h += '</table>';
