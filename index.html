@@ -2953,9 +2953,15 @@
     }
 
     function filterMajors(tag, btn) {
-      currentMajorFilter = tag;
-      document.querySelectorAll('#majors .filter-bar:first-of-type .filter-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
+      if (currentMajorFilter === tag && tag !== 'all') {
+        currentMajorFilter = 'all';
+        btn.classList.remove('active');
+        btn.parentElement.querySelector('.filter-btn').classList.add('active'); // re-activate "全部"
+      } else {
+        currentMajorFilter = tag;
+        btn.parentElement.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+      }
       renderMajors();
     }
 
