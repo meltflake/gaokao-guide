@@ -2130,35 +2130,6 @@
     "desc": "中南农林名校，园艺与畜牧学科全国领先。"
   },
   {
-    "id": "huazhong_normal",
-    "name": "华中师范大学",
-    "province": "湖北",
-    "city": "武汉",
-    "type": "师范",
-    "tags": [
-      "211",
-      "双一流"
-    ],
-    "region": "华中",
-    "ranking": 49,
-    "studentCount": 32000,
-    "employmentRate": 95.0,
-    "maleRatio": 38,
-    "topMajors": [
-      "教育学",
-      "政治学",
-      "中文",
-      "数学",
-      "化学"
-    ],
-    "features": [
-      "华中师范名校",
-      "师范教育强"
-    ],
-    "website": "https://www.ccnu.edu.cn",
-    "desc": "华中师范类名校，教育学与政治学突出。"
-  },
-  {
     "id": "whut",
     "name": "武汉理工大学",
     "province": "湖北",
@@ -3773,35 +3744,6 @@
     "desc": "华南师范类名校，心理学与教育学突出。"
   },
   {
-    "id": "fuzhou",
-    "name": "福州大学",
-    "province": "福建",
-    "city": "福州",
-    "type": "理工",
-    "tags": [
-      "211",
-      "双一流"
-    ],
-    "region": "华东",
-    "ranking": 73,
-    "studentCount": 38000,
-    "employmentRate": 94.0,
-    "maleRatio": 58,
-    "topMajors": [
-      "化学",
-      "化学工程",
-      "土木工程",
-      "计算机",
-      "电气工程"
-    ],
-    "features": [
-      "福建211",
-      "化学化工强"
-    ],
-    "website": "https://www.fzu.edu.cn",
-    "desc": "福建理工科名校。"
-  },
-  {
     "id": "cup_hz",
     "name": "中国石油大学(华东)",
     "province": "山东",
@@ -4169,35 +4111,6 @@
     ],
     "website": "https://www.hainmc.edu.cn",
     "desc": "海南医科院校。"
-  },
-  {
-    "id": "dlut",
-    "name": "大连理工大学",
-    "province": "辽宁",
-    "city": "大连",
-    "type": "理工",
-    "tags": [
-      "985",
-      "211",
-      "双一流"
-    ],
-    "region": "东北",
-    "ranking": 24,
-    "studentCount": 42000,
-    "employmentRate": 96.0,
-    "maleRatio": 66,
-    "topMajors": [
-      "化学工程",
-      "力学",
-      "水利工程",
-      "机械工程",
-      "管理科学"
-    ],
-    "features": [
-      "东北工科名校"
-    ],
-    "website": "https://www.dlut.edu.cn",
-    "desc": "东北理工科名校。"
   },
   {
     "id": "usst",
