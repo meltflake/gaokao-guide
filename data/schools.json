@@ -7876,5 +7876,340 @@
     ],
     "website": "https://www.caa.edu.cn",
     "desc": "中国顶尖美术学院，美术学和设计学全国领先"
+  },
+  {
+    "id": "dgut",
+    "name": "东莞理工学院",
+    "province": "广东",
+    "city": "东莞",
+    "type": "理工",
+    "tags": [],
+    "region": "华南",
+    "ranking": 230,
+    "studentCount": 25000,
+    "employmentRate": 93,
+    "maleRatio": 58,
+    "topMajors": [
+      "计算机科学",
+      "机械工程",
+      "电子信息",
+      "化学工程",
+      "自动化"
+    ],
+    "features": [
+      "东莞制造业对接",
+      "应用型"
+    ],
+    "website": "https://www.dgut.edu.cn",
+    "desc": "东莞市属理工科大学，对接珠三角制造业。"
+  },
+  {
+    "id": "gdmu",
+    "name": "广东医科大学",
+    "province": "广东",
+    "city": "东莞",
+    "type": "医药",
+    "tags": [],
+    "region": "华南",
+    "ranking": 280,
+    "studentCount": 20000,
+    "employmentRate": 92,
+    "maleRatio": 40,
+    "topMajors": [
+      "临床医学",
+      "药学",
+      "护理学",
+      "预防医学",
+      "医学检验"
+    ],
+    "features": [
+      "东莞湛江双校区",
+      "临床医学"
+    ],
+    "website": "https://www.gdmu.edu.cn",
+    "desc": "广东省属医科大学，临床医学和药学为优势学科。"
+  },
+  {
+    "id": "gdpu",
+    "name": "广东药科大学",
+    "province": "广东",
+    "city": "广州",
+    "type": "医药",
+    "tags": [],
+    "region": "华南",
+    "ranking": 320,
+    "studentCount": 22000,
+    "employmentRate": 91,
+    "maleRatio": 38,
+    "topMajors": [
+      "药学",
+      "中药学",
+      "临床药学",
+      "生物制药",
+      "食品科学"
+    ],
+    "features": [
+      "华南药学人才摇篮"
+    ],
+    "website": "https://www.gdpu.edu.cn",
+    "desc": "华南地区独立建制的药科大学。"
+  },
+  {
+    "id": "gdou",
+    "name": "广东海洋大学",
+    "province": "广东",
+    "city": "湛江",
+    "type": "综合",
+    "tags": [],
+    "region": "华南",
+    "ranking": 290,
+    "studentCount": 30000,
+    "employmentRate": 90,
+    "maleRatio": 52,
+    "topMajors": [
+      "水产养殖",
+      "海洋科学",
+      "食品科学",
+      "船舶工程",
+      "生物学"
+    ],
+    "features": [
+      "海洋水产特色",
+      "南海研究"
+    ],
+    "website": "https://www.gdou.edu.cn",
+    "desc": "广东省属海洋特色大学，水产养殖全国领先。"
+  },
+  {
+    "id": "gpnu",
+    "name": "广东技术师范大学",
+    "province": "广东",
+    "city": "广州",
+    "type": "师范",
+    "tags": [],
+    "region": "华南",
+    "ranking": 350,
+    "studentCount": 25000,
+    "employmentRate": 91,
+    "maleRatio": 42,
+    "topMajors": [
+      "教育技术",
+      "计算机科学",
+      "电子信息",
+      "机械工程",
+      "会计学"
+    ],
+    "features": [
+      "职业教育师资培养"
+    ],
+    "website": "https://www.gpnu.edu.cn",
+    "desc": "广东省属师范大学，以职业技术教育师资培养为特色。"
+  },
+  {
+    "id": "gdpa",
+    "name": "广东警官学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "政法",
+    "tags": [],
+    "region": "华南",
+    "ranking": 500,
+    "studentCount": 10000,
+    "employmentRate": 98,
+    "maleRatio": 72,
+    "topMajors": [
+      "侦查学",
+      "治安学",
+      "法学",
+      "刑事技术",
+      "网络安全"
+    ],
+    "features": [
+      "公安院校",
+      "就业率极高"
+    ],
+    "website": "https://www.gdppla.edu.cn",
+    "desc": "广东省属公安本科院校，就业对口率极高。"
+  },
+  {
+    "id": "fosu",
+    "name": "佛山科学技术学院",
+    "province": "广东",
+    "city": "佛山",
+    "type": "综合",
+    "tags": [],
+    "region": "华南",
+    "ranking": 380,
+    "studentCount": 22000,
+    "employmentRate": 91,
+    "maleRatio": 50,
+    "topMajors": [
+      "兽医学",
+      "机械工程",
+      "土木工程",
+      "计算机科学",
+      "材料科学"
+    ],
+    "features": [
+      "佛山市属",
+      "兽医学特色"
+    ],
+    "website": "https://www.fosu.edu.cn",
+    "desc": "佛山市属综合性大学，兽医学和机械工程有特色。"
+  },
+  {
+    "id": "hzu",
+    "name": "惠州学院",
+    "province": "广东",
+    "city": "惠州",
+    "type": "综合",
+    "tags": [],
+    "region": "华南",
+    "ranking": 450,
+    "studentCount": 18000,
+    "employmentRate": 90,
+    "maleRatio": 45,
+    "topMajors": [
+      "电子信息",
+      "化学工程",
+      "服装设计",
+      "旅游管理",
+      "教育学"
+    ],
+    "features": [
+      "惠州市属",
+      "应用型"
+    ],
+    "website": "https://www.hzu.edu.cn",
+    "desc": "惠州市属应用型本科院校。"
+  },
+  {
+    "id": "sgu",
+    "name": "韶关学院",
+    "province": "广东",
+    "city": "韶关",
+    "type": "综合",
+    "tags": [],
+    "region": "华南",
+    "ranking": 480,
+    "studentCount": 20000,
+    "employmentRate": 89,
+    "maleRatio": 45,
+    "topMajors": [
+      "教育学",
+      "生物学",
+      "机械工程",
+      "旅游管理",
+      "计算机"
+    ],
+    "features": [
+      "粤北地区",
+      "师范传统"
+    ],
+    "website": "https://www.sgu.edu.cn",
+    "desc": "粤北地区综合性本科院校，师范教育有传统。"
+  },
+  {
+    "id": "jyu",
+    "name": "嘉应学院",
+    "province": "广东",
+    "city": "梅州",
+    "type": "综合",
+    "tags": [],
+    "region": "华南",
+    "ranking": 490,
+    "studentCount": 18000,
+    "employmentRate": 88,
+    "maleRatio": 44,
+    "topMajors": [
+      "教育学",
+      "化学",
+      "生物学",
+      "计算机科学",
+      "体育教育"
+    ],
+    "features": [
+      "客家文化",
+      "粤东地区"
+    ],
+    "website": "https://www.jyu.edu.cn",
+    "desc": "梅州市属综合性本科院校，客家文化研究有特色。"
+  },
+  {
+    "id": "gafa",
+    "name": "广州美术学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "艺术",
+    "tags": [],
+    "region": "华南",
+    "ranking": 350,
+    "studentCount": 6000,
+    "employmentRate": 90,
+    "maleRatio": 35,
+    "topMajors": [
+      "设计学",
+      "美术学",
+      "雕塑",
+      "动画",
+      "视觉传达"
+    ],
+    "features": [
+      "华南最高美术学府",
+      "八大美院之一"
+    ],
+    "website": "https://www.gzarts.edu.cn",
+    "desc": "中国八大美术学院之一，华南地区最高美术学府。"
+  },
+  {
+    "id": "xhcon",
+    "name": "星海音乐学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "艺术",
+    "tags": [],
+    "region": "华南",
+    "ranking": 400,
+    "studentCount": 5000,
+    "employmentRate": 88,
+    "maleRatio": 35,
+    "topMajors": [
+      "音乐表演",
+      "音乐学",
+      "作曲",
+      "舞蹈",
+      "音乐教育"
+    ],
+    "features": [
+      "华南最高音乐学府",
+      "以冼星海命名"
+    ],
+    "website": "https://www.xhcom.edu.cn",
+    "desc": "华南地区唯一独立建制的高等音乐学府。"
+  },
+  {
+    "id": "gipe",
+    "name": "广州体育学院",
+    "province": "广东",
+    "city": "广州",
+    "type": "体育",
+    "tags": [],
+    "region": "华南",
+    "ranking": 450,
+    "studentCount": 8000,
+    "employmentRate": 90,
+    "maleRatio": 60,
+    "topMajors": [
+      "体育教育",
+      "运动训练",
+      "武术",
+      "运动康复",
+      "休闲体育"
+    ],
+    "features": [
+      "华南体育人才基地"
+    ],
+    "website": "https://www.gipe.edu.cn",
+    "desc": "华南地区体育专业人才培养基地。"
   }
 ]
