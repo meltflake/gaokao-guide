@@ -8211,5 +8211,58 @@
     ],
     "website": "https://www.gipe.edu.cn",
     "desc": "华南地区体育专业人才培养基地。"
+  },
+  {
+    "id": "sztech",
+    "name": "深圳技术大学",
+    "province": "广东",
+    "city": "深圳",
+    "type": "理工",
+    "tags": [],
+    "region": "华南",
+    "ranking": 326,
+    "studentCount": 8000,
+    "employmentRate": 95,
+    "maleRatio": 62,
+    "topMajors": [
+      "机械设计制造及其自动化",
+      "光源与照明",
+      "物联网工程",
+      "新能源科学与工程",
+      "汽车服务工程"
+    ],
+    "features": [
+      "应用型本科",
+      "产教融合",
+      "深圳市属"
+    ],
+    "website": "https://www.sztu.edu.cn",
+    "desc": "深圳市高标准建设的应用技术型大学，紧贴产业需求培养高素质工程师。"
+  },
+  {
+    "id": "gzu",
+    "name": "广州大学",
+    "province": "广东",
+    "city": "广州",
+    "type": "综合",
+    "tags": [],
+    "region": "华南",
+    "ranking": 119,
+    "studentCount": 35000,
+    "employmentRate": 92,
+    "maleRatio": 48,
+    "topMajors": [
+      "土木工程",
+      "计算机科学与技术",
+      "网络空间安全",
+      "法学",
+      "会计学"
+    ],
+    "features": [
+      "综合实力强",
+      "地处广州核心区"
+    ],
+    "website": "https://www.gzhu.edu.cn",
+    "desc": "广州市属综合性大学，学科门类齐全，工学与人文社科实力较强。"
   }
 ]
